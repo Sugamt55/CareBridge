@@ -1,2 +1,2 @@
 # CareBridge
-A telemedicine platform to improve healthcare access
+A telemedicine application to improve healthcare access
