@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "899302353696",
+    "project_id": "device-streaming-0619d401",
+    "storage_bucket": "device-streaming-0619d401.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899302353696:android:f962cffed3300393260545",
+        "android_client_info": {
+          "package_name": "com.example.carebridge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiPY-lV4x74WbFSWLBc6-SjSY3HNEw1_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
