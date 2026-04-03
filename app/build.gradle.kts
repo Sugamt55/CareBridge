@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.example.carebridge"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.carebridge"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -70,7 +70,7 @@ dependencies {
     implementation("androidx.camera:camera-video:$cameraxVersion")
     implementation("androidx.camera:camera-view:$cameraxVersion")
     implementation("androidx.camera:camera-extensions:$cameraxVersion")
-    implementation("androidx.camera:camera-viewfinder-compose:1.0.0-alpha02")
+    implementation("androidx.camera.viewfinder:viewfinder-compose:1.6.0")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
