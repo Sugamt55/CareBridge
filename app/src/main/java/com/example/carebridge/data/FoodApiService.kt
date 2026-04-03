@@ -1,5 +1,6 @@
 package com.example.carebridge.data
 
+import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -7,16 +8,21 @@ import retrofit2.http.Part
 
 interface FoodApiService {
     @Multipart
-    @POST("analyze")
-    suspend fun analyzeFood(
+    @POST("predict")
+    suspend fun predictFood(
         @Part image: MultipartBody.Part
-    ): FoodResponse
+    ): FoodPredictionResponse
 }
 
-data class FoodResponse(
-    val name: String,
+data class FoodPredictionResponse(
+    @SerializedName("food_name")
+    val foodName: String,
     val calories: Int,
-    val protein: Double,
-    val fat: Double,
-    val carbs: Double
+    val protein: String,
+    val carbs: String,
+    val fat: String,
+    @SerializedName("ph_level")
+    val phLevel: Double,
+    @SerializedName("is_alkaline")
+    val isAlkaline: Boolean
 )
