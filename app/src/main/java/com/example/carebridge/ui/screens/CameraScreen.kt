@@ -1,11 +1,11 @@
 package com.example.carebridge.ui.screens
 
 import android.content.Context
-import android.net.Uri
 import android.util.Log
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -18,8 +18,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.carebridge.data.FoodPredictionResponse
+import com.example.carebridge.ui.viewmodel.MainViewModel
+import com.example.carebridge.ui.viewmodel.ScanUiState
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -27,8 +32,8 @@ import java.util.concurrent.Executor
 
 @Composable
 fun CameraScreen(
-    onImageCaptured: (File) -> Unit,
-    onError: (ImageCaptureException) -> Unit
+    viewModel: MainViewModel = viewModel(),
+    onAnalysisSuccess: (FoodPredictionResponse) -> Unit
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -39,13 +44,21 @@ fun CameraScreen(
     val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     
     val previewView = remember { PreviewView(context) }
+    val uiState by viewModel.uiState.collectAsState()
+
+    // Handle Success State
+    LaunchedEffect(uiState) {
+        if (uiState is ScanUiState.Success) {
+            onAnalysisSuccess((uiState as ScanUiState.Success).response)
+            viewModel.resetState()
+        }
+    }
 
     LaunchedEffect(cameraSelector) {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
         cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
             
-            // Build UseCaseGroup
             val useCaseGroup = UseCaseGroup.Builder()
                 .addUseCase(preview)
                 .addUseCase(imageCapture)
@@ -66,21 +79,26 @@ fun CameraScreen(
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
+        // Camera Preview
         AndroidView(
             factory = { previewView },
             modifier = Modifier.fillMaxSize()
         )
 
+        // Capture Button
         Button(
             onClick = {
-                captureImage(context, imageCapture, executor, onImageCaptured, onError)
+                captureImage(context, imageCapture, executor) { file ->
+                    viewModel.analyzeFood(file)
+                }
             },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 32.dp)
                 .size(80.dp),
             shape = CircleShape,
-            colors = ButtonDefaults.buttonColors(containerColor = Color.White.copy(alpha = 0.8f))
+            colors = ButtonDefaults.buttonColors(containerColor = Color.White.copy(alpha = 0.8f)),
+            enabled = uiState !is ScanUiState.Loading
         ) {
             Icon(
                 imageVector = Icons.Default.CameraAlt,
@@ -89,6 +107,43 @@ fun CameraScreen(
                 modifier = Modifier.size(40.dp)
             )
         }
+
+        // Loading Overlay
+        if (uiState is ScanUiState.Loading) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.7f)),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    CircularProgressIndicator(color = Color.White)
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = "Analyzing Food...",
+                        color = Color.White,
+                        fontSize = 18.sp,
+                        fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                    )
+                }
+            }
+        }
+
+        // Simple Error Feedback (Optional but helpful)
+        if (uiState is ScanUiState.Error) {
+            Snackbar(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 120.dp),
+                action = {
+                    TextButton(onClick = { viewModel.resetState() }) {
+                        Text("Dismiss", color = Color.White)
+                    }
+                }
+            ) {
+                Text((uiState as ScanUiState.Error).message)
+            }
+        }
     }
 }
 
@@ -96,10 +151,13 @@ private fun captureImage(
     context: Context,
     imageCapture: ImageCapture,
     executor: Executor,
-    onImageCaptured: (File) -> Unit,
-    onError: (ImageCaptureException) -> Unit
+    onImageCaptured: (File) -> Unit
 ) {
-    val outputDirectory = context.getExternalFilesDir(android.os.Environment.DIRECTORY_PICTURES)
+    // Save to the cache directory as configured in FileProvider
+    val outputDirectory = File(context.cacheDir, "images").apply {
+        if (!exists()) mkdirs()
+    }
+    
     val photoFile = File(
         outputDirectory,
         SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US).format(System.currentTimeMillis()) + ".jpg"
@@ -116,7 +174,7 @@ private fun captureImage(
             }
 
             override fun onError(exception: ImageCaptureException) {
-                onError(exception)
+                Log.e("CameraScreen", "Capture failed", exception)
             }
         }
     )
