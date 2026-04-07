@@ -72,6 +72,12 @@ dependencies {
     implementation("androidx.camera:camera-extensions:$cameraxVersion")
     implementation("androidx.camera.viewfinder:viewfinder-compose:1.6.0")
 
+    // Media3 for Video Background
+    val media3Version = "1.5.1"
+    implementation("androidx.media3:media3-exoplayer:$media3Version")
+    implementation("androidx.media3:media3-ui:$media3Version")
+    implementation("androidx.media3:media3-common:$media3Version")
+
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")

@@ -1,16 +1,16 @@
-package com.example.carebridge.ui.navigation // Updated to match your screenshot folder
+package com.example.carebridge.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.carebridge.ui.screens.* // This imports your screens
+import com.example.carebridge.ui.screens.*
 
 @Composable
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = "login"
+        startDestination = "home" // Temporarily set to home for testing. Change back to "login" later.
     ) {
         composable(route = "login") {
             LoginScreen(navController = navController)
@@ -24,8 +24,11 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(route = "home") {
             HomeScreen(navController = navController)
         }
-        composable(route = "contact") {
-            ContactScreen(navController = navController)
+        composable(route = "scan") {
+            ScanScreen(navController = navController)
+        }
+        composable(route = "chat") {
+            ChatScreen(navController = navController)
         }
     }
 }

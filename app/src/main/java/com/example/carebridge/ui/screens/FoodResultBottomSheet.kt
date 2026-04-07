@@ -18,11 +18,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.carebridge.data.FoodPredictionResponse
+import com.example.carebridge.data.model.FoodDatabaseItem
+import java.util.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FoodResultBottomSheet(
     foodData: FoodPredictionResponse,
+    detailedData: FoodDatabaseItem? = null,
     onDismiss: () -> Unit
 ) {
     ModalBottomSheet(
@@ -42,11 +45,16 @@ fun FoodResultBottomSheet(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = foodData.foodName,
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold
-                )
+                Column {
+                    Text(
+                        text = detailedData?.foodName ?: foodData.foodName,
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold
+                    )
+                    detailedData?.servingSize?.let {
+                        Text(text = it, style = MaterialTheme.typography.bodySmall, color = Color.Gray)
+                    }
+                }
                 IconButton(onClick = onDismiss) {
                     Icon(Icons.Default.Close, contentDescription = "Close")
                 }
@@ -61,7 +69,12 @@ fun FoodResultBottomSheet(
                 color = Color.Gray
             )
             Spacer(modifier = Modifier.height(8.dp))
-            PhScaleBar(phLevel = foodData.phLevel, isAlkaline = foodData.isAlkaline)
+            PhScaleBar(
+                phLevel = foodData.phLevel, 
+                isAlkaline = foodData.isAlkaline,
+                classification = detailedData?.phClassification,
+                reason = detailedData?.phReason
+            )
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -73,22 +86,51 @@ fun FoodResultBottomSheet(
             )
             Spacer(modifier = Modifier.height(16.dp))
             
-            val nutritionItems = listOf(
-                "Calories" to "${foodData.calories} kcal",
-                "Protein" to foodData.protein,
-                "Carbs" to foodData.carbs,
-                "Fats" to foodData.fat
-            )
+            val nutritionItems = if (detailedData != null) {
+                listOf(
+                    "Calories" to "${detailedData.calories} kcal",
+                    "Protein" to "${detailedData.macronutrients.proteinG}g",
+                    "Carbs" to "${detailedData.macronutrients.carbsG}g",
+                    "Fats" to "${detailedData.macronutrients.fatG}g",
+                    "Fiber" to "${detailedData.macronutrients.fiberG}g",
+                    "Sugar" to "${detailedData.macronutrients.sugarG}g"
+                )
+            } else {
+                listOf(
+                    "Calories" to "${foodData.calories} kcal",
+                    "Protein" to foodData.protein,
+                    "Carbs" to foodData.carbs,
+                    "Fats" to foodData.fat
+                )
+            }
 
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.height(140.dp) // Fixed height for grid
+                modifier = Modifier.height(if (detailedData != null) 210.dp else 140.dp)
             ) {
                 items(nutritionItems.size) { index ->
                     val item = nutritionItems[index]
                     NutritionCard(label = item.first, value = item.second)
+                }
+            }
+
+            if (detailedData != null) {
+                Spacer(modifier = Modifier.height(24.dp))
+                Text(
+                    "Micronutrients",
+                    style = MaterialTheme.typography.labelLarge,
+                    color = Color.Gray
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    ResultSuggestionChip(label = "Iron: ${detailedData.micronutrients.ironMg}mg")
+                    ResultSuggestionChip(label = "Potassium: ${detailedData.micronutrients.potassiumMg}mg")
+                    ResultSuggestionChip(label = "Vit C: ${detailedData.micronutrients.vitaminCMg}mg")
                 }
             }
 
@@ -112,7 +154,12 @@ fun FoodResultBottomSheet(
 }
 
 @Composable
-fun PhScaleBar(phLevel: Double, isAlkaline: Boolean) {
+fun PhScaleBar(
+    phLevel: Double, 
+    isAlkaline: Boolean, 
+    classification: String? = null,
+    reason: String? = null
+) {
     Column {
         Box(
             modifier = Modifier
@@ -145,16 +192,29 @@ fun PhScaleBar(phLevel: Double, isAlkaline: Boolean) {
         
         Spacer(modifier = Modifier.height(8.dp))
         
-        Surface(
-            color = if (isAlkaline) Color(0xFFD1FAE5) else Color(0xFFFEE2E2),
-            shape = RoundedCornerShape(8.dp)
-        ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Surface(
+                color = if (isAlkaline) Color(0xFFD1FAE5) else Color(0xFFFEE2E2),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                val displayText = classification?.replace("-", " ")?.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() } ?: if (isAlkaline) "Alkaline Choice" else "Acidic Choice"
+                Text(
+                    text = displayText,
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                    color = if (isAlkaline) Color(0xFF065F46) else Color(0xFF991B1B),
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+        
+        reason?.let {
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = if (isAlkaline) "Alkaline Choice" else "Acidic Choice",
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                color = if (isAlkaline) Color(0xFF065F46) else Color(0xFF991B1B),
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold
+                text = it,
+                style = MaterialTheme.typography.bodySmall,
+                color = Color.DarkGray,
+                lineHeight = 16.sp
             )
         }
     }
@@ -176,5 +236,22 @@ fun NutritionCard(label: String, value: String) {
             Text(label, fontSize = 10.sp, color = Color.Gray, fontWeight = FontWeight.Bold)
             Text(value, fontSize = 14.sp, fontWeight = FontWeight.Bold)
         }
+    }
+}
+
+@Composable
+fun ResultSuggestionChip(label: String) {
+    Surface(
+        shape = RoundedCornerShape(16.dp),
+        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE5E7EB)),
+        color = Color.White
+    ) {
+        Text(
+            label,
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+            fontSize = 12.sp,
+            color = Color(0xFF1B4985),
+            fontWeight = FontWeight.Medium
+        )
     }
 }

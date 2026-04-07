@@ -1,79 +1,323 @@
 package com.example.carebridge.ui.screens
 
-import androidx.compose.foundation.Image
+import android.net.Uri
+import androidx.annotation.OptIn
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.History
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.QrCodeScanner
+import androidx.compose.material.icons.outlined.TrendingUp
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.AspectRatioFrameLayout
+import androidx.media3.ui.PlayerView
 import androidx.navigation.NavController
 import com.example.carebridge.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Home", color = Color.White) },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Transparent
-                )
-            )
-        },
-        containerColor = Color.Transparent
-    ) { innerPadding ->
-        Box(modifier = Modifier.fillMaxSize()) {
-            // High-quality healthcare background
-            Image(
-                painter = painterResource(id = R.drawable.home_bg),
-                contentDescription = "Medical Background",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
-            )
+    val backgroundColor = Color(0xFF0D0800)
+    val orangeColor = Color(0xFFF97316)
+    val greyBorder = Color(0xFF555555)
+    val subtitleColor = Color(0xFFCCCCCC) 
+    val navBackgroundColor = Color(0xFF1A1000)
+    val unselectedGrey = Color(0xFF888888)
 
-            // Dark tint for text readability
+    Scaffold(
+        containerColor = backgroundColor,
+        bottomBar = {
+            NavigationBar(
+                containerColor = navBackgroundColor,
+                tonalElevation = 0.dp,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                    .clip(RoundedCornerShape(32.dp))
+                    .border(1.dp, Color.White.copy(alpha = 0.05f), RoundedCornerShape(32.dp))
+            ) {
+                NavigationBarItem(
+                    selected = true,
+                    onClick = { },
+                    icon = { Icon(Icons.Filled.Home, contentDescription = "Home") },
+                    label = { Text("HOME", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = orangeColor,
+                        selectedTextColor = orangeColor,
+                        unselectedIconColor = unselectedGrey,
+                        unselectedTextColor = unselectedGrey,
+                        indicatorColor = Color.Transparent
+                    )
+                )
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { },
+                    icon = { Icon(Icons.Outlined.History, contentDescription = "History") },
+                    label = { Text("HISTORY", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    colors = NavigationBarItemDefaults.colors(
+                        unselectedIconColor = unselectedGrey,
+                        unselectedTextColor = unselectedGrey,
+                        indicatorColor = Color.Transparent
+                    )
+                )
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { navController.navigate("scan") },
+                    icon = { Icon(Icons.Outlined.QrCodeScanner, contentDescription = "Scanner") },
+                    label = { Text("SCANNER", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    colors = NavigationBarItemDefaults.colors(
+                        unselectedIconColor = unselectedGrey,
+                        unselectedTextColor = unselectedGrey,
+                        indicatorColor = Color.Transparent
+                    )
+                )
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { },
+                    icon = { Icon(Icons.Outlined.TrendingUp, contentDescription = "Insights") },
+                    label = { Text("INSIGHTS", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    colors = NavigationBarItemDefaults.colors(
+                        unselectedIconColor = unselectedGrey,
+                        unselectedTextColor = unselectedGrey,
+                        indicatorColor = Color.Transparent
+                    )
+                )
+            }
+        }
+    ) { innerPadding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(backgroundColor)
+        ) {
+            // 1. Looping Video Background layer
+            VideoBackground(resourceId = R.raw.background_glow)
+
+            // 2. Dark Overlay to dim the bright video and improve text contrast
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.Black.copy(alpha = 0.4f))
+                    .background(Color.Black.copy(alpha = 0.5f))
             )
 
+            // 3. Subtle Radial Gradient Glow layer
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.radialGradient(
+                            colors = listOf(
+                                orangeColor.copy(alpha = 0.2f),
+                                Color.Transparent
+                            ),
+                            radius = 1800f
+                        )
+                    )
+            )
+
+            // 4. UI Content layer
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding)
-                    .padding(24.dp),
-                verticalArrangement = Arrangement.Center,
+                    .padding(horizontal = 24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = "CareBridge Telemedicine",
-                    style = MaterialTheme.typography.headlineLarge,
-                    color = Color.White
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = "Bridging the gap between patients and providers. Quality healthcare from the comfort of your home.",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = Color.White,
-                    textAlign = TextAlign.Center
-                )
-                Spacer(modifier = Modifier.height(32.dp))
-                Button(
-                    onClick = {
-                        navController.navigate("contact")
-                    }
+                // Top Header Box (Centered Text + Profile)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Text("Find a Doctor")
+                    // Left placeholder/menu icon to match design
+                    Icon(
+                        imageVector = Icons.Default.Menu,
+                        contentDescription = null,
+                        tint = orangeColor,
+                        modifier = Modifier.size(24.dp).align(Alignment.CenterStart)
+                    )
+
+                    Text(
+                        text = "NutriScan AI",
+                        color = Color(0xFFFFD700), // Gold/Yellowish
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+                    
+                    Box(
+                        modifier = Modifier
+                            .size(40.dp)
+                            .clip(CircleShape)
+                            .background(Color.Gray)
+                            .align(Alignment.CenterEnd)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Person,
+                            contentDescription = "Profile",
+                            modifier = Modifier.align(Alignment.Center),
+                            tint = Color.White
+                        )
+                    }
                 }
+
+                Spacer(modifier = Modifier.weight(0.8f))
+
+                // 1. Trusted Badge
+                Surface(
+                    color = Color.Transparent,
+                    shape = RoundedCornerShape(50),
+                    border = BorderStroke(1.dp, greyBorder)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Star,
+                            contentDescription = null,
+                            tint = Color(0xFFFFD700),
+                            modifier = Modifier.size(12.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "TRUSTED BY HEALTH-CONSCIOUS USERS",
+                            color = Color.White,
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.5.sp
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(40.dp))
+
+                // 2. Headline
+                Text(
+                    text = "Scan Your Food.",
+                    color = Color.White,
+                    fontSize = 42.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    textAlign = TextAlign.Center,
+                    lineHeight = 48.sp
+                )
+                Text(
+                    text = "Know What's Inside.",
+                    color = orangeColor,
+                    fontSize = 42.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    textAlign = TextAlign.Center,
+                    lineHeight = 48.sp
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                // 3. Subtitle
+                Text(
+                    text = "Discover nutritional facts and\ningredients instantly.",
+                    color = subtitleColor,
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center,
+                    lineHeight = 24.sp,
+                    fontWeight = FontWeight.Medium
+                )
+
+                Spacer(modifier = Modifier.height(56.dp))
+
+                // 4. Action Buttons
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    Button(
+                        onClick = { navController.navigate("scan") },
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(60.dp),
+                        shape = RoundedCornerShape(50),
+                        colors = ButtonDefaults.buttonColors(containerColor = orangeColor)
+                    ) {
+                        Text(
+                            text = "Scan Food Now",
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 15.sp
+                        )
+                    }
+
+                    OutlinedButton(
+                        onClick = { },
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(60.dp),
+                        shape = RoundedCornerShape(50),
+                        border = BorderStroke(1.dp, greyBorder),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.White)
+                    ) {
+                        Text(
+                            text = "Learn More",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 15.sp
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.weight(1.2f))
             }
         }
     }
+}
+
+@OptIn(UnstableApi::class)
+@Composable
+fun VideoBackground(resourceId: Int) {
+    val context = LocalContext.current
+    val exoPlayer = remember {
+        ExoPlayer.Builder(context).build().apply {
+            val uri = Uri.parse("android.resource://${context.packageName}/$resourceId")
+            setMediaItem(MediaItem.fromUri(uri))
+            repeatMode = Player.REPEAT_MODE_ALL
+            volume = 0f
+            prepare()
+            playWhenReady = true
+        }
+    }
+
+    DisposableEffect(exoPlayer) {
+        onDispose {
+            exoPlayer.release()
+        }
+    }
+
+    AndroidView(
+        factory = { ctx ->
+            PlayerView(ctx).apply {
+                useController = false
+                resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
+                player = exoPlayer
+            }
+        },
+        modifier = Modifier.fillMaxSize()
+    )
 }

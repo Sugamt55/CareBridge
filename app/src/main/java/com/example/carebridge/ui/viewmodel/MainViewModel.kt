@@ -1,9 +1,12 @@
 package com.example.carebridge.ui.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.carebridge.data.FoodPredictionResponse
 import com.example.carebridge.data.RetrofitInstance
+import com.example.carebridge.data.model.FoodDatabaseItem
+import com.example.carebridge.data.repository.FoodDatabaseRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,14 +19,16 @@ import java.io.File
 sealed class ScanUiState {
     object Idle : ScanUiState()
     object Loading : ScanUiState()
-    data class Success(val response: FoodPredictionResponse) : ScanUiState()
+    data class Success(val response: FoodPredictionResponse, val detailedData: FoodDatabaseItem? = null) : ScanUiState()
     data class Error(val message: String) : ScanUiState()
 }
 
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _uiState = MutableStateFlow<ScanUiState>(ScanUiState.Idle)
     val uiState: StateFlow<ScanUiState> = _uiState.asStateFlow()
+
+    private val localRepository = FoodDatabaseRepository(application)
 
     fun analyzeFood(imageFile: File) {
         _uiState.value = ScanUiState.Loading
@@ -34,7 +39,11 @@ class MainViewModel : ViewModel() {
                 val body = MultipartBody.Part.createFormData("image", imageFile.name, requestFile)
 
                 val response = RetrofitInstance.api.predictFood(body)
-                _uiState.value = ScanUiState.Success(response)
+                
+                // Lookup detailed data from local JSON database
+                val detailedData = localRepository.getFoodByName(response.foodName)
+                
+                _uiState.value = ScanUiState.Success(response, detailedData)
             } catch (e: Exception) {
                 _uiState.value = ScanUiState.Error(e.message ?: "Failed to analyze food")
             }

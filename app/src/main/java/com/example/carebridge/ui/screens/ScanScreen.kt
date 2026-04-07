@@ -1,7 +1,11 @@
 package com.example.carebridge.ui.screens
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -51,6 +55,29 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
 
     var showSheet by remember { mutableStateOf(false) }
     var scannedFoodData by remember { mutableStateOf<FoodPredictionResponse?>(null) }
+
+    // Permission Handling
+    var hasCameraPermission by remember {
+        mutableStateOf(
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED
+        )
+    }
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { granted ->
+            hasCameraPermission = granted
+        }
+    )
+
+    LaunchedEffect(key1 = true) {
+        if (!hasCameraPermission) {
+            launcher.launch(Manifest.permission.CAMERA)
+        }
+    }
 
     // Success Logic to show the BottomSheet
     LaunchedEffect(uiState) {
@@ -175,11 +202,17 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                     .clip(RoundedCornerShape(32.dp))
                     .background(Color(0xFFDEE2E6))
             ) {
-                CameraPreview(
-                    lifecycleOwner = lifecycleOwner,
-                    imageCapture = imageCapture,
-                    modifier = Modifier.fillMaxSize()
-                )
+                if (hasCameraPermission) {
+                    CameraPreview(
+                        lifecycleOwner = lifecycleOwner,
+                        imageCapture = imageCapture,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                } else {
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Text("Camera permission required", color = Color.Gray)
+                    }
+                }
 
                 // Corner markers
                 ScannerCorners(modifier = Modifier.fillMaxSize())
@@ -219,7 +252,7 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                         .padding(bottom = 60.dp)
                         .size(64.dp)
                         .background(Color.White.copy(alpha = 0.3f), CircleShape),
-                    enabled = uiState !is ScanUiState.Loading
+                    enabled = uiState !is ScanUiState.Loading && hasCameraPermission
                 ) {
                     Icon(Icons.Default.CameraAlt, contentDescription = "Capture", tint = Color.White)
                 }
@@ -439,10 +472,8 @@ fun ScannerCorners(modifier: Modifier) {
         Box(modifier = Modifier
             .size(cornerSize)
             .align(Alignment.BottomEnd)) {
-            Box(modifier = Modifier.fillMaxHeight().width(strokeWidth).align(Alignment.BottomEnd).background(color))
+            Box(modifier = Modifier.fillMaxHeight().width(strokeWidth).align(Alignment.TopEnd).background(color))
             Box(modifier = Modifier.fillMaxWidth().height(strokeWidth).align(Alignment.BottomEnd).background(color))
         }
     }
 }
-
-private fun Modifier.size(size: Int): Modifier = this.size(size.dp)
