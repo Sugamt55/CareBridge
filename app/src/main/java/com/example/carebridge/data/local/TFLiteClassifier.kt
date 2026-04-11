@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
 import org.tensorflow.lite.Interpreter
+import org.tensorflow.lite.gpu.GpuDelegate
 import org.tensorflow.lite.support.common.FileUtil
 import org.tensorflow.lite.support.common.ops.NormalizeOp
 import org.tensorflow.lite.support.image.ImageProcessor
@@ -15,6 +16,7 @@ import java.nio.ByteOrder
 class TFLiteClassifier(private val context: Context) {
 
     private var interpreter: Interpreter? = null
+    private var gpuDelegate: GpuDelegate? = null
     private var labels: List<String> = emptyList()
 
     private val inputImageSize = 224
@@ -25,11 +27,23 @@ class TFLiteClassifier(private val context: Context) {
 
     init {
         try {
-            Log.d(TAG, "Initializing TFLite Interpreter...")
+            Log.d(TAG, "Initializing TFLite Interpreter (v2.17.0)...")
             val model = FileUtil.loadMappedFile(context, modelPath)
             val options = Interpreter.Options()
+            
+            // Try to add GPU Delegate for acceleration
+            try {
+                gpuDelegate = GpuDelegate()
+                options.addDelegate(gpuDelegate)
+                Log.d(TAG, "GPU Delegate initialized and added to options")
+            } catch (e: Exception) {
+                Log.w(TAG, "GPU Delegate initialization failed, falling back to CPU: ${e.message}")
+                gpuDelegate = null
+            }
+
             interpreter = Interpreter(model, options)
             labels = FileUtil.loadLabels(context, labelPath)
+            
             Log.d(TAG, "Successfully loaded model: $modelPath and labels: $labelPath")
             Log.d(TAG, "Number of labels: ${labels.size}")
         } catch (e: Exception) {
@@ -57,9 +71,7 @@ class TFLiteClassifier(private val context: Context) {
             tensorImage = imageProcessor.process(tensorImage)
 
             // 2. Run inference
-            // Get output shape from interpreter to be dynamic if possible, 
-            // but for now sticking to the provided 1x16 structure with error checking.
-            val outputShape = interpreter.getOutputTensor(0).shape() // [1, 16] or similar
+            val outputShape = interpreter.getOutputTensor(0).shape() 
             val numClasses = outputShape[1]
             
             val outputBuffer = ByteBuffer.allocateDirect(1 * numClasses * 4).order(ByteOrder.nativeOrder())
@@ -103,5 +115,7 @@ class TFLiteClassifier(private val context: Context) {
     fun close() {
         interpreter?.close()
         interpreter = null
+        gpuDelegate?.close()
+        gpuDelegate = null
     }
 }

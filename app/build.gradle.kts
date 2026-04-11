@@ -95,8 +95,10 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.7.0")
 
     // TensorFlow Lite
-    implementation("org.tensorflow:tensorflow-lite:2.16.1")
+    val tfliteVersion = "2.17.0"
+    implementation("org.tensorflow:tensorflow-lite:$tfliteVersion")
     implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
+    implementation("org.tensorflow:tensorflow-lite-gpu:$tfliteVersion")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
