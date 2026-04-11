@@ -9,7 +9,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,10 +26,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -34,6 +39,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.carebridge.R
 import com.example.carebridge.data.FoodPredictionResponse
 import com.example.carebridge.ui.viewmodel.MainViewModel
 import com.example.carebridge.ui.viewmodel.ScanUiState
@@ -45,7 +51,6 @@ import java.util.concurrent.Executor
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewModel()) {
-    var autoCaptureEnabled by remember { mutableStateOf(true) }
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val uiState by viewModel.uiState.collectAsState()
@@ -55,6 +60,13 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
 
     var showSheet by remember { mutableStateOf(false) }
     var scannedFoodData by remember { mutableStateOf<FoodPredictionResponse?>(null) }
+
+    // Style Constants matching HomeScreen
+    val orangeColor = Color(0xFFFF6B00)
+    val navBackgroundColor = Color(0xFF1A1A1A)
+    val unselectedGrey = Color(0xFF888888)
+    val whiteColor = Color(0xFFFFFFFF)
+    val darkOverlay = Color(0x80000000)
 
     // Permission Handling
     var hasCameraPermission by remember {
@@ -87,267 +99,250 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
         }
     }
 
-    Scaffold(
-        containerColor = Color(0xFFF8F9FA),
-        topBar = {
-            TopAppBar(
-                navigationIcon = {
-                    IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
-                            tint = Color.DarkGray
-                        )
-                    }
-                },
-                title = {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Outlined.Bolt, contentDescription = null, tint = Color.DarkGray)
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Box(
-                                modifier = Modifier
-                                    .size(32.dp)
-                                    .clip(CircleShape)
-                                    .background(Color(0xFF0056B3))
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Person,
-                                    contentDescription = "Profile",
-                                    modifier = Modifier.align(Alignment.Center).size(20.dp),
-                                    tint = Color.White
-                                )
-                            }
-                        }
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
-            )
-        },
-        bottomBar = {
-            NavigationBar(
-                containerColor = Color.White,
-                tonalElevation = 8.dp
-            ) {
-                NavigationBarItem(
-                    selected = false,
-                    onClick = {
-                        navController.navigate("home") {
-                            popUpTo("home") { inclusive = true }
-                            launchSingleTop = true
-                        }
-                    },
-                    icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
-                    label = { Text("Home") }
-                )
-                NavigationBarItem(
-                    selected = true,
-                    onClick = { /* Already here */ },
-                    icon = { Icon(Icons.Default.QrCodeScanner, contentDescription = "Scan") },
-                    label = { Text("Scan") }
-                )
-                NavigationBarItem(
-                    selected = false,
-                    onClick = {
-                        navController.navigate("chat") {
-                            popUpTo("home") { saveState = true }
-                            launchSingleTop = true
-                            restoreState = true
-                        }
-                    },
-                    icon = { Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = "Chat") },
-                    label = { Text("Chat") }
-                )
-                NavigationBarItem(
-                    selected = false,
-                    onClick = { /* TODO */ },
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-                    label = { Text("Profile") }
-                )
-            }
-        }
-    ) { innerPadding ->
-        Column(
+    Box(modifier = Modifier.fillMaxSize()) {
+        // 1. Background: Fullscreen background (Using VideoBackground from HomeScreen.kt)
+        VideoBackground(resourceId = R.raw.background_glow)
+
+        // 2. Dark Overlay (#80000000)
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
-                .padding(horizontal = 24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                "AI Report Scanner",
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                "Align your medical document within the\nframe to start the analysis.",
-                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                color = Color.Gray,
-                lineHeight = 20.sp
-            )
+                .background(darkOverlay)
+        )
 
-            Spacer(modifier = Modifier.height(32.dp))
-
-            // Scanner Frame
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(0.8f)
-                    .clip(RoundedCornerShape(32.dp))
-                    .background(Color(0xFFDEE2E6))
-            ) {
-                if (hasCameraPermission) {
-                    CameraPreview(
-                        lifecycleOwner = lifecycleOwner,
-                        imageCapture = imageCapture,
-                        modifier = Modifier.fillMaxSize()
+        // 3. Subtle Radial Gradient Glow
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.radialGradient(
+                        colors = listOf(
+                            orangeColor.copy(alpha = 0.2f),
+                            Color.Transparent
+                        ),
+                        radius = 1800f
                     )
-                } else {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text("Camera permission required", color = Color.Gray)
-                    }
-                }
+                )
+        )
 
-                // Corner markers
-                ScannerCorners(modifier = Modifier.fillMaxSize())
-                
-                // AI READY Badge
-                Surface(
-                    color = Color.Black.copy(alpha = 0.4f),
-                    shape = RoundedCornerShape(20.dp),
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .padding(bottom = 24.dp)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(8.dp)
-                                .clip(CircleShape)
-                                .background(Color(0xFF0056B3))
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text("AI READY", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                    }
-                }
-
-                // Capture Trigger (Overlay Button)
-                IconButton(
-                    onClick = {
-                        takePicture(context, imageCapture, executor) { file ->
-                            viewModel.analyzeFood(file)
+        Scaffold(
+            containerColor = Color.Transparent,
+            topBar = {
+                TopAppBar(
+                    navigationIcon = {
+                        IconButton(onClick = { 
+                            viewModel.resetState()
+                            navController.navigateUp() 
+                        }) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back",
+                                tint = whiteColor
+                            )
                         }
                     },
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .padding(bottom = 60.dp)
-                        .size(64.dp)
-                        .background(Color.White.copy(alpha = 0.3f), CircleShape),
-                    enabled = uiState !is ScanUiState.Loading && hasCameraPermission
-                ) {
-                    Icon(Icons.Default.CameraAlt, contentDescription = "Capture", tint = Color.White)
-                }
-
-                // Loading Indicator
-                if (uiState is ScanUiState.Loading) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color.Black.copy(alpha = 0.5f)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            CircularProgressIndicator(color = Color.White)
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text("Analyzing Food...", color = Color.White)
-                        }
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Card(
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(100.dp),
-                    shape = RoundedCornerShape(24.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color.White)
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(48.dp)
-                                .clip(RoundedCornerShape(12.dp))
-                                .background(Color(0xFFD0E1FF)),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(Icons.Default.Image, contentDescription = null, tint = Color(0xFF0056B3))
-                        }
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text("Gallery", fontWeight = FontWeight.Bold, fontSize = 14.sp)
-                    }
-                }
-
-                Card(
-                    modifier = Modifier
-                        .weight(1.2f)
-                        .height(100.dp),
-                    shape = RoundedCornerShape(24.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color.White)
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .padding(16.dp)
-                            .fillMaxSize(),
-                        verticalArrangement = Arrangement.SpaceBetween
-                    ) {
+                    title = {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
+                            horizontalArrangement = Arrangement.End,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Column {
-                                Text("AUTO-", fontSize = 10.sp, color = Color.Gray, fontWeight = FontWeight.Bold)
-                                Text("CAPTURE", fontSize = 10.sp, color = Color.Gray, fontWeight = FontWeight.Bold)
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(Icons.Outlined.Bolt, contentDescription = null, tint = orangeColor)
+                                Spacer(modifier = Modifier.width(16.dp))
+                                Box(
+                                    modifier = Modifier
+                                        .size(32.dp)
+                                        .clip(CircleShape)
+                                        .background(Color.Gray)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Person,
+                                        contentDescription = "Profile",
+                                        modifier = Modifier.align(Alignment.Center).size(20.dp),
+                                        tint = whiteColor
+                                    )
+                                }
                             }
-                            Switch(
-                                checked = autoCaptureEnabled,
-                                onCheckedChange = { autoCaptureEnabled = it },
-                                colors = SwitchDefaults.colors(
-                                    checkedThumbColor = Color.White,
-                                    checkedTrackColor = Color(0xFF0056B3)
-                                )
-                            )
                         }
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                Icons.Default.AutoAwesome,
-                                contentDescription = null,
-                                modifier = Modifier.size(16.dp),
-                                tint = Color(0xFF0056B3)
-                            )
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text("Enhanced AI\nMode", fontSize = 10.sp, lineHeight = 12.sp, fontWeight = FontWeight.Bold)
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+                )
+            },
+            bottomBar = {
+                // Bottom Navigation Bar: Dark/black (#1A1A1A), stylized like HomeScreen
+                NavigationBar(
+                    containerColor = navBackgroundColor,
+                    tonalElevation = 0.dp,
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp, vertical = 12.dp)
+                        .clip(RoundedCornerShape(32.dp))
+                        .border(1.dp, Color.White.copy(alpha = 0.05f), RoundedCornerShape(32.dp))
+                ) {
+                    NavigationBarItem(
+                        selected = false,
+                        onClick = {
+                            viewModel.resetState()
+                            navController.navigate("home") {
+                                popUpTo("home") { inclusive = true }
+                                launchSingleTop = true
+                            }
+                        },
+                        icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
+                        label = { Text("HOME", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                        colors = NavigationBarItemDefaults.colors(
+                            unselectedIconColor = unselectedGrey,
+                            unselectedTextColor = unselectedGrey,
+                            indicatorColor = Color.Transparent
+                        )
+                    )
+                    NavigationBarItem(
+                        selected = true,
+                        onClick = { /* Already here */ },
+                        icon = { Icon(Icons.Default.QrCodeScanner, contentDescription = "Scan") },
+                        label = { Text("SCAN", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = orangeColor,
+                            selectedTextColor = orangeColor,
+                            indicatorColor = Color.Transparent
+                        )
+                    )
+                    NavigationBarItem(
+                        selected = false,
+                        onClick = {
+                            viewModel.resetState()
+                            navController.navigate("chat") {
+                                popUpTo("home") { saveState = true }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        },
+                        icon = { Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = "Chat") },
+                        label = { Text("CHAT", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                        colors = NavigationBarItemDefaults.colors(
+                            unselectedIconColor = unselectedGrey,
+                            unselectedTextColor = unselectedGrey,
+                            indicatorColor = Color.Transparent
+                        )
+                    )
+                    NavigationBarItem(
+                        selected = false,
+                        onClick = { /* TODO */ },
+                        icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
+                        label = { Text("PROFILE", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                        colors = NavigationBarItemDefaults.colors(
+                            unselectedIconColor = unselectedGrey,
+                            unselectedTextColor = unselectedGrey,
+                            indicatorColor = Color.Transparent
+                        )
+                    )
+                }
+            }
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .padding(horizontal = 24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Spacer(modifier = Modifier.height(20.dp))
+                // Title: "AI Report Scanner" - white, bold, large (matching homepage)
+                Text(
+                    text = "AI Report Scanner",
+                    color = whiteColor,
+                    fontSize = 42.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    textAlign = TextAlign.Center,
+                    lineHeight = 48.sp
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                // Subtitle: white
+                Text(
+                    text = "Align your food within the frame to start the analysis.",
+                    textAlign = TextAlign.Center,
+                    color = whiteColor,
+                    lineHeight = 24.sp,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium
+                )
+
+                Spacer(modifier = Modifier.height(32.dp))
+
+                // Scanner Frame
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(0.8f)
+                        .clip(RoundedCornerShape(32.dp))
+                        .background(Color.Black.copy(alpha = 0.3f))
+                ) {
+                    if (hasCameraPermission) {
+                        CameraPreview(
+                            lifecycleOwner = lifecycleOwner,
+                            imageCapture = imageCapture,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    } else {
+                        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                            Text("Camera permission required", color = whiteColor)
                         }
                     }
+
+                    // Corner frame brackets (Orange)
+                    ScannerCorners(modifier = Modifier.fillMaxSize(), color = orangeColor)
+
+                    // Camera capture button: white circular button with a subtle dark border
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .padding(bottom = 60.dp)
+                            .size(72.dp)
+                            .border(4.dp, Color.Black.copy(alpha = 0.2f), CircleShape)
+                            .background(whiteColor, CircleShape)
+                            .clip(CircleShape)
+                            .clickable(
+                                enabled = uiState !is ScanUiState.Loading && hasCameraPermission,
+                                onClick = {
+                                    takePicture(context, imageCapture, executor) { file ->
+                                        Log.d("ScanScreen", "Triggering analysis for: ${file.name}")
+                                        viewModel.analyzeFood(file)
+                                    }
+                                }
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(Icons.Default.CameraAlt, contentDescription = "Capture", tint = Color.Black, modifier = Modifier.size(32.dp))
+                    }
+
+                    // Loading Indicator
+                    if (uiState is ScanUiState.Loading) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(Color.Black.copy(alpha = 0.5f)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                CircularProgressIndicator(color = orangeColor)
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text("Analyzing Food...", color = whiteColor)
+                            }
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Error Display
+                if (uiState is ScanUiState.Error) {
+                    Text(
+                        text = (uiState as ScanUiState.Error).message,
+                        color = Color.Red,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
                 }
             }
         }
@@ -357,6 +352,7 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
     if (showSheet && scannedFoodData != null) {
         FoodResultBottomSheet(
             foodData = scannedFoodData!!,
+            detailedData = (uiState as? ScanUiState.Success)?.detailedData,
             onDismiss = {
                 showSheet = false
                 viewModel.resetState()
@@ -438,11 +434,10 @@ private fun takePicture(
 }
 
 @Composable
-fun ScannerCorners(modifier: Modifier) {
+fun ScannerCorners(modifier: Modifier, color: Color) {
     Box(modifier = modifier.padding(24.dp)) {
         val cornerSize = 40.dp
         val strokeWidth = 4.dp
-        val color = Color(0xFF0056B3)
 
         // Top Left
         Box(modifier = Modifier
@@ -473,7 +468,7 @@ fun ScannerCorners(modifier: Modifier) {
             .size(cornerSize)
             .align(Alignment.BottomEnd)) {
             Box(modifier = Modifier.fillMaxHeight().width(strokeWidth).align(Alignment.TopEnd).background(color))
-            Box(modifier = Modifier.fillMaxWidth().height(strokeWidth).align(Alignment.BottomEnd).background(color))
+            Box(modifier = Modifier.fillMaxWidth().height(strokeWidth).background(color))
         }
     }
 }

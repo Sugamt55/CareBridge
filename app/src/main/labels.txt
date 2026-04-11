@@ -1,0 +1,16 @@
+apple
+banana
+cabbage
+carrot
+chicken
+corn
+cucumber
+ginger
+goat
+grapes
+mango
+onion
+orange
+potato
+tomato
+watermelon

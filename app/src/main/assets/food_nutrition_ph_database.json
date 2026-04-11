@@ -1,43 +1,209 @@
 {
+  "apple_red": {
+    "food_name": "Apple Red",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "apple_golden": {
+    "food_name": "Apple Golden",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "banana": {
+    "food_name": "Banana",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "blackberry": {
+    "food_name": "Blackberry",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "blueberry": {
+    "food_name": "Blueberry",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "cherry": {
+    "food_name": "Cherry",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "grape_white": {
+    "food_name": "Grape White",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "mango": {
+    "food_name": "Mango",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "papaya": {
+    "food_name": "Papaya",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "peach": {
+    "food_name": "Peach",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "pear": {
+    "food_name": "Pear",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "plum": {
+    "food_name": "Plum",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "pomegranate": {
+    "food_name": "Pomegranate",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "strawberry": {
+    "food_name": "Strawberry",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "watermelon": {
+    "food_name": "Watermelon",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": { "protein_g": 0.8, "carbs_g": 15, "fat_g": 0.3, "fiber_g": 2.5, "sugar_g": 12 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Fresh non-hybrid fruits are mineral-rich."
+  },
+  "bell_pepper": {
+    "food_name": "Bell Pepper",
+    "serving_size": "100g",
+    "calories": 25,
+    "macronutrients": { "protein_g": 1.5, "carbs_g": 5, "fat_g": 0.2, "fiber_g": 2.0, "sugar_g": 2 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Non-starchy vegetables provide essential alkaline minerals."
+  },
+  "cucumber": {
+    "food_name": "Cucumber",
+    "serving_size": "100g",
+    "calories": 25,
+    "macronutrients": { "protein_g": 1.5, "carbs_g": 5, "fat_g": 0.2, "fiber_g": 2.0, "sugar_g": 2 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Non-starchy vegetables provide essential alkaline minerals."
+  },
+  "kale": {
+    "food_name": "Kale",
+    "serving_size": "100g",
+    "calories": 25,
+    "macronutrients": { "protein_g": 1.5, "carbs_g": 5, "fat_g": 0.2, "fiber_g": 2.0, "sugar_g": 2 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Non-starchy vegetables provide essential alkaline minerals."
+  },
+  "lettuce": {
+    "food_name": "Lettuce",
+    "serving_size": "100g",
+    "calories": 25,
+    "macronutrients": { "protein_g": 1.5, "carbs_g": 5, "fat_g": 0.2, "fiber_g": 2.0, "sugar_g": 2 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Non-starchy vegetables provide essential alkaline minerals."
+  },
+  "mushroom": {
+    "food_name": "Mushroom",
+    "serving_size": "100g",
+    "calories": 25,
+    "macronutrients": { "protein_g": 1.5, "carbs_g": 5, "fat_g": 0.2, "fiber_g": 2.0, "sugar_g": 2 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Non-starchy vegetables provide essential alkaline minerals."
+  },
+  "onion": {
+    "food_name": "Onion",
+    "serving_size": "100g",
+    "calories": 25,
+    "macronutrients": { "protein_g": 1.5, "carbs_g": 5, "fat_g": 0.2, "fiber_g": 2.0, "sugar_g": 2 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Non-starchy vegetables provide essential alkaline minerals."
+  },
+  "zucchini": {
+    "food_name": "Zucchini",
+    "serving_size": "100g",
+    "calories": 25,
+    "macronutrients": { "protein_g": 1.5, "carbs_g": 5, "fat_g": 0.2, "fiber_g": 2.0, "sugar_g": 2 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Non-starchy vegetables provide essential alkaline minerals."
+  },
+  "squash": {
+    "food_name": "Squash",
+    "serving_size": "100g",
+    "calories": 25,
+    "macronutrients": { "protein_g": 1.5, "carbs_g": 5, "fat_g": 0.2, "fiber_g": 2.0, "sugar_g": 2 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Non-starchy vegetables provide essential alkaline minerals."
+  },
+  "tomato": {
+    "food_name": "Tomato",
+    "serving_size": "100g",
+    "calories": 25,
+    "macronutrients": { "protein_g": 1.5, "carbs_g": 5, "fat_g": 0.2, "fiber_g": 2.0, "sugar_g": 2 },
+    "ph_classification": "alkaline-forming",
+    "ph_reason": "Non-starchy vegetables provide essential alkaline minerals."
+  },
   "apple_pie": {
     "food_name": "Apple Pie",
     "serving_size": "1 slice (125g)",
     "calories": 296,
-    "macronutrients": {
-      "protein_g": 2.4,
-      "carbs_g": 43,
-      "fat_g": 14,
-      "fiber_g": 1.9,
-      "sugar_g": 22
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 40,
-      "vitamin_c_mg": 2,
-      "calcium_mg": 15,
-      "iron_mg": 0.7,
-      "potassium_mg": 80
-    },
+    "macronutrients": { "protein_g": 2.4, "carbs_g": 43, "fat_g": 14, "fiber_g": 1.9, "sugar_g": 22 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Contains refined flour, sugar, and butter \u2014 all acid-forming per Dr. Sebi"
+    "ph_reason": "Contains refined flour, sugar, and butter — all acid-forming per Dr. Sebi"
   },
   "baby_back_ribs": {
     "food_name": "Baby Back Ribs",
     "serving_size": "3 ribs (170g)",
     "calories": 470,
-    "macronutrients": {
-      "protein_g": 33,
-      "carbs_g": 8,
-      "fat_g": 34,
-      "fiber_g": 0,
-      "sugar_g": 6
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 0,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 40,
-      "iron_mg": 2.5,
-      "potassium_mg": 310
-    },
+    "macronutrients": { "protein_g": 33, "carbs_g": 8, "fat_g": 34, "fiber_g": 0, "sugar_g": 6 },
     "ph_classification": "acid-forming",
     "ph_reason": "Animal protein is acid-forming; BBQ sauce contains sugar"
   },
@@ -45,20 +211,7 @@
     "food_name": "Baklava",
     "serving_size": "1 piece (78g)",
     "calories": 334,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 29,
-      "fat_g": 23,
-      "fiber_g": 1.5,
-      "sugar_g": 16
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 85,
-      "vitamin_c_mg": 0.5,
-      "calcium_mg": 25,
-      "iron_mg": 1.2,
-      "potassium_mg": 95
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 29, "fat_g": 23, "fiber_g": 1.5, "sugar_g": 16 },
     "ph_classification": "acid-forming",
     "ph_reason": "Refined pastry dough, sugar syrup, and butter are acid-forming"
   },
@@ -66,20 +219,7 @@
     "food_name": "Beef Carpaccio",
     "serving_size": "100g",
     "calories": 143,
-    "macronutrients": {
-      "protein_g": 22,
-      "carbs_g": 0.5,
-      "fat_g": 6,
-      "fiber_g": 0,
-      "sugar_g": 0
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 0,
-      "vitamin_c_mg": 3,
-      "calcium_mg": 12,
-      "iron_mg": 3.5,
-      "potassium_mg": 340
-    },
+    "macronutrients": { "protein_g": 22, "carbs_g": 0.5, "fat_g": 6, "fiber_g": 0, "sugar_g": 0 },
     "ph_classification": "acid-forming",
     "ph_reason": "Red meat is strongly acid-forming in Dr. Sebi's classification"
   },
@@ -87,20 +227,7 @@
     "food_name": "Beef Tartare",
     "serving_size": "150g",
     "calories": 240,
-    "macronutrients": {
-      "protein_g": 28,
-      "carbs_g": 2,
-      "fat_g": 13,
-      "fiber_g": 0,
-      "sugar_g": 0.5
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 30,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 15,
-      "iron_mg": 4,
-      "potassium_mg": 380
-    },
+    "macronutrients": { "protein_g": 28, "carbs_g": 2, "fat_g": 13, "fiber_g": 0, "sugar_g": 0.5 },
     "ph_classification": "acid-forming",
     "ph_reason": "Raw beef is acid-forming; egg yolk adds to acidity"
   },
@@ -108,20 +235,7 @@
     "food_name": "Beet Salad",
     "serving_size": "1 cup (200g)",
     "calories": 130,
-    "macronutrients": {
-      "protein_g": 3,
-      "carbs_g": 18,
-      "fat_g": 6,
-      "fiber_g": 4,
-      "sugar_g": 12
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 50,
-      "vitamin_c_mg": 8,
-      "calcium_mg": 30,
-      "iron_mg": 1.5,
-      "potassium_mg": 440
-    },
+    "macronutrients": { "protein_g": 3, "carbs_g": 18, "fat_g": 6, "fiber_g": 4, "sugar_g": 12 },
     "ph_classification": "alkaline-forming",
     "ph_reason": "Beets are highly alkaline-forming root vegetables rich in minerals"
   },
@@ -129,41 +243,15 @@
     "food_name": "Beignets",
     "serving_size": "3 pieces (90g)",
     "calories": 350,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 42,
-      "fat_g": 18,
-      "fiber_g": 0.8,
-      "sugar_g": 15
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 20,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 30,
-      "iron_mg": 1,
-      "potassium_mg": 55
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 42, "fat_g": 18, "fiber_g": 0.8, "sugar_g": 15 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Deep-fried refined flour with powdered sugar \u2014 highly acid-forming"
+    "ph_reason": "Deep-fried refined flour with powdered sugar — highly acid-forming"
   },
   "bibimbap": {
     "food_name": "Bibimbap",
     "serving_size": "1 bowl (400g)",
     "calories": 490,
-    "macronutrients": {
-      "protein_g": 22,
-      "carbs_g": 68,
-      "fat_g": 14,
-      "fiber_g": 4,
-      "sugar_g": 6
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 2800,
-      "vitamin_c_mg": 15,
-      "calcium_mg": 80,
-      "iron_mg": 3,
-      "potassium_mg": 450
-    },
+    "macronutrients": { "protein_g": 22, "carbs_g": 68, "fat_g": 14, "fiber_g": 4, "sugar_g": 6 },
     "ph_classification": "acid-forming",
     "ph_reason": "White rice and meat/egg components are acid-forming despite vegetables"
   },
@@ -171,41 +259,15 @@
     "food_name": "Bread Pudding",
     "serving_size": "1 serving (150g)",
     "calories": 340,
-    "macronutrients": {
-      "protein_g": 8,
-      "carbs_g": 48,
-      "fat_g": 13,
-      "fiber_g": 1,
-      "sugar_g": 28
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 300,
-      "vitamin_c_mg": 1,
-      "calcium_mg": 120,
-      "iron_mg": 1.5,
-      "potassium_mg": 180
-    },
+    "macronutrients": { "protein_g": 8, "carbs_g": 48, "fat_g": 13, "fiber_g": 1, "sugar_g": 28 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Bread, sugar, eggs, and dairy \u2014 all acid-forming ingredients"
+    "ph_reason": "Bread, sugar, eggs, and dairy — all acid-forming ingredients"
   },
   "breakfast_burrito": {
     "food_name": "Breakfast Burrito",
     "serving_size": "1 burrito (220g)",
     "calories": 380,
-    "macronutrients": {
-      "protein_g": 18,
-      "carbs_g": 35,
-      "fat_g": 18,
-      "fiber_g": 3,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 350,
-      "vitamin_c_mg": 8,
-      "calcium_mg": 150,
-      "iron_mg": 2.5,
-      "potassium_mg": 280
-    },
+    "macronutrients": { "protein_g": 18, "carbs_g": 35, "fat_g": 18, "fiber_g": 3, "sugar_g": 2 },
     "ph_classification": "acid-forming",
     "ph_reason": "Flour tortilla, eggs, cheese, and meat are acid-forming"
   },
@@ -213,20 +275,7 @@
     "food_name": "Bruschetta",
     "serving_size": "2 pieces (120g)",
     "calories": 180,
-    "macronutrients": {
-      "protein_g": 4,
-      "carbs_g": 22,
-      "fat_g": 9,
-      "fiber_g": 2,
-      "sugar_g": 3
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 500,
-      "vitamin_c_mg": 12,
-      "calcium_mg": 20,
-      "iron_mg": 1,
-      "potassium_mg": 200
-    },
+    "macronutrients": { "protein_g": 4, "carbs_g": 22, "fat_g": 9, "fiber_g": 2, "sugar_g": 3 },
     "ph_classification": "acid-forming",
     "ph_reason": "Bread base is acid-forming despite alkaline tomato topping"
   },
@@ -234,20 +283,7 @@
     "food_name": "Caesar Salad",
     "serving_size": "1 bowl (250g)",
     "calories": 220,
-    "macronutrients": {
-      "protein_g": 8,
-      "carbs_g": 12,
-      "fat_g": 16,
-      "fiber_g": 3,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 4400,
-      "vitamin_c_mg": 18,
-      "calcium_mg": 120,
-      "iron_mg": 1.5,
-      "potassium_mg": 300
-    },
+    "macronutrients": { "protein_g": 8, "carbs_g": 12, "fat_g": 16, "fiber_g": 3, "sugar_g": 2 },
     "ph_classification": "acid-forming",
     "ph_reason": "Parmesan cheese, croutons, and anchovy dressing are acid-forming"
   },
@@ -255,20 +291,7 @@
     "food_name": "Cannoli",
     "serving_size": "1 piece (100g)",
     "calories": 370,
-    "macronutrients": {
-      "protein_g": 8,
-      "carbs_g": 40,
-      "fat_g": 20,
-      "fiber_g": 0.5,
-      "sugar_g": 24
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 180,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 70,
-      "iron_mg": 1,
-      "potassium_mg": 90
-    },
+    "macronutrients": { "protein_g": 8, "carbs_g": 40, "fat_g": 20, "fiber_g": 0.5, "sugar_g": 24 },
     "ph_classification": "acid-forming",
     "ph_reason": "Ricotta, fried shell, and sugar are acid-forming"
   },
@@ -276,20 +299,7 @@
     "food_name": "Caprese Salad",
     "serving_size": "1 serving (200g)",
     "calories": 250,
-    "macronutrients": {
-      "protein_g": 14,
-      "carbs_g": 5,
-      "fat_g": 20,
-      "fiber_g": 1,
-      "sugar_g": 3
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 700,
-      "vitamin_c_mg": 15,
-      "calcium_mg": 300,
-      "iron_mg": 0.8,
-      "potassium_mg": 250
-    },
+    "macronutrients": { "protein_g": 14, "carbs_g": 5, "fat_g": 20, "fiber_g": 1, "sugar_g": 3 },
     "ph_classification": "acid-forming",
     "ph_reason": "Mozzarella cheese is acid-forming despite alkaline tomatoes and basil"
   },
@@ -297,41 +307,15 @@
     "food_name": "Carrot Cake",
     "serving_size": "1 slice (130g)",
     "calories": 415,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 52,
-      "fat_g": 22,
-      "fiber_g": 1.5,
-      "sugar_g": 35
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 3500,
-      "vitamin_c_mg": 2,
-      "calcium_mg": 50,
-      "iron_mg": 1.2,
-      "potassium_mg": 150
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 52, "fat_g": 22, "fiber_g": 1.5, "sugar_g": 35 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Sugar, flour, cream cheese frosting \u2014 acid-forming despite carrots"
+    "ph_reason": "Sugar, flour, cream cheese frosting — acid-forming despite carrots"
   },
   "ceviche": {
     "food_name": "Ceviche",
     "serving_size": "1 cup (180g)",
     "calories": 140,
-    "macronutrients": {
-      "protein_g": 18,
-      "carbs_g": 8,
-      "fat_g": 4,
-      "fiber_g": 2,
-      "sugar_g": 3
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 300,
-      "vitamin_c_mg": 35,
-      "calcium_mg": 40,
-      "iron_mg": 1,
-      "potassium_mg": 350
-    },
+    "macronutrients": { "protein_g": 18, "carbs_g": 8, "fat_g": 4, "fiber_g": 2, "sugar_g": 3 },
     "ph_classification": "acid-forming",
     "ph_reason": "Fish/seafood is acid-forming per Dr. Sebi's classification"
   },
@@ -339,41 +323,15 @@
     "food_name": "Cheesecake",
     "serving_size": "1 slice (125g)",
     "calories": 400,
-    "macronutrients": {
-      "protein_g": 7,
-      "carbs_g": 30,
-      "fat_g": 28,
-      "fiber_g": 0.3,
-      "sugar_g": 22
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 500,
-      "vitamin_c_mg": 1,
-      "calcium_mg": 60,
-      "iron_mg": 0.8,
-      "potassium_mg": 100
-    },
+    "macronutrients": { "protein_g": 7, "carbs_g": 30, "fat_g": 28, "fiber_g": 0.3, "sugar_g": 22 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Cream cheese, sugar, and graham crust \u2014 highly acid-forming"
+    "ph_reason": "Cream cheese, sugar, and graham crust — highly acid-forming"
   },
   "cheese_plate": {
     "food_name": "Cheese Plate",
     "serving_size": "100g assorted",
     "calories": 350,
-    "macronutrients": {
-      "protein_g": 22,
-      "carbs_g": 3,
-      "fat_g": 28,
-      "fiber_g": 0,
-      "sugar_g": 1
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 900,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 600,
-      "iron_mg": 0.5,
-      "potassium_mg": 100
-    },
+    "macronutrients": { "protein_g": 22, "carbs_g": 3, "fat_g": 28, "fiber_g": 0, "sugar_g": 1 },
     "ph_classification": "acid-forming",
     "ph_reason": "All dairy products are acid-forming in Dr. Sebi's framework"
   },
@@ -381,20 +339,7 @@
     "food_name": "Chicken Curry",
     "serving_size": "1 cup (250g)",
     "calories": 300,
-    "macronutrients": {
-      "protein_g": 25,
-      "carbs_g": 12,
-      "fat_g": 18,
-      "fiber_g": 2,
-      "sugar_g": 4
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 600,
-      "vitamin_c_mg": 8,
-      "calcium_mg": 50,
-      "iron_mg": 2,
-      "potassium_mg": 380
-    },
+    "macronutrients": { "protein_g": 25, "carbs_g": 12, "fat_g": 18, "fiber_g": 2, "sugar_g": 4 },
     "ph_classification": "acid-forming",
     "ph_reason": "Chicken is acid-forming; cream-based sauce adds to acidity"
   },
@@ -402,20 +347,7 @@
     "food_name": "Chicken Quesadilla",
     "serving_size": "1 quesadilla (200g)",
     "calories": 460,
-    "macronutrients": {
-      "protein_g": 28,
-      "carbs_g": 32,
-      "fat_g": 24,
-      "fiber_g": 2,
-      "sugar_g": 1
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 200,
-      "vitamin_c_mg": 3,
-      "calcium_mg": 300,
-      "iron_mg": 2,
-      "potassium_mg": 250
-    },
+    "macronutrients": { "protein_g": 28, "carbs_g": 32, "fat_g": 24, "fiber_g": 2, "sugar_g": 1 },
     "ph_classification": "acid-forming",
     "ph_reason": "Chicken, cheese, and flour tortilla are all acid-forming"
   },
@@ -423,104 +355,39 @@
     "food_name": "Chicken Wings",
     "serving_size": "6 wings (180g)",
     "calories": 430,
-    "macronutrients": {
-      "protein_g": 36,
-      "carbs_g": 8,
-      "fat_g": 28,
-      "fiber_g": 0.5,
-      "sugar_g": 1
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 150,
-      "vitamin_c_mg": 2,
-      "calcium_mg": 20,
-      "iron_mg": 1.5,
-      "potassium_mg": 220
-    },
+    "macronutrients": { "protein_g": 36, "carbs_g": 8, "fat_g": 28, "fiber_g": 0.5, "sugar_g": 1 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Fried chicken with sauce \u2014 acid-forming animal protein"
+    "ph_reason": "Fried chicken with sauce — acid-forming animal protein"
   },
   "chocolate_cake": {
     "food_name": "Chocolate Cake",
     "serving_size": "1 slice (125g)",
     "calories": 440,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 55,
-      "fat_g": 22,
-      "fiber_g": 2,
-      "sugar_g": 38
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 100,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 40,
-      "iron_mg": 2.5,
-      "potassium_mg": 180
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 55, "fat_g": 22, "fiber_g": 2, "sugar_g": 38 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Refined flour, sugar, dairy, and processed cocoa \u2014 acid-forming"
+    "ph_reason": "Refined flour, sugar, dairy, and processed cocoa — acid-forming"
   },
   "chocolate_mousse": {
     "food_name": "Chocolate Mousse",
     "serving_size": "1 cup (130g)",
     "calories": 320,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 30,
-      "fat_g": 20,
-      "fiber_g": 1.5,
-      "sugar_g": 25
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 350,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 45,
-      "iron_mg": 1.8,
-      "potassium_mg": 170
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 30, "fat_g": 20, "fiber_g": 1.5, "sugar_g": 25 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Cream, sugar, eggs, and chocolate \u2014 all acid-forming"
+    "ph_reason": "Cream, sugar, eggs, and chocolate — all acid-forming"
   },
   "churros": {
     "food_name": "Churros",
     "serving_size": "3 pieces (100g)",
     "calories": 380,
-    "macronutrients": {
-      "protein_g": 4,
-      "carbs_g": 44,
-      "fat_g": 21,
-      "fiber_g": 1,
-      "sugar_g": 18
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 20,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 15,
-      "iron_mg": 1,
-      "potassium_mg": 40
-    },
+    "macronutrients": { "protein_g": 4, "carbs_g": 44, "fat_g": 21, "fiber_g": 1, "sugar_g": 18 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Deep-fried refined dough coated in sugar \u2014 highly acid-forming"
+    "ph_reason": "Deep-fried refined dough coated in sugar — highly acid-forming"
   },
   "clam_chowder": {
     "food_name": "Clam Chowder",
     "serving_size": "1 cup (250g)",
     "calories": 200,
-    "macronutrients": {
-      "protein_g": 10,
-      "carbs_g": 18,
-      "fat_g": 10,
-      "fiber_g": 1,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 200,
-      "vitamin_c_mg": 10,
-      "calcium_mg": 80,
-      "iron_mg": 3,
-      "potassium_mg": 350
-    },
+    "macronutrients": { "protein_g": 10, "carbs_g": 18, "fat_g": 10, "fiber_g": 1, "sugar_g": 2 },
     "ph_classification": "acid-forming",
     "ph_reason": "Clams, cream, and flour are acid-forming"
   },
@@ -528,125 +395,47 @@
     "food_name": "Club Sandwich",
     "serving_size": "1 sandwich (300g)",
     "calories": 550,
-    "macronutrients": {
-      "protein_g": 30,
-      "carbs_g": 40,
-      "fat_g": 30,
-      "fiber_g": 3,
-      "sugar_g": 5
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 400,
-      "vitamin_c_mg": 8,
-      "calcium_mg": 80,
-      "iron_mg": 3,
-      "potassium_mg": 350
-    },
+    "macronutrients": { "protein_g": 30, "carbs_g": 40, "fat_g": 30, "fiber_g": 3, "sugar_g": 5 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Bread, meat, cheese, and mayo \u2014 acid-forming"
+    "ph_reason": "Bread, meat, cheese, and mayo — acid-forming"
   },
   "crab_cakes": {
     "food_name": "Crab Cakes",
     "serving_size": "2 cakes (130g)",
     "calories": 280,
-    "macronutrients": {
-      "protein_g": 20,
-      "carbs_g": 12,
-      "fat_g": 16,
-      "fiber_g": 0.5,
-      "sugar_g": 1
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 100,
-      "vitamin_c_mg": 4,
-      "calcium_mg": 80,
-      "iron_mg": 1.5,
-      "potassium_mg": 250
-    },
+    "macronutrients": { "protein_g": 20, "carbs_g": 12, "fat_g": 16, "fiber_g": 0.5, "sugar_g": 1 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Crab and breadcrumbs with egg binder \u2014 acid-forming"
+    "ph_reason": "Crab and breadcrumbs with egg binder — acid-forming"
   },
   "creme_brulee": {
-    "food_name": "Cr\u00e8me Br\u00fbl\u00e9e",
+    "food_name": "Crème Brûlée",
     "serving_size": "1 ramekin (130g)",
     "calories": 330,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 28,
-      "fat_g": 22,
-      "fiber_g": 0,
-      "sugar_g": 25
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 600,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 80,
-      "iron_mg": 0.5,
-      "potassium_mg": 100
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 28, "fat_g": 22, "fiber_g": 0, "sugar_g": 25 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Heavy cream, eggs, and sugar \u2014 acid-forming dairy dessert"
+    "ph_reason": "Heavy cream, eggs, and sugar — acid-forming dairy dessert"
   },
   "croque_madame": {
     "food_name": "Croque Madame",
     "serving_size": "1 sandwich (250g)",
     "calories": 520,
-    "macronutrients": {
-      "protein_g": 28,
-      "carbs_g": 30,
-      "fat_g": 32,
-      "fiber_g": 1.5,
-      "sugar_g": 3
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 500,
-      "vitamin_c_mg": 2,
-      "calcium_mg": 350,
-      "iron_mg": 2,
-      "potassium_mg": 220
-    },
+    "macronutrients": { "protein_g": 28, "carbs_g": 30, "fat_g": 32, "fiber_g": 1.5, "sugar_g": 3 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Bread, ham, cheese, b\u00e9chamel, and egg \u2014 heavily acid-forming"
+    "ph_reason": "Bread, ham, cheese, béchamel, and egg — heavily acid-forming"
   },
   "cup_cakes": {
     "food_name": "Cupcakes",
     "serving_size": "1 cupcake (80g)",
     "calories": 290,
-    "macronutrients": {
-      "protein_g": 3,
-      "carbs_g": 40,
-      "fat_g": 14,
-      "fiber_g": 0.5,
-      "sugar_g": 28
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 100,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 30,
-      "iron_mg": 0.8,
-      "potassium_mg": 50
-    },
+    "macronutrients": { "protein_g": 3, "carbs_g": 40, "fat_g": 14, "fiber_g": 0.5, "sugar_g": 28 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Refined flour, sugar, butter, and frosting \u2014 acid-forming"
+    "ph_reason": "Refined flour, sugar, butter, and frosting — acid-forming"
   },
   "deviled_eggs": {
     "food_name": "Deviled Eggs",
     "serving_size": "4 halves (120g)",
     "calories": 250,
-    "macronutrients": {
-      "protein_g": 12,
-      "carbs_g": 2,
-      "fat_g": 22,
-      "fiber_g": 0,
-      "sugar_g": 1
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 500,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 40,
-      "iron_mg": 1.5,
-      "potassium_mg": 130
-    },
+    "macronutrients": { "protein_g": 12, "carbs_g": 2, "fat_g": 22, "fiber_g": 0, "sugar_g": 1 },
     "ph_classification": "acid-forming",
     "ph_reason": "Eggs and mayo are acid-forming in Dr. Sebi's classification"
   },
@@ -654,41 +443,15 @@
     "food_name": "Donuts",
     "serving_size": "1 donut (70g)",
     "calories": 290,
-    "macronutrients": {
-      "protein_g": 3,
-      "carbs_g": 33,
-      "fat_g": 16,
-      "fiber_g": 0.7,
-      "sugar_g": 14
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 10,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 20,
-      "iron_mg": 1,
-      "potassium_mg": 45
-    },
+    "macronutrients": { "protein_g": 3, "carbs_g": 33, "fat_g": 16, "fiber_g": 0.7, "sugar_g": 14 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Fried refined dough with sugar glaze \u2014 highly acid-forming"
+    "ph_reason": "Fried refined dough with sugar glaze — highly acid-forming"
   },
   "dumplings": {
     "food_name": "Dumplings",
     "serving_size": "6 pieces (150g)",
     "calories": 280,
-    "macronutrients": {
-      "protein_g": 12,
-      "carbs_g": 35,
-      "fat_g": 10,
-      "fiber_g": 1.5,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 50,
-      "vitamin_c_mg": 4,
-      "calcium_mg": 25,
-      "iron_mg": 2,
-      "potassium_mg": 180
-    },
+    "macronutrients": { "protein_g": 12, "carbs_g": 35, "fat_g": 10, "fiber_g": 1.5, "sugar_g": 2 },
     "ph_classification": "acid-forming",
     "ph_reason": "Wheat wrapper and meat filling are acid-forming"
   },
@@ -696,20 +459,7 @@
     "food_name": "Edamame",
     "serving_size": "1 cup shelled (155g)",
     "calories": 190,
-    "macronutrients": {
-      "protein_g": 17,
-      "carbs_g": 15,
-      "fat_g": 8,
-      "fiber_g": 8,
-      "sugar_g": 3
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 300,
-      "vitamin_c_mg": 10,
-      "calcium_mg": 100,
-      "iron_mg": 3.5,
-      "potassium_mg": 675
-    },
+    "macronutrients": { "protein_g": 17, "carbs_g": 15, "fat_g": 8, "fiber_g": 8, "sugar_g": 3 },
     "ph_classification": "acid-forming",
     "ph_reason": "Soy is considered acid-forming and a hybrid food in Dr. Sebi's list"
   },
@@ -717,62 +467,23 @@
     "food_name": "Eggs Benedict",
     "serving_size": "1 serving (250g)",
     "calories": 480,
-    "macronutrients": {
-      "protein_g": 22,
-      "carbs_g": 25,
-      "fat_g": 32,
-      "fiber_g": 1,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 600,
-      "vitamin_c_mg": 2,
-      "calcium_mg": 120,
-      "iron_mg": 2.5,
-      "potassium_mg": 250
-    },
+    "macronutrients": { "protein_g": 22, "carbs_g": 25, "fat_g": 32, "fiber_g": 1, "sugar_g": 2 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Eggs, English muffin, ham, hollandaise \u2014 all acid-forming"
+    "ph_reason": "Eggs, English muffin, ham, hollandaise — all acid-forming"
   },
   "escargots": {
     "food_name": "Escargots",
     "serving_size": "6 pieces (120g)",
     "calories": 220,
-    "macronutrients": {
-      "protein_g": 16,
-      "carbs_g": 4,
-      "fat_g": 16,
-      "fiber_g": 0,
-      "sugar_g": 0
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 400,
-      "vitamin_c_mg": 2,
-      "calcium_mg": 30,
-      "iron_mg": 5,
-      "potassium_mg": 280
-    },
+    "macronutrients": { "protein_g": 16, "carbs_g": 4, "fat_g": 16, "fiber_g": 0, "sugar_g": 0 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Animal protein with butter \u2014 acid-forming"
+    "ph_reason": "Animal protein with butter — acid-forming"
   },
   "falafel": {
     "food_name": "Falafel",
     "serving_size": "4 pieces (120g)",
     "calories": 330,
-    "macronutrients": {
-      "protein_g": 13,
-      "carbs_g": 32,
-      "fat_g": 18,
-      "fiber_g": 5,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 30,
-      "vitamin_c_mg": 4,
-      "calcium_mg": 50,
-      "iron_mg": 3,
-      "potassium_mg": 300
-    },
+    "macronutrients": { "protein_g": 13, "carbs_g": 32, "fat_g": 18, "fiber_g": 5, "sugar_g": 2 },
     "ph_classification": "acid-forming",
     "ph_reason": "Chickpeas are considered a hybrid legume; deep-fried adds acidity"
   },
@@ -780,20 +491,7 @@
     "food_name": "Filet Mignon",
     "serving_size": "6 oz (170g)",
     "calories": 350,
-    "macronutrients": {
-      "protein_g": 42,
-      "carbs_g": 0,
-      "fat_g": 20,
-      "fiber_g": 0,
-      "sugar_g": 0
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 0,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 15,
-      "iron_mg": 4,
-      "potassium_mg": 550
-    },
+    "macronutrients": { "protein_g": 42, "carbs_g": 0, "fat_g": 20, "fiber_g": 0, "sugar_g": 0 },
     "ph_classification": "acid-forming",
     "ph_reason": "Red meat is strongly acid-forming per Dr. Sebi"
   },
@@ -801,41 +499,15 @@
     "food_name": "Fish and Chips",
     "serving_size": "1 serving (300g)",
     "calories": 590,
-    "macronutrients": {
-      "protein_g": 25,
-      "carbs_g": 55,
-      "fat_g": 30,
-      "fiber_g": 4,
-      "sugar_g": 1
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 30,
-      "vitamin_c_mg": 12,
-      "calcium_mg": 40,
-      "iron_mg": 2,
-      "potassium_mg": 500
-    },
+    "macronutrients": { "protein_g": 25, "carbs_g": 55, "fat_g": 30, "fiber_g": 4, "sugar_g": 1 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Fried battered fish and fried potatoes \u2014 acid-forming"
+    "ph_reason": "Fried battered fish and fried potatoes — acid-forming"
   },
   "foie_gras": {
     "food_name": "Foie Gras",
     "serving_size": "60g",
     "calories": 250,
-    "macronutrients": {
-      "protein_g": 7,
-      "carbs_g": 3,
-      "fat_g": 25,
-      "fiber_g": 0,
-      "sugar_g": 0
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 5000,
-      "vitamin_c_mg": 3,
-      "calcium_mg": 15,
-      "iron_mg": 8,
-      "potassium_mg": 140
-    },
+    "macronutrients": { "protein_g": 7, "carbs_g": 3, "fat_g": 25, "fiber_g": 0, "sugar_g": 0 },
     "ph_classification": "acid-forming",
     "ph_reason": "Organ meat/liver is acid-forming animal product"
   },
@@ -843,41 +515,15 @@
     "food_name": "French Fries",
     "serving_size": "medium (130g)",
     "calories": 365,
-    "macronutrients": {
-      "protein_g": 4,
-      "carbs_g": 48,
-      "fat_g": 17,
-      "fiber_g": 4,
-      "sugar_g": 0.5
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 0,
-      "vitamin_c_mg": 10,
-      "calcium_mg": 15,
-      "iron_mg": 1,
-      "potassium_mg": 550
-    },
+    "macronutrients": { "protein_g": 4, "carbs_g": 48, "fat_g": 17, "fiber_g": 4, "sugar_g": 0.5 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Deep-fried starch with salt \u2014 acid-forming per Dr. Sebi"
+    "ph_reason": "Deep-fried starch with salt — acid-forming per Dr. Sebi"
   },
   "french_onion_soup": {
     "food_name": "French Onion Soup",
     "serving_size": "1 bowl (300g)",
     "calories": 280,
-    "macronutrients": {
-      "protein_g": 12,
-      "carbs_g": 22,
-      "fat_g": 16,
-      "fiber_g": 2,
-      "sugar_g": 6
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 200,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 200,
-      "iron_mg": 1.5,
-      "potassium_mg": 250
-    },
+    "macronutrients": { "protein_g": 12, "carbs_g": 22, "fat_g": 16, "fiber_g": 2, "sugar_g": 6 },
     "ph_classification": "acid-forming",
     "ph_reason": "Beef broth, bread, and melted cheese are acid-forming"
   },
@@ -885,62 +531,23 @@
     "food_name": "French Toast",
     "serving_size": "2 slices (150g)",
     "calories": 350,
-    "macronutrients": {
-      "protein_g": 10,
-      "carbs_g": 40,
-      "fat_g": 16,
-      "fiber_g": 1,
-      "sugar_g": 14
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 300,
-      "vitamin_c_mg": 1,
-      "calcium_mg": 80,
-      "iron_mg": 2,
-      "potassium_mg": 130
-    },
+    "macronutrients": { "protein_g": 10, "carbs_g": 40, "fat_g": 16, "fiber_g": 1, "sugar_g": 14 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Bread soaked in eggs and milk, cooked in butter \u2014 acid-forming"
+    "ph_reason": "Bread soaked in eggs and milk, cooked in butter — acid-forming"
   },
   "fried_calamari": {
     "food_name": "Fried Calamari",
     "serving_size": "1 serving (150g)",
     "calories": 310,
-    "macronutrients": {
-      "protein_g": 18,
-      "carbs_g": 20,
-      "fat_g": 18,
-      "fiber_g": 1,
-      "sugar_g": 1
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 50,
-      "vitamin_c_mg": 4,
-      "calcium_mg": 40,
-      "iron_mg": 1.5,
-      "potassium_mg": 250
-    },
+    "macronutrients": { "protein_g": 18, "carbs_g": 20, "fat_g": 18, "fiber_g": 1, "sugar_g": 1 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Fried seafood with breading \u2014 acid-forming"
+    "ph_reason": "Fried seafood with breading — acid-forming"
   },
   "fried_rice": {
     "food_name": "Fried Rice",
     "serving_size": "1 cup (200g)",
     "calories": 340,
-    "macronutrients": {
-      "protein_g": 10,
-      "carbs_g": 50,
-      "fat_g": 12,
-      "fiber_g": 2,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 400,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 30,
-      "iron_mg": 2,
-      "potassium_mg": 180
-    },
+    "macronutrients": { "protein_g": 10, "carbs_g": 50, "fat_g": 12, "fiber_g": 2, "sugar_g": 2 },
     "ph_classification": "acid-forming",
     "ph_reason": "White rice, egg, and soy sauce are acid-forming"
   },
@@ -948,83 +555,31 @@
     "food_name": "Frozen Yogurt",
     "serving_size": "1 cup (175g)",
     "calories": 220,
-    "macronutrients": {
-      "protein_g": 6,
-      "carbs_g": 40,
-      "fat_g": 4,
-      "fiber_g": 0,
-      "sugar_g": 34
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 100,
-      "vitamin_c_mg": 1,
-      "calcium_mg": 200,
-      "iron_mg": 0.3,
-      "potassium_mg": 280
-    },
+    "macronutrients": { "protein_g": 6, "carbs_g": 40, "fat_g": 4, "fiber_g": 0, "sugar_g": 34 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Dairy and sugar \u2014 acid-forming despite yogurt cultures"
+    "ph_reason": "Dairy and sugar — acid-forming despite yogurt cultures"
   },
   "garlic_bread": {
     "food_name": "Garlic Bread",
     "serving_size": "2 slices (80g)",
     "calories": 280,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 30,
-      "fat_g": 16,
-      "fiber_g": 1.5,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 200,
-      "vitamin_c_mg": 1,
-      "calcium_mg": 30,
-      "iron_mg": 1.5,
-      "potassium_mg": 60
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 30, "fat_g": 16, "fiber_g": 1.5, "sugar_g": 2 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Refined bread with butter \u2014 acid-forming despite alkaline garlic"
+    "ph_reason": "Refined bread with butter — acid-forming despite alkaline garlic"
   },
   "gnocchi": {
     "food_name": "Gnocchi",
     "serving_size": "1 cup (175g)",
     "calories": 250,
-    "macronutrients": {
-      "protein_g": 6,
-      "carbs_g": 50,
-      "fat_g": 3,
-      "fiber_g": 2,
-      "sugar_g": 1
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 0,
-      "vitamin_c_mg": 8,
-      "calcium_mg": 20,
-      "iron_mg": 1.5,
-      "potassium_mg": 300
-    },
+    "macronutrients": { "protein_g": 6, "carbs_g": 50, "fat_g": 3, "fiber_g": 2, "sugar_g": 1 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Potato and flour dough with egg \u2014 acid-forming starch"
+    "ph_reason": "Potato and flour dough with egg — acid-forming starch"
   },
   "greek_salad": {
     "food_name": "Greek Salad",
     "serving_size": "1 bowl (250g)",
     "calories": 200,
-    "macronutrients": {
-      "protein_g": 6,
-      "carbs_g": 10,
-      "fat_g": 16,
-      "fiber_g": 3,
-      "sugar_g": 5
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 1500,
-      "vitamin_c_mg": 25,
-      "calcium_mg": 150,
-      "iron_mg": 1.5,
-      "potassium_mg": 350
-    },
+    "macronutrients": { "protein_g": 6, "carbs_g": 10, "fat_g": 16, "fiber_g": 3, "sugar_g": 5 },
     "ph_classification": "acid-forming",
     "ph_reason": "Feta cheese is acid-forming despite alkaline vegetables"
   },
@@ -1032,41 +587,15 @@
     "food_name": "Grilled Cheese Sandwich",
     "serving_size": "1 sandwich (150g)",
     "calories": 400,
-    "macronutrients": {
-      "protein_g": 15,
-      "carbs_g": 30,
-      "fat_g": 25,
-      "fiber_g": 1.5,
-      "sugar_g": 4
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 400,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 300,
-      "iron_mg": 2,
-      "potassium_mg": 120
-    },
+    "macronutrients": { "protein_g": 15, "carbs_g": 30, "fat_g": 25, "fiber_g": 1.5, "sugar_g": 4 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Bread, cheese, and butter \u2014 all acid-forming"
+    "ph_reason": "Bread, cheese, and butter — all acid-forming"
   },
   "grilled_salmon": {
     "food_name": "Grilled Salmon",
     "serving_size": "6 oz (170g)",
     "calories": 350,
-    "macronutrients": {
-      "protein_g": 38,
-      "carbs_g": 0,
-      "fat_g": 22,
-      "fiber_g": 0,
-      "sugar_g": 0
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 100,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 15,
-      "iron_mg": 1,
-      "potassium_mg": 600
-    },
+    "macronutrients": { "protein_g": 38, "carbs_g": 0, "fat_g": 22, "fiber_g": 0, "sugar_g": 0 },
     "ph_classification": "acid-forming",
     "ph_reason": "Fish is acid-forming animal protein per Dr. Sebi"
   },
@@ -1074,20 +603,7 @@
     "food_name": "Guacamole",
     "serving_size": "1/2 cup (115g)",
     "calories": 180,
-    "macronutrients": {
-      "protein_g": 2,
-      "carbs_g": 10,
-      "fat_g": 16,
-      "fiber_g": 7,
-      "sugar_g": 1
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 200,
-      "vitamin_c_mg": 12,
-      "calcium_mg": 15,
-      "iron_mg": 0.8,
-      "potassium_mg": 500
-    },
+    "macronutrients": { "protein_g": 2, "carbs_g": 10, "fat_g": 16, "fiber_g": 7, "sugar_g": 1 },
     "ph_classification": "alkaline-forming",
     "ph_reason": "Avocado is alkaline-forming with lime and fresh vegetables"
   },
@@ -1095,125 +611,47 @@
     "food_name": "Gyoza",
     "serving_size": "6 pieces (150g)",
     "calories": 300,
-    "macronutrients": {
-      "protein_g": 12,
-      "carbs_g": 30,
-      "fat_g": 14,
-      "fiber_g": 2,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 100,
-      "vitamin_c_mg": 6,
-      "calcium_mg": 25,
-      "iron_mg": 2,
-      "potassium_mg": 200
-    },
+    "macronutrients": { "protein_g": 12, "carbs_g": 30, "fat_g": 14, "fiber_g": 2, "sugar_g": 2 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Wheat wrapper and pork filling \u2014 acid-forming"
+    "ph_reason": "Wheat wrapper and pork filling — acid-forming"
   },
   "hamburger": {
     "food_name": "Hamburger",
     "serving_size": "1 burger (200g)",
     "calories": 500,
-    "macronutrients": {
-      "protein_g": 28,
-      "carbs_g": 35,
-      "fat_g": 26,
-      "fiber_g": 2,
-      "sugar_g": 6
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 100,
-      "vitamin_c_mg": 3,
-      "calcium_mg": 80,
-      "iron_mg": 4,
-      "potassium_mg": 350
-    },
+    "macronutrients": { "protein_g": 28, "carbs_g": 35, "fat_g": 26, "fiber_g": 2, "sugar_g": 6 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Beef patty, refined bun, and condiments \u2014 acid-forming"
+    "ph_reason": "Beef patty, refined bun, and condiments — acid-forming"
   },
   "hot_and_sour_soup": {
     "food_name": "Hot and Sour Soup",
     "serving_size": "1 cup (250g)",
     "calories": 95,
-    "macronutrients": {
-      "protein_g": 6,
-      "carbs_g": 10,
-      "fat_g": 3,
-      "fiber_g": 1,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 100,
-      "vitamin_c_mg": 3,
-      "calcium_mg": 25,
-      "iron_mg": 1.5,
-      "potassium_mg": 200
-    },
+    "macronutrients": { "protein_g": 6, "carbs_g": 10, "fat_g": 3, "fiber_g": 1, "sugar_g": 2 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Pork, egg, soy sauce, and vinegar \u2014 acid-forming"
+    "ph_reason": "Pork, egg, soy sauce, and vinegar — acid-forming"
   },
   "hot_dog": {
     "food_name": "Hot Dog",
     "serving_size": "1 hot dog (150g)",
     "calories": 350,
-    "macronutrients": {
-      "protein_g": 12,
-      "carbs_g": 28,
-      "fat_g": 22,
-      "fiber_g": 1,
-      "sugar_g": 5
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 0,
-      "vitamin_c_mg": 1,
-      "calcium_mg": 50,
-      "iron_mg": 2,
-      "potassium_mg": 180
-    },
+    "macronutrients": { "protein_g": 12, "carbs_g": 28, "fat_g": 22, "fiber_g": 1, "sugar_g": 5 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Processed meat in refined bun \u2014 highly acid-forming"
+    "ph_reason": "Processed meat in refined bun — highly acid-forming"
   },
   "huevos_rancheros": {
     "food_name": "Huevos Rancheros",
     "serving_size": "1 serving (280g)",
     "calories": 360,
-    "macronutrients": {
-      "protein_g": 18,
-      "carbs_g": 30,
-      "fat_g": 18,
-      "fiber_g": 6,
-      "sugar_g": 4
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 800,
-      "vitamin_c_mg": 15,
-      "calcium_mg": 120,
-      "iron_mg": 3,
-      "potassium_mg": 450
-    },
+    "macronutrients": { "protein_g": 18, "carbs_g": 30, "fat_g": 18, "fiber_g": 6, "sugar_g": 4 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Eggs and cheese over tortilla \u2014 acid-forming despite beans and salsa"
+    "ph_reason": "Eggs and cheese over tortilla — acid-forming despite beans and salsa"
   },
   "hummus": {
     "food_name": "Hummus",
     "serving_size": "1/3 cup (80g)",
     "calories": 170,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 15,
-      "fat_g": 10,
-      "fiber_g": 4,
-      "sugar_g": 1
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 10,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 30,
-      "iron_mg": 2,
-      "potassium_mg": 150
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 15, "fat_g": 10, "fiber_g": 4, "sugar_g": 1 },
     "ph_classification": "acid-forming",
     "ph_reason": "Chickpeas are considered hybrid; tahini is from sesame seeds (not on Dr. Sebi's approved list)"
   },
@@ -1221,146 +659,55 @@
     "food_name": "Ice Cream",
     "serving_size": "1 cup (140g)",
     "calories": 270,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 32,
-      "fat_g": 14,
-      "fiber_g": 0.5,
-      "sugar_g": 28
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 350,
-      "vitamin_c_mg": 1,
-      "calcium_mg": 130,
-      "iron_mg": 0.3,
-      "potassium_mg": 200
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 32, "fat_g": 14, "fiber_g": 0.5, "sugar_g": 28 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Dairy, sugar, and artificial flavors \u2014 acid-forming"
+    "ph_reason": "Dairy, sugar, and artificial flavors — acid-forming"
   },
   "lasagna": {
     "food_name": "Lasagna",
     "serving_size": "1 piece (300g)",
     "calories": 430,
-    "macronutrients": {
-      "protein_g": 24,
-      "carbs_g": 38,
-      "fat_g": 20,
-      "fiber_g": 3,
-      "sugar_g": 6
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 800,
-      "vitamin_c_mg": 10,
-      "calcium_mg": 250,
-      "iron_mg": 3,
-      "potassium_mg": 400
-    },
+    "macronutrients": { "protein_g": 24, "carbs_g": 38, "fat_g": 20, "fiber_g": 3, "sugar_g": 6 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Pasta, meat, and cheese layers \u2014 acid-forming"
+    "ph_reason": "Pasta, meat, and cheese layers — acid-forming"
   },
   "lobster_bisque": {
     "food_name": "Lobster Bisque",
     "serving_size": "1 cup (250g)",
     "calories": 280,
-    "macronutrients": {
-      "protein_g": 12,
-      "carbs_g": 16,
-      "fat_g": 18,
-      "fiber_g": 0.5,
-      "sugar_g": 3
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 500,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 60,
-      "iron_mg": 1,
-      "potassium_mg": 300
-    },
+    "macronutrients": { "protein_g": 12, "carbs_g": 16, "fat_g": 18, "fiber_g": 0.5, "sugar_g": 3 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Lobster, cream, and butter \u2014 acid-forming"
+    "ph_reason": "Lobster, cream, and butter — acid-forming"
   },
   "lobster_roll_sandwich": {
     "food_name": "Lobster Roll Sandwich",
     "serving_size": "1 roll (200g)",
     "calories": 420,
-    "macronutrients": {
-      "protein_g": 25,
-      "carbs_g": 30,
-      "fat_g": 22,
-      "fiber_g": 1,
-      "sugar_g": 4
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 150,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 70,
-      "iron_mg": 1.5,
-      "potassium_mg": 300
-    },
+    "macronutrients": { "protein_g": 25, "carbs_g": 30, "fat_g": 22, "fiber_g": 1, "sugar_g": 4 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Lobster, mayo, and buttered bread roll \u2014 acid-forming"
+    "ph_reason": "Lobster, mayo, and buttered bread roll — acid-forming"
   },
   "macaroni_and_cheese": {
     "food_name": "Macaroni and Cheese",
     "serving_size": "1 cup (200g)",
     "calories": 380,
-    "macronutrients": {
-      "protein_g": 15,
-      "carbs_g": 40,
-      "fat_g": 18,
-      "fiber_g": 1.5,
-      "sugar_g": 4
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 300,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 250,
-      "iron_mg": 1.5,
-      "potassium_mg": 150
-    },
+    "macronutrients": { "protein_g": 15, "carbs_g": 40, "fat_g": 18, "fiber_g": 1.5, "sugar_g": 4 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Pasta and cheese \u2014 both acid-forming"
+    "ph_reason": "Pasta and cheese — both acid-forming"
   },
   "macarons": {
     "food_name": "Macarons",
     "serving_size": "3 pieces (45g)",
     "calories": 180,
-    "macronutrients": {
-      "protein_g": 3,
-      "carbs_g": 26,
-      "fat_g": 8,
-      "fiber_g": 1,
-      "sugar_g": 22
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 20,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 30,
-      "iron_mg": 0.5,
-      "potassium_mg": 40
-    },
+    "macronutrients": { "protein_g": 3, "carbs_g": 26, "fat_g": 8, "fiber_g": 1, "sugar_g": 22 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Almond flour, sugar, and egg whites \u2014 acid-forming confection"
+    "ph_reason": "Almond flour, sugar, and egg whites — acid-forming confection"
   },
   "miso_soup": {
     "food_name": "Miso Soup",
     "serving_size": "1 cup (240g)",
     "calories": 55,
-    "macronutrients": {
-      "protein_g": 4,
-      "carbs_g": 6,
-      "fat_g": 2,
-      "fiber_g": 1,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 150,
-      "vitamin_c_mg": 1,
-      "calcium_mg": 30,
-      "iron_mg": 1,
-      "potassium_mg": 200
-    },
+    "macronutrients": { "protein_g": 4, "carbs_g": 6, "fat_g": 2, "fiber_g": 1, "sugar_g": 2 },
     "ph_classification": "acid-forming",
     "ph_reason": "Soy-based miso paste is acid-forming per Dr. Sebi"
   },
@@ -1368,20 +715,7 @@
     "food_name": "Mussels",
     "serving_size": "1 lb cooked (200g)",
     "calories": 290,
-    "macronutrients": {
-      "protein_g": 40,
-      "carbs_g": 12,
-      "fat_g": 8,
-      "fiber_g": 0,
-      "sugar_g": 0
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 300,
-      "vitamin_c_mg": 12,
-      "calcium_mg": 50,
-      "iron_mg": 11,
-      "potassium_mg": 500
-    },
+    "macronutrients": { "protein_g": 40, "carbs_g": 12, "fat_g": 8, "fiber_g": 0, "sugar_g": 0 },
     "ph_classification": "acid-forming",
     "ph_reason": "Shellfish is acid-forming animal protein"
   },
@@ -1389,41 +723,15 @@
     "food_name": "Nachos",
     "serving_size": "1 serving (200g)",
     "calories": 450,
-    "macronutrients": {
-      "protein_g": 12,
-      "carbs_g": 42,
-      "fat_g": 26,
-      "fiber_g": 4,
-      "sugar_g": 3
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 300,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 200,
-      "iron_mg": 2,
-      "potassium_mg": 250
-    },
+    "macronutrients": { "protein_g": 12, "carbs_g": 42, "fat_g": 26, "fiber_g": 4, "sugar_g": 3 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Corn chips with cheese, sour cream \u2014 acid-forming"
+    "ph_reason": "Corn chips with cheese, sour cream — acid-forming"
   },
   "omelette": {
     "food_name": "Omelette",
     "serving_size": "1 omelette (180g)",
     "calories": 300,
-    "macronutrients": {
-      "protein_g": 20,
-      "carbs_g": 3,
-      "fat_g": 24,
-      "fiber_g": 0.5,
-      "sugar_g": 1
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 600,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 150,
-      "iron_mg": 2,
-      "potassium_mg": 220
-    },
+    "macronutrients": { "protein_g": 20, "carbs_g": 3, "fat_g": 24, "fiber_g": 0.5, "sugar_g": 1 },
     "ph_classification": "acid-forming",
     "ph_reason": "Eggs and cheese are acid-forming per Dr. Sebi"
   },
@@ -1431,42 +739,15 @@
     "food_name": "Onion Rings",
     "serving_size": "8 rings (120g)",
     "calories": 340,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 38,
-      "fat_g": 19,
-      "fiber_g": 2,
-      "sugar_g": 4
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 20,
-      "vitamin_c_mg": 3,
-      "calcium_mg": 30,
-      "iron_mg": 1.5,
-      "potassium_mg": 120
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 38, "fat_g": 19, "fiber_g": 2, "sugar_g": 4 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Deep-fried battered onions \u2014 acid-forming despite alkaline onions"
+    "ph_reason": "Deep-fried battered onions — acid-forming despite alkaline onions"
   },
   "oysters": {
     "food_name": "Oysters",
     "serving_size": "6 oysters (84g)",
     "calories": 60,
-    "macronutrients": {
-      "protein_g": 6,
-      "carbs_g": 3,
-      "fat_g": 2,
-      "fiber_g": 0,
-      "sugar_g": 0
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 80,
-      "vitamin_c_mg": 4,
-      "calcium_mg": 40,
-      "iron_mg": 5,
-      "potassium_mg": 130,
-      "zinc_mg": 32
-    },
+    "macronutrients": { "protein_g": 6, "carbs_g": 3, "fat_g": 2, "fiber_g": 0, "sugar_g": 0 },
     "ph_classification": "acid-forming",
     "ph_reason": "Shellfish is acid-forming animal protein per Dr. Sebi"
   },
@@ -1474,167 +755,63 @@
     "food_name": "Pad Thai",
     "serving_size": "1 plate (300g)",
     "calories": 450,
-    "macronutrients": {
-      "protein_g": 18,
-      "carbs_g": 55,
-      "fat_g": 18,
-      "fiber_g": 3,
-      "sugar_g": 12
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 200,
-      "vitamin_c_mg": 10,
-      "calcium_mg": 60,
-      "iron_mg": 2.5,
-      "potassium_mg": 350
-    },
+    "macronutrients": { "protein_g": 18, "carbs_g": 55, "fat_g": 18, "fiber_g": 3, "sugar_g": 12 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Rice noodles, egg, soy, and sugar \u2014 acid-forming"
+    "ph_reason": "Rice noodles, egg, soy, and sugar — acid-forming"
   },
   "paella": {
     "food_name": "Paella",
     "serving_size": "1 cup (250g)",
     "calories": 380,
-    "macronutrients": {
-      "protein_g": 22,
-      "carbs_g": 45,
-      "fat_g": 12,
-      "fiber_g": 2,
-      "sugar_g": 3
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 400,
-      "vitamin_c_mg": 15,
-      "calcium_mg": 50,
-      "iron_mg": 3,
-      "potassium_mg": 350
-    },
+    "macronutrients": { "protein_g": 22, "carbs_g": 45, "fat_g": 12, "fiber_g": 2, "sugar_g": 3 },
     "ph_classification": "acid-forming",
-    "ph_reason": "White rice with seafood/meat \u2014 acid-forming"
+    "ph_reason": "White rice with seafood/meat — acid-forming"
   },
   "pancakes": {
     "food_name": "Pancakes",
     "serving_size": "3 pancakes (180g)",
     "calories": 380,
-    "macronutrients": {
-      "protein_g": 8,
-      "carbs_g": 52,
-      "fat_g": 16,
-      "fiber_g": 1.5,
-      "sugar_g": 14
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 200,
-      "vitamin_c_mg": 1,
-      "calcium_mg": 120,
-      "iron_mg": 2,
-      "potassium_mg": 150
-    },
+    "macronutrients": { "protein_g": 8, "carbs_g": 52, "fat_g": 16, "fiber_g": 1.5, "sugar_g": 14 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Refined flour, eggs, milk, and syrup \u2014 acid-forming"
+    "ph_reason": "Refined flour, eggs, milk, and syrup — acid-forming"
   },
   "panna_cotta": {
     "food_name": "Panna Cotta",
     "serving_size": "1 serving (130g)",
     "calories": 300,
-    "macronutrients": {
-      "protein_g": 4,
-      "carbs_g": 26,
-      "fat_g": 20,
-      "fiber_g": 0,
-      "sugar_g": 22
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 400,
-      "vitamin_c_mg": 1,
-      "calcium_mg": 80,
-      "iron_mg": 0.2,
-      "potassium_mg": 90
-    },
+    "macronutrients": { "protein_g": 4, "carbs_g": 26, "fat_g": 20, "fiber_g": 0, "sugar_g": 22 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Heavy cream, sugar, and gelatin \u2014 acid-forming dairy dessert"
+    "ph_reason": "Heavy cream, sugar, and gelatin — acid-forming dairy dessert"
   },
   "peking_duck": {
     "food_name": "Peking Duck",
     "serving_size": "1 serving (200g)",
     "calories": 420,
-    "macronutrients": {
-      "protein_g": 30,
-      "carbs_g": 15,
-      "fat_g": 28,
-      "fiber_g": 1,
-      "sugar_g": 8
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 250,
-      "vitamin_c_mg": 4,
-      "calcium_mg": 20,
-      "iron_mg": 3,
-      "potassium_mg": 300
-    },
+    "macronutrients": { "protein_g": 30, "carbs_g": 15, "fat_g": 28, "fiber_g": 1, "sugar_g": 8 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Duck meat with hoisin sauce \u2014 acid-forming"
+    "ph_reason": "Duck meat with hoisin sauce — acid-forming"
   },
   "pho": {
     "food_name": "Pho",
     "serving_size": "1 bowl (500g)",
     "calories": 350,
-    "macronutrients": {
-      "protein_g": 22,
-      "carbs_g": 42,
-      "fat_g": 8,
-      "fiber_g": 2,
-      "sugar_g": 3
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 200,
-      "vitamin_c_mg": 10,
-      "calcium_mg": 30,
-      "iron_mg": 3,
-      "potassium_mg": 400
-    },
+    "macronutrients": { "protein_g": 22, "carbs_g": 42, "fat_g": 8, "fiber_g": 2, "sugar_g": 3 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Beef broth and rice noodles \u2014 acid-forming despite herbs"
+    "ph_reason": "Beef broth and rice noodles — acid-forming despite herbs"
   },
   "pizza": {
     "food_name": "Pizza",
     "serving_size": "1 slice (150g)",
     "calories": 380,
-    "macronutrients": {
-      "protein_g": 15,
-      "carbs_g": 40,
-      "fat_g": 18,
-      "fiber_g": 2,
-      "sugar_g": 4
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 400,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 200,
-      "iron_mg": 2,
-      "potassium_mg": 200
-    },
+    "macronutrients": { "protein_g": 15, "carbs_g": 40, "fat_g": 18, "fiber_g": 2, "sugar_g": 4 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Refined dough, cheese, and processed toppings \u2014 acid-forming"
+    "ph_reason": "Refined dough, cheese, and processed toppings — acid-forming"
   },
   "pork_chop": {
     "food_name": "Pork Chop",
     "serving_size": "1 chop (170g)",
     "calories": 290,
-    "macronutrients": {
-      "protein_g": 36,
-      "carbs_g": 0,
-      "fat_g": 16,
-      "fiber_g": 0,
-      "sugar_g": 0
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 10,
-      "vitamin_c_mg": 1,
-      "calcium_mg": 15,
-      "iron_mg": 1.5,
-      "potassium_mg": 450
-    },
+    "macronutrients": { "protein_g": 36, "carbs_g": 0, "fat_g": 16, "fiber_g": 0, "sugar_g": 0 },
     "ph_classification": "acid-forming",
     "ph_reason": "Pork is acid-forming animal protein per Dr. Sebi"
   },
@@ -1642,188 +819,71 @@
     "food_name": "Poutine",
     "serving_size": "1 serving (300g)",
     "calories": 600,
-    "macronutrients": {
-      "protein_g": 15,
-      "carbs_g": 55,
-      "fat_g": 35,
-      "fiber_g": 4,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 100,
-      "vitamin_c_mg": 12,
-      "calcium_mg": 200,
-      "iron_mg": 2,
-      "potassium_mg": 600
-    },
+    "macronutrients": { "protein_g": 15, "carbs_g": 55, "fat_g": 35, "fiber_g": 4, "sugar_g": 2 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Fries, cheese curds, and gravy \u2014 highly acid-forming"
+    "ph_reason": "Fries, cheese curds, and gravy — highly acid-forming"
   },
   "prime_rib": {
     "food_name": "Prime Rib",
     "serving_size": "6 oz (170g)",
     "calories": 450,
-    "macronutrients": {
-      "protein_g": 38,
-      "carbs_g": 0,
-      "fat_g": 32,
-      "fiber_g": 0,
-      "sugar_g": 0
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 0,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 15,
-      "iron_mg": 4.5,
-      "potassium_mg": 450
-    },
+    "macronutrients": { "protein_g": 38, "carbs_g": 0, "fat_g": 32, "fiber_g": 0, "sugar_g": 0 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Red meat \u2014 strongly acid-forming per Dr. Sebi"
+    "ph_reason": "Red meat — strongly acid-forming per Dr. Sebi"
   },
   "pulled_pork_sandwich": {
     "food_name": "Pulled Pork Sandwich",
     "serving_size": "1 sandwich (250g)",
     "calories": 480,
-    "macronutrients": {
-      "protein_g": 28,
-      "carbs_g": 42,
-      "fat_g": 20,
-      "fiber_g": 2,
-      "sugar_g": 12
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 50,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 60,
-      "iron_mg": 3,
-      "potassium_mg": 350
-    },
+    "macronutrients": { "protein_g": 28, "carbs_g": 42, "fat_g": 20, "fiber_g": 2, "sugar_g": 12 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Pork with BBQ sauce on refined bun \u2014 acid-forming"
+    "ph_reason": "Pork with BBQ sauce on refined bun — acid-forming"
   },
   "ramen": {
     "food_name": "Ramen",
     "serving_size": "1 bowl (500g)",
     "calories": 450,
-    "macronutrients": {
-      "protein_g": 22,
-      "carbs_g": 52,
-      "fat_g": 18,
-      "fiber_g": 2,
-      "sugar_g": 3
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 300,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 40,
-      "iron_mg": 3,
-      "potassium_mg": 400
-    },
+    "macronutrients": { "protein_g": 22, "carbs_g": 52, "fat_g": 18, "fiber_g": 2, "sugar_g": 3 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Wheat noodles, pork broth, and egg \u2014 acid-forming"
+    "ph_reason": "Wheat noodles, pork broth, and egg — acid-forming"
   },
   "ravioli": {
     "food_name": "Ravioli",
     "serving_size": "1 cup (250g)",
     "calories": 350,
-    "macronutrients": {
-      "protein_g": 14,
-      "carbs_g": 40,
-      "fat_g": 14,
-      "fiber_g": 2,
-      "sugar_g": 5
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 500,
-      "vitamin_c_mg": 8,
-      "calcium_mg": 150,
-      "iron_mg": 2.5,
-      "potassium_mg": 300
-    },
+    "macronutrients": { "protein_g": 14, "carbs_g": 40, "fat_g": 14, "fiber_g": 2, "sugar_g": 5 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Pasta with cheese/meat filling \u2014 acid-forming"
+    "ph_reason": "Pasta with cheese/meat filling — acid-forming"
   },
   "red_velvet_cake": {
     "food_name": "Red Velvet Cake",
     "serving_size": "1 slice (125g)",
     "calories": 410,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 50,
-      "fat_g": 22,
-      "fiber_g": 0.5,
-      "sugar_g": 35
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 200,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 40,
-      "iron_mg": 1.5,
-      "potassium_mg": 100
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 50, "fat_g": 22, "fiber_g": 0.5, "sugar_g": 35 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Flour, sugar, butter, cream cheese frosting \u2014 acid-forming"
+    "ph_reason": "Flour, sugar, butter, cream cheese frosting — acid-forming"
   },
   "risotto": {
     "food_name": "Risotto",
     "serving_size": "1 cup (230g)",
     "calories": 350,
-    "macronutrients": {
-      "protein_g": 8,
-      "carbs_g": 50,
-      "fat_g": 12,
-      "fiber_g": 1,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 300,
-      "vitamin_c_mg": 3,
-      "calcium_mg": 100,
-      "iron_mg": 1.5,
-      "potassium_mg": 150
-    },
+    "macronutrients": { "protein_g": 8, "carbs_g": 50, "fat_g": 12, "fiber_g": 1, "sugar_g": 2 },
     "ph_classification": "acid-forming",
-    "ph_reason": "White rice with butter and parmesan \u2014 acid-forming"
+    "ph_reason": "White rice with butter and parmesan — acid-forming"
   },
   "samosa": {
     "food_name": "Samosa",
     "serving_size": "2 pieces (100g)",
     "calories": 280,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 30,
-      "fat_g": 16,
-      "fiber_g": 3,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 50,
-      "vitamin_c_mg": 8,
-      "calcium_mg": 20,
-      "iron_mg": 1.5,
-      "potassium_mg": 250
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 30, "fat_g": 16, "fiber_g": 3, "sugar_g": 2 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Deep-fried refined flour pastry \u2014 acid-forming despite vegetable filling"
+    "ph_reason": "Deep-fried refined flour pastry — acid-forming despite vegetable filling"
   },
   "sashimi": {
     "food_name": "Sashimi",
     "serving_size": "6 pieces (100g)",
     "calories": 130,
-    "macronutrients": {
-      "protein_g": 26,
-      "carbs_g": 0,
-      "fat_g": 3,
-      "fiber_g": 0,
-      "sugar_g": 0
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 100,
-      "vitamin_c_mg": 2,
-      "calcium_mg": 10,
-      "iron_mg": 1,
-      "potassium_mg": 350
-    },
+    "macronutrients": { "protein_g": 26, "carbs_g": 0, "fat_g": 3, "fiber_g": 0, "sugar_g": 0 },
     "ph_classification": "acid-forming",
     "ph_reason": "Raw fish is acid-forming animal protein per Dr. Sebi"
   },
@@ -1831,20 +891,7 @@
     "food_name": "Scallops",
     "serving_size": "5 large (100g)",
     "calories": 110,
-    "macronutrients": {
-      "protein_g": 20,
-      "carbs_g": 3,
-      "fat_g": 1,
-      "fiber_g": 0,
-      "sugar_g": 0
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 20,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 10,
-      "iron_mg": 0.5,
-      "potassium_mg": 300
-    },
+    "macronutrients": { "protein_g": 20, "carbs_g": 3, "fat_g": 1, "fiber_g": 0, "sugar_g": 0 },
     "ph_classification": "acid-forming",
     "ph_reason": "Shellfish is acid-forming per Dr. Sebi's framework"
   },
@@ -1852,21 +899,7 @@
     "food_name": "Seaweed Salad",
     "serving_size": "1 cup (100g)",
     "calories": 70,
-    "macronutrients": {
-      "protein_g": 2,
-      "carbs_g": 10,
-      "fat_g": 3,
-      "fiber_g": 2,
-      "sugar_g": 4
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 350,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 60,
-      "iron_mg": 2,
-      "potassium_mg": 200,
-      "iodine_mcg": 100
-    },
+    "macronutrients": { "protein_g": 2, "carbs_g": 10, "fat_g": 3, "fiber_g": 2, "sugar_g": 4 },
     "ph_classification": "alkaline-forming",
     "ph_reason": "Sea vegetables are highly alkaline and mineral-rich per Dr. Sebi"
   },
@@ -1874,230 +907,87 @@
     "food_name": "Shrimp and Grits",
     "serving_size": "1 serving (300g)",
     "calories": 420,
-    "macronutrients": {
-      "protein_g": 25,
-      "carbs_g": 35,
-      "fat_g": 20,
-      "fiber_g": 2,
-      "sugar_g": 2
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 300,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 80,
-      "iron_mg": 3,
-      "potassium_mg": 300
-    },
+    "macronutrients": { "protein_g": 25, "carbs_g": 35, "fat_g": 20, "fiber_g": 2, "sugar_g": 2 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Shrimp, corn grits, butter, and cheese \u2014 acid-forming"
+    "ph_reason": "Shrimp, corn grits, butter, and cheese — acid-forming"
   },
   "spaghetti_bolognese": {
     "food_name": "Spaghetti Bolognese",
     "serving_size": "1 plate (350g)",
     "calories": 450,
-    "macronutrients": {
-      "protein_g": 22,
-      "carbs_g": 55,
-      "fat_g": 15,
-      "fiber_g": 4,
-      "sugar_g": 8
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 600,
-      "vitamin_c_mg": 12,
-      "calcium_mg": 60,
-      "iron_mg": 4,
-      "potassium_mg": 500
-    },
+    "macronutrients": { "protein_g": 22, "carbs_g": 55, "fat_g": 15, "fiber_g": 4, "sugar_g": 8 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Pasta and ground meat sauce \u2014 acid-forming"
+    "ph_reason": "Pasta and ground meat sauce — acid-forming"
   },
   "spaghetti_carbonara": {
     "food_name": "Spaghetti Carbonara",
     "serving_size": "1 plate (350g)",
     "calories": 520,
-    "macronutrients": {
-      "protein_g": 22,
-      "carbs_g": 55,
-      "fat_g": 22,
-      "fiber_g": 2,
-      "sugar_g": 3
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 300,
-      "vitamin_c_mg": 1,
-      "calcium_mg": 200,
-      "iron_mg": 2.5,
-      "potassium_mg": 200
-    },
+    "macronutrients": { "protein_g": 22, "carbs_g": 55, "fat_g": 22, "fiber_g": 2, "sugar_g": 3 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Pasta, egg, cheese, and pancetta \u2014 acid-forming"
+    "ph_reason": "Pasta, egg, cheese, and pancetta — acid-forming"
   },
   "spring_rolls": {
     "food_name": "Spring Rolls",
     "serving_size": "3 rolls (120g)",
     "calories": 200,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 25,
-      "fat_g": 10,
-      "fiber_g": 2,
-      "sugar_g": 3
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 300,
-      "vitamin_c_mg": 8,
-      "calcium_mg": 20,
-      "iron_mg": 1,
-      "potassium_mg": 150
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 25, "fat_g": 10, "fiber_g": 2, "sugar_g": 3 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Fried wrapper \u2014 acid-forming despite vegetable filling"
+    "ph_reason": "Fried wrapper — acid-forming despite vegetable filling"
   },
   "steak": {
     "food_name": "Steak",
     "serving_size": "8 oz (225g)",
     "calories": 500,
-    "macronutrients": {
-      "protein_g": 50,
-      "carbs_g": 0,
-      "fat_g": 32,
-      "fiber_g": 0,
-      "sugar_g": 0
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 0,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 20,
-      "iron_mg": 5,
-      "potassium_mg": 600
-    },
+    "macronutrients": { "protein_g": 50, "carbs_g": 0, "fat_g": 32, "fiber_g": 0, "sugar_g": 0 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Red meat \u2014 strongly acid-forming per Dr. Sebi"
+    "ph_reason": "Red meat — strongly acid-forming per Dr. Sebi"
   },
   "strawberry_shortcake": {
     "food_name": "Strawberry Shortcake",
     "serving_size": "1 serving (180g)",
     "calories": 350,
-    "macronutrients": {
-      "protein_g": 5,
-      "carbs_g": 45,
-      "fat_g": 17,
-      "fiber_g": 2,
-      "sugar_g": 28
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 250,
-      "vitamin_c_mg": 45,
-      "calcium_mg": 60,
-      "iron_mg": 1,
-      "potassium_mg": 160
-    },
+    "macronutrients": { "protein_g": 5, "carbs_g": 45, "fat_g": 17, "fiber_g": 2, "sugar_g": 28 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Biscuit, cream, and sugar \u2014 acid-forming despite alkaline strawberries"
+    "ph_reason": "Biscuit, cream, and sugar — acid-forming despite alkaline strawberries"
   },
   "sushi": {
     "food_name": "Sushi",
     "serving_size": "8 pieces (200g)",
     "calories": 300,
-    "macronutrients": {
-      "protein_g": 14,
-      "carbs_g": 45,
-      "fat_g": 6,
-      "fiber_g": 2,
-      "sugar_g": 6
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 200,
-      "vitamin_c_mg": 4,
-      "calcium_mg": 20,
-      "iron_mg": 2,
-      "potassium_mg": 250
-    },
+    "macronutrients": { "protein_g": 14, "carbs_g": 45, "fat_g": 6, "fiber_g": 2, "sugar_g": 6 },
     "ph_classification": "acid-forming",
-    "ph_reason": "White rice with vinegar and fish \u2014 acid-forming"
+    "ph_reason": "White rice with vinegar and fish — acid-forming"
   },
   "tacos": {
     "food_name": "Tacos",
     "serving_size": "2 tacos (200g)",
     "calories": 380,
-    "macronutrients": {
-      "protein_g": 18,
-      "carbs_g": 32,
-      "fat_g": 20,
-      "fiber_g": 4,
-      "sugar_g": 3
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 400,
-      "vitamin_c_mg": 10,
-      "calcium_mg": 100,
-      "iron_mg": 2.5,
-      "potassium_mg": 300
-    },
+    "macronutrients": { "protein_g": 18, "carbs_g": 32, "fat_g": 20, "fiber_g": 4, "sugar_g": 3 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Meat, cheese, and corn/flour tortilla \u2014 acid-forming"
+    "ph_reason": "Meat, cheese, and corn/flour tortilla — acid-forming"
   },
   "takoyaki": {
     "food_name": "Takoyaki",
     "serving_size": "6 pieces (150g)",
     "calories": 280,
-    "macronutrients": {
-      "protein_g": 12,
-      "carbs_g": 32,
-      "fat_g": 12,
-      "fiber_g": 1,
-      "sugar_g": 4
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 50,
-      "vitamin_c_mg": 3,
-      "calcium_mg": 30,
-      "iron_mg": 1.5,
-      "potassium_mg": 200
-    },
+    "macronutrients": { "protein_g": 12, "carbs_g": 32, "fat_g": 12, "fiber_g": 1, "sugar_g": 4 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Wheat batter with octopus and mayo \u2014 acid-forming"
+    "ph_reason": "Wheat batter with octopus and mayo — acid-forming"
   },
   "tiramisu": {
     "food_name": "Tiramisu",
     "serving_size": "1 serving (150g)",
     "calories": 380,
-    "macronutrients": {
-      "protein_g": 7,
-      "carbs_g": 35,
-      "fat_g": 24,
-      "fiber_g": 0.5,
-      "sugar_g": 22
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 500,
-      "vitamin_c_mg": 0,
-      "calcium_mg": 60,
-      "iron_mg": 1,
-      "potassium_mg": 100
-    },
+    "macronutrients": { "protein_g": 7, "carbs_g": 35, "fat_g": 24, "fiber_g": 0.5, "sugar_g": 22 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Mascarpone, ladyfingers, sugar, and coffee \u2014 acid-forming"
+    "ph_reason": "Mascarpone, ladyfingers, sugar, and coffee — acid-forming"
   },
   "tuna_tartare": {
     "food_name": "Tuna Tartare",
     "serving_size": "120g",
     "calories": 150,
-    "macronutrients": {
-      "protein_g": 24,
-      "carbs_g": 3,
-      "fat_g": 5,
-      "fiber_g": 0.5,
-      "sugar_g": 1
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 2000,
-      "vitamin_c_mg": 5,
-      "calcium_mg": 15,
-      "iron_mg": 1.5,
-      "potassium_mg": 350
-    },
+    "macronutrients": { "protein_g": 24, "carbs_g": 3, "fat_g": 5, "fiber_g": 0.5, "sugar_g": 1 },
     "ph_classification": "acid-forming",
     "ph_reason": "Raw tuna is acid-forming animal protein"
   },
@@ -2105,21 +995,8 @@
     "food_name": "Waffles",
     "serving_size": "2 waffles (150g)",
     "calories": 410,
-    "macronutrients": {
-      "protein_g": 8,
-      "carbs_g": 52,
-      "fat_g": 20,
-      "fiber_g": 1.5,
-      "sugar_g": 12
-    },
-    "micronutrients": {
-      "vitamin_a_iu": 250,
-      "vitamin_c_mg": 1,
-      "calcium_mg": 120,
-      "iron_mg": 3,
-      "potassium_mg": 120
-    },
+    "macronutrients": { "protein_g": 8, "carbs_g": 52, "fat_g": 20, "fiber_g": 1.5, "sugar_g": 12 },
     "ph_classification": "acid-forming",
-    "ph_reason": "Refined flour, eggs, milk, butter, and syrup \u2014 acid-forming"
+    "ph_reason": "Refined flour, eggs, milk, butter, and syrup — acid-forming"
   }
 }
