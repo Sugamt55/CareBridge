@@ -38,6 +38,11 @@ android {
     buildFeatures {
         compose = true
     }
+
+    @Suppress("UnstableApiUsage")
+    androidResources {
+        noCompress += "tflite"
+    }
 }
 
 dependencies {
