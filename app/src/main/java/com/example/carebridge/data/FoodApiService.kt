@@ -17,6 +17,8 @@ interface FoodApiService {
 data class FoodPredictionResponse(
     @SerializedName("food_name")
     val foodName: String,
+    @SerializedName("serving_size")
+    val servingSize: String,
     val calories: Int,
     val protein: String,
     val carbs: String,

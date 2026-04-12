@@ -51,9 +51,11 @@ fun FoodResultBottomSheet(
                         style = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Bold
                     )
-                    detailedData?.servingSize?.let {
-                        Text(text = it, style = MaterialTheme.typography.bodySmall, color = Color.Gray)
-                    }
+                    Text(
+                        text = detailedData?.servingSize ?: foodData.servingSize,
+                        style = MaterialTheme.typography.bodySmall, 
+                        color = Color.Gray
+                    )
                 }
                 IconButton(onClick = onDismiss) {
                     Icon(Icons.Default.Close, contentDescription = "Close")
@@ -80,7 +82,7 @@ fun FoodResultBottomSheet(
 
             // Nutrition Grid
             Text(
-                "Nutritional Information",
+                "Nutritional Information (per ${detailedData?.servingSize ?: foodData.servingSize})",
                 style = MaterialTheme.typography.labelLarge,
                 color = Color.Gray
             )
@@ -191,6 +193,16 @@ fun PhScaleBar(
         }
         
         Spacer(modifier = Modifier.height(8.dp))
+        
+        // Added the pH level text here
+        Text(
+            text = "pH Level: %.1f".format(phLevel),
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+            color = if (isAlkaline) Color(0xFF065F46) else Color(0xFF991B1B)
+        )
+
+        Spacer(modifier = Modifier.height(4.dp))
         
         Row(verticalAlignment = Alignment.CenterVertically) {
             Surface(

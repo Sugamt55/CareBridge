@@ -1,4 +1,3 @@
-import json
 import numpy as np
 import tensorflow as tf
 from fastapi import FastAPI, UploadFile, File
@@ -10,48 +9,61 @@ import traceback
 
 app = FastAPI()
 
-# Load the database
-DB_PATH = "app/src/main/assets/food_nutrition_ph_database.json"
-try:
-    with open(DB_PATH, "r") as f:
-        food_db = json.load(f)
-    print(f"Database loaded with {len(food_db)} items.")
-except Exception as e:
-    print(f"FAILED TO LOAD DATABASE: {e}")
-    food_db = {}
-
-# Standard Food-101 base list
-base_classes = [
-    'apple_pie', 'baby_back_ribs', 'baklava', 'beef_carpaccio', 'beef_tartare', 'beet_salad', 'beignets', 'bibimbap', 'bread_pudding', 'breakfast_burrito', 'bruschetta', 'caesar_salad', 'cannoli', 'caprese_salad', 'carrot_cake', 'ceviche', 'cheesecake', 'cheese_plate', 'chicken_curry', 'chicken_quesadilla', 'chicken_wings', 'chocolate_cake', 'chocolate_mousse', 'churros', 'clam_chowder', 'club_sandwich', 'crab_cakes', 'creme_brulee', 'croque_madame', 'cup_cakes', 'deviled_eggs', 'donuts', 'dumplings', 'edamame', 'eggs_benedict', 'escargots', 'falafel', 'filet_mignon', 'fish_and_chips', 'foie_gras', 'french_fries', 'french_onion_soup', 'french_toast', 'fried_calamari', 'fried_rice', 'frozen_yogurt', 'garlic_bread', 'gnocchi', 'greek_salad', 'grilled_cheese_sandwich', 'grilled_salmon', 'guacamole', 'gyoza', 'hamburger', 'hot_and_sour_soup', 'hot_dog', 'huevos_rancheros', 'hummus', 'ice_cream', 'lasagna', 'lobster_bisque', 'lobster_roll_sandwich', 'macaroni_and_cheese', 'macarons', 'miso_soup', 'mussels', 'nachos', 'omelette', 'onion_rings', 'oysters', 'pad_thai', 'paella', 'pancakes', 'panna_cotta', 'peking_duck', 'pho', 'pizza', 'pork_chop', 'poutine', 'prime_rib', 'pulled_pork_sandwich', 'ramen', 'ravioli', 'red_velvet_cake', 'risotto', 'samosa', 'sashimi', 'scallops', 'seaweed_salad', 'shrimp_and_grits', 'spaghetti_bolognese', 'spaghetti_carbonara', 'spring_rolls', 'steak', 'strawberry_shortcake', 'sushi', 'tacos', 'takoyaki', 'tiramisu', 'tuna_tartare', 'waffles'
+# Updated to exactly match your nutriscan_model.tflite (16 labels)
+CLASSES = [
+    'apple', 'banana', 'cabbage', 'carrot', 'chicken', 'corn', 
+    'cucumber', 'ginger', 'goat', 'grapes', 'mango', 'onion', 
+    'orange', 'potato', 'tomato', 'watermelon'
 ]
 
-# Padding the list to exactly 512 entries as required by the model
-# Replace 'base_classes' with your 396 real names if you have them.
-CLASSES = base_classes + [f"placeholder_{i}" for i in range(len(base_classes), 512)]
+# Nutritional Data Mapping (Approximate values per 100g)
+FOOD_DATA = {
+    'apple': {"calories": 52, "protein": "0.3g", "carbs": "14g", "fat": "0.2g", "ph_level": 3.5, "is_alkaline": False},
+    'banana': {"calories": 89, "protein": "1.1g", "carbs": "23g", "fat": "0.3g", "ph_level": 4.5, "is_alkaline": False},
+    'cabbage': {"calories": 25, "protein": "1.3g", "carbs": "6g", "fat": "0.1g", "ph_level": 5.5, "is_alkaline": True},
+    'carrot': {"calories": 41, "protein": "0.9g", "carbs": "10g", "fat": "0.2g", "ph_level": 6.0, "is_alkaline": True},
+    'chicken': {"calories": 239, "protein": "27g", "carbs": "0g", "fat": "14g", "ph_level": 6.0, "is_alkaline": False},
+    'corn': {"calories": 86, "protein": "3.2g", "carbs": "19g", "fat": "1.2g", "ph_level": 6.5, "is_alkaline": False},
+    'cucumber': {"calories": 15, "protein": "0.7g", "carbs": "3.6g", "fat": "0.1g", "ph_level": 5.5, "is_alkaline": True},
+    'ginger': {"calories": 80, "protein": "1.8g", "carbs": "18g", "fat": "0.8g", "ph_level": 5.5, "is_alkaline": True},
+    'goat': {"calories": 143, "protein": "27g", "carbs": "0g", "fat": "3g", "ph_level": 6.0, "is_alkaline": False},
+    'grapes': {"calories": 69, "protein": "0.7g", "carbs": "18g", "fat": "0.2g", "ph_level": 3.5, "is_alkaline": True},
+    'mango': {"calories": 60, "protein": "0.8g", "carbs": "15g", "fat": "0.4g", "ph_level": 4.0, "is_alkaline": True},
+    'onion': {"calories": 40, "protein": "1.1g", "carbs": "9g", "fat": "0.1g", "ph_level": 5.5, "is_alkaline": True},
+    'orange': {"calories": 47, "protein": "0.9g", "carbs": "12g", "fat": "0.1g", "ph_level": 3.5, "is_alkaline": True},
+    'potato': {"calories": 77, "protein": "2g", "carbs": "17g", "fat": "0.1g", "ph_level": 5.5, "is_alkaline": True},
+    'tomato': {"calories": 18, "protein": "0.9g", "carbs": "3.9g", "fat": "0.2g", "ph_level": 4.5, "is_alkaline": True},
+    'watermelon': {"calories": 30, "protein": "0.6g", "carbs": "8g", "fat": "0.2g", "ph_level": 5.5, "is_alkaline": True}
+}
 
-TFLITE_MODEL_PATH = "app/src/main/fixed_model_512.tflite"
+# Updated path to match the actual file in assets
+TFLITE_MODEL_PATH = "app/src/main/assets/nutriscan_model.tflite"
 interpreter = None
 input_details = None
 output_details = None
-IMG_SIZE = (512, 512)
+IMG_SIZE = (224, 224) 
 
 try:
-    interpreter = tf.lite.Interpreter(model_path=TFLITE_MODEL_PATH)
-    interpreter.allocate_tensors()
-    input_details = interpreter.get_input_details()
-    output_details = interpreter.get_output_details()
-    
-    # Auto-detect input size from the TFLite model
-    input_shape = input_details[0]['shape']
-    IMG_SIZE = (input_shape[1], input_shape[2])
-    
-    print(f"SUCCESS: TFLite model loaded! Expected Input: {IMG_SIZE}, Output: {output_details[0]['shape'][1]} classes")
+    if os.path.exists(TFLITE_MODEL_PATH):
+        interpreter = tf.lite.Interpreter(model_path=TFLITE_MODEL_PATH)
+        interpreter.allocate_tensors()
+        input_details = interpreter.get_input_details()
+        output_details = interpreter.get_output_details()
+        
+        # Auto-detect input size from the TFLite model
+        input_shape = input_details[0]['shape']
+        IMG_SIZE = (input_shape[1], input_shape[2])
+        
+        print(f"SUCCESS: TFLite model loaded! Expected Input: {IMG_SIZE}, Output: {len(CLASSES)} classes")
+    else:
+        print(f"ERROR: TFLite model not found at {TFLITE_MODEL_PATH}")
 except Exception as e:
     print(f"ERROR LOADING TFLITE MODEL: {e}")
     traceback.print_exc()
 
 class FoodPredictionResponse(BaseModel):
     food_name: str
+    serving_size: str
     calories: int
     protein: str
     carbs: str
@@ -74,7 +86,7 @@ def preprocess_image(image_bytes, input_type):
 @app.post("/predict", response_model=FoodPredictionResponse)
 async def predict_food(image: UploadFile = File(...)):
     if interpreter is None:
-        return FoodPredictionResponse(food_name="Model Not Loaded", calories=0, protein="0g", carbs="0g", fat="0g", ph_level=0.0, is_alkaline=False)
+        return FoodPredictionResponse(food_name="Model Not Loaded", serving_size="N/A", calories=0, protein="0g", carbs="0g", fat="0g", ph_level=0.0, is_alkaline=False)
 
     try:
         contents = await image.read()
@@ -89,36 +101,38 @@ async def predict_food(image: UploadFile = File(...)):
         class_idx = np.argmax(output_data[0])
         confidence = float(np.max(output_data[0]))
         
-        predicted_class = CLASSES[class_idx]
+        predicted_class = "Unknown"
+        if class_idx < len(CLASSES):
+            predicted_class = CLASSES[class_idx]
+            
         print(f"PREDICTED: {predicted_class} ({confidence:.2%})")
 
-        # Try finding in database, or fallback to name only
-        food_data = food_db.get(predicted_class)
-        
-        if not food_data:
-            return FoodPredictionResponse(
-                food_name=predicted_class.replace("_", " ").replace("placeholder", "Unknown Item").title(),
-                calories=0, protein="0g", carbs="0g", fat="0g",
-                ph_level=7.0, is_alkaline=True
-            )
-        
-        macros = food_data.get("macronutrients", {})
-        ph_class = str(food_data.get("ph_classification", "")).lower()
-        
+        # Get nutritional data from our mapping
+        info = FOOD_DATA.get(predicted_class, {
+            "calories": 0, 
+            "protein": "0g", 
+            "carbs": "0g", 
+            "fat": "0g", 
+            "ph_level": 7.0, 
+            "is_alkaline": True
+        })
+
         return FoodPredictionResponse(
-            food_name=food_data.get("food_name", predicted_class.title()),
-            calories=int(food_data.get("calories", 0)),
-            protein=f"{macros.get('protein_g', 0)}g",
-            carbs=f"{macros.get('carbs_g', 0)}g",
-            fat=f"{macros.get('fat_g', 0)}g",
-            ph_level=7.0 if ph_class == "neutral" else (8.5 if "alkaline" in ph_class else 6.0),
-            is_alkaline="alkaline" in ph_class
+            food_name=predicted_class.replace("_", " ").title(),
+            serving_size="100g",
+            calories=info["calories"],
+            protein=info["protein"],
+            carbs=info["carbs"],
+            fat=info["fat"],
+            ph_level=info["ph_level"],
+            is_alkaline=info["is_alkaline"]
         )
     except Exception as e:
         print("--- RUNTIME ERROR ---")
         traceback.print_exc()
         return FoodPredictionResponse(
             food_name=f"Inference Error: {str(e)[:30]}",
+            serving_size="N/A",
             calories=0, protein="0g", carbs="0g", fat="0g",
             ph_level=0.0, is_alkaline=False
         )

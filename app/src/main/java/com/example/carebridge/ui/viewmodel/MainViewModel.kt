@@ -59,6 +59,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                         _uiState.value = ScanUiState.Success(
                             FoodPredictionResponse(
                                 foodName = detailedData.foodName,
+                                servingSize = detailedData.servingSize,
                                 calories = detailedData.calories,
                                 protein = "${detailedData.macronutrients.proteinG}g",
                                 carbs = "${detailedData.macronutrients.carbsG}g",

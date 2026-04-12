@@ -43,6 +43,16 @@ android {
     androidResources {
         noCompress += "tflite"
     }
+    
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+    buildToolsVersion = "35.0.0"
 }
 
 dependencies {
@@ -55,23 +65,16 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     
-    // Material Icons
     implementation("androidx.compose.material:material-icons-extended")
-
-    // ViewModel and LiveData support for Compose
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("androidx.compose.runtime:runtime-livedata:1.7.5")
     implementation("androidx.navigation:navigation-compose:2.8.4")
     
-    // Firebase using BOM
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-database-ktx")
-    
-    // Coroutines support for Firebase Tasks
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.9.0")
 
-    // CameraX
     val cameraxVersion = "1.4.0"
     implementation("androidx.camera:camera-core:$cameraxVersion")
     implementation("androidx.camera:camera-camera2:$cameraxVersion")
@@ -80,25 +83,22 @@ dependencies {
     implementation("androidx.camera:camera-view:$cameraxVersion")
     implementation("androidx.camera:camera-extensions:$cameraxVersion")
 
-    // Media3 for Video Background
     val media3Version = "1.4.1"
     implementation("androidx.media3:media3-exoplayer:$media3Version")
     implementation("androidx.media3:media3-ui:$media3Version")
     implementation("androidx.media3:media3-common:$media3Version")
 
-    // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-
-    // Coil
     implementation("io.coil-kt:coil-compose:2.7.0")
 
-    // TensorFlow Lite
-    val tfliteVersion = "2.17.0"
+    // TensorFlow Lite - Unified to 2.16.1
+    val tfliteVersion = "2.16.1"
     implementation("org.tensorflow:tensorflow-lite:$tfliteVersion")
-    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
     implementation("org.tensorflow:tensorflow-lite-gpu:$tfliteVersion")
+    implementation("org.tensorflow:tensorflow-lite-gpu-api:$tfliteVersion")
+    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
