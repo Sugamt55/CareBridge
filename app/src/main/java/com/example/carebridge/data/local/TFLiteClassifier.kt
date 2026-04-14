@@ -3,93 +3,53 @@ package com.example.carebridge.data.local
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
-import org.tensorflow.lite.Interpreter
-import org.tensorflow.lite.gpu.GpuDelegate
-import org.tensorflow.lite.support.common.FileUtil
-import org.tensorflow.lite.support.common.ops.NormalizeOp
+import com.example.carebridge.ml.NutriscanModel
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
+import org.tensorflow.lite.support.common.ops.NormalizeOp
+import org.tensorflow.lite.support.common.FileUtil
+import org.tensorflow.lite.DataType
 
 class TFLiteClassifier(private val context: Context) {
 
-    private var interpreter: Interpreter? = null
-    private var gpuDelegate: GpuDelegate? = null
+    private var model: NutriscanModel? = null
     private var labels: List<String> = emptyList()
-
-    private val inputImageSize = 224
-    private val modelPath = "nutriscan_model.tflite"
     private val labelPath = "labels.txt"
-
     private val TAG = "TFLiteClassifier"
 
     init {
         try {
-            Log.d(TAG, "Initializing TFLite Interpreter (Consolidated v2.16.1)...")
-            
-            // Check if asset exists first
-            val assetList = context.assets.list("")?.toList() ?: emptyList()
-            if (!assetList.contains(modelPath)) {
-                Log.e(TAG, "CRITICAL: $modelPath not found in assets! Found: $assetList")
-            }
-
-            val model = FileUtil.loadMappedFile(context, modelPath)
-            val options = Interpreter.Options()
-            
-            // Try to add GPU Delegate for acceleration
-            try {
-                // Catch Throwable to handle NoClassDefFoundError which is an Error
-                gpuDelegate = GpuDelegate()
-                options.addDelegate(gpuDelegate)
-                Log.d(TAG, "GPU Delegate initialized successfully")
-            } catch (t: Throwable) {
-                Log.w(TAG, "GPU Delegate failed (expected on some devices), falling back to CPU: ${t.message}")
-                gpuDelegate = null
-            }
-
-            interpreter = Interpreter(model, options)
+            model = NutriscanModel.newInstance(context)
             labels = FileUtil.loadLabels(context, labelPath)
-            
-            Log.d(TAG, "Successfully loaded model: $modelPath and labels: $labelPath")
-            Log.d(TAG, "Number of labels loaded: ${labels.size}")
+            Log.i(TAG, "LiteRT: Model binding initialized successfully.")
         } catch (e: Exception) {
-            Log.e(TAG, "CRITICAL ERROR during TFLite initialization: ${e.message}", e)
+            Log.e(TAG, "LiteRT: Failed to initialize model binding", e)
         }
     }
 
-    fun isModelLoaded(): Boolean = interpreter != null && labels.isNotEmpty()
+    fun isModelLoaded(): Boolean = model != null && labels.isNotEmpty()
 
     fun classify(bitmap: Bitmap): ClassificationResult? {
-        val currentInterpreter = interpreter ?: run {
-            Log.e(TAG, "Classification failed: Interpreter is null")
-            return null
-        }
+        val currentModel = model ?: return null
         
         try {
             // 1. Preprocess the image
             val imageProcessor = ImageProcessor.Builder()
-                .add(ResizeOp(inputImageSize, inputImageSize, ResizeOp.ResizeMethod.BILINEAR))
+                .add(ResizeOp(224, 224, ResizeOp.ResizeMethod.BILINEAR))
                 .add(NormalizeOp(0f, 255f)) 
                 .build()
 
-            var tensorImage = TensorImage(org.tensorflow.lite.DataType.FLOAT32)
+            // Using the correct DataType import
+            var tensorImage = TensorImage(DataType.FLOAT32)
             tensorImage.load(bitmap)
             tensorImage = imageProcessor.process(tensorImage)
 
-            // 2. Run inference
-            val outputShape = currentInterpreter.getOutputTensor(0).shape() 
-            val numClasses = outputShape[1]
-            
-            val outputBuffer = ByteBuffer.allocateDirect(1 * numClasses * 4).order(ByteOrder.nativeOrder())
-            currentInterpreter.run(tensorImage.buffer, outputBuffer)
+            // 2. Run inference using the generated model binding
+            val outputs = currentModel.process(tensorImage.tensorBuffer)
+            val confidences = outputs.outputFeature0AsTensorBuffer.floatArray
 
-            // 3. Post-process the output
-            outputBuffer.rewind()
-            val confidences = FloatArray(numClasses)
-            outputBuffer.asFloatBuffer().get(confidences)
-
+            // 3. Post-process
             var maxIndex = -1
             var maxConfidence = 0f
             for (i in confidences.indices) {
@@ -100,35 +60,19 @@ class TFLiteClassifier(private val context: Context) {
             }
 
             return if (maxIndex != -1 && maxIndex < labels.size) {
-                Log.d(TAG, "Local Prediction: ${labels[maxIndex]} ($maxConfidence)")
-                ClassificationResult(
-                    label = labels[maxIndex],
-                    confidence = maxConfidence
-                )
-            } else {
-                Log.w(TAG, "Prediction failed: maxIndex $maxIndex out of bounds")
-                null
-            }
+                Log.d(TAG, "LiteRT: Prediction -> ${labels[maxIndex]} ($maxConfidence)")
+                ClassificationResult(label = labels[maxIndex], confidence = maxConfidence)
+            } else null
         } catch (e: Exception) {
-            Log.e(TAG, "Error during inference: ${e.message}", e)
+            Log.e(TAG, "LiteRT: Inference failed", e)
             return null
         }
     }
 
-    data class ClassificationResult(
-        val label: String,
-        val confidence: Float
-    )
+    data class ClassificationResult(val label: String, val confidence: Float)
 
     fun close() {
-        try {
-            interpreter?.close()
-            gpuDelegate?.close()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error closing resources: ${e.message}")
-        } finally {
-            interpreter = null
-            gpuDelegate = null
-        }
+        model?.close()
+        model = null
     }
 }

@@ -37,6 +37,7 @@ android {
     }
     buildFeatures {
         compose = true
+        mlModelBinding = true
     }
 
     @Suppress("UnstableApiUsage")
@@ -53,6 +54,15 @@ android {
         }
     }
     buildToolsVersion = "35.0.0"
+}
+
+configurations.all {
+    resolutionStrategy {
+        // Force 2.17.0 to prevent version mismatch with the model
+        force("org.tensorflow:tensorflow-lite:2.17.0")
+        force("org.tensorflow:tensorflow-lite-gpu:2.17.0")
+        force("org.tensorflow:tensorflow-lite-api:2.17.0")
+    }
 }
 
 dependencies {
@@ -93,12 +103,11 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("io.coil-kt:coil-compose:2.7.0")
 
-    // TensorFlow Lite - Unified to 2.16.1
-    val tfliteVersion = "2.16.1"
-    implementation("org.tensorflow:tensorflow-lite:$tfliteVersion")
-    implementation("org.tensorflow:tensorflow-lite-gpu:$tfliteVersion")
-    implementation("org.tensorflow:tensorflow-lite-gpu-api:$tfliteVersion")
+    // TensorFlow Lite - Forced to 2.17.0 to support model opcodes
+    implementation("org.tensorflow:tensorflow-lite:2.17.0")
+    implementation("org.tensorflow:tensorflow-lite-gpu:2.17.0")
     implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
+    implementation("org.tensorflow:tensorflow-lite-metadata:0.4.4")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -1,0 +1,306 @@
+{
+  "apple": {
+    "food_name": "Apple",
+    "serving_size": "100g",
+    "calories": 52,
+    "macronutrients": {
+      "protein_g": 0.3,
+      "carbs_g": 14.0,
+      "fat_g": 0.2,
+      "fiber_g": 2.4,
+      "sugar_g": 10.0
+    },
+    "micronutrients": {
+      "iron_mg": 0.1,
+      "potassium_mg": 107.0,
+      "vitamin_c_mg": 4.6
+    },
+    "ph_classification": "Alkaline-forming",
+    "ph_reason": "Fruits are rich in alkaline minerals like potassium which neutralize acids during metabolism."
+  },
+  "banana": {
+    "food_name": "Banana",
+    "serving_size": "100g",
+    "calories": 89,
+    "macronutrients": {
+      "protein_g": 1.1,
+      "carbs_g": 23.0,
+      "fat_g": 0.3,
+      "fiber_g": 2.6,
+      "sugar_g": 12.0
+    },
+    "micronutrients": {
+      "iron_mg": 0.3,
+      "potassium_mg": 358.0,
+      "vitamin_c_mg": 8.7
+    },
+    "ph_classification": "Alkaline-forming",
+    "ph_reason": "High potassium content helps maintain an alkaline environment in the body."
+  },
+  "cabbage": {
+    "food_name": "Cabbage",
+    "serving_size": "100g",
+    "calories": 25,
+    "macronutrients": {
+      "protein_g": 1.3,
+      "carbs_g": 6.0,
+      "fat_g": 0.1,
+      "fiber_g": 2.5,
+      "sugar_g": 3.2
+    },
+    "micronutrients": {
+      "iron_mg": 0.5,
+      "potassium_mg": 170.0,
+      "vitamin_c_mg": 36.6
+    },
+    "ph_classification": "Alkaline-forming",
+    "ph_reason": "Cruciferous vegetables are highly alkaline due to their mineral density."
+  },
+  "carrot": {
+    "food_name": "Carrot",
+    "serving_size": "100g",
+    "calories": 41,
+    "macronutrients": {
+      "protein_g": 0.9,
+      "carbs_g": 10.0,
+      "fat_g": 0.2,
+      "fiber_g": 2.8,
+      "sugar_g": 4.7
+    },
+    "micronutrients": {
+      "iron_mg": 0.3,
+      "potassium_mg": 320.0,
+      "vitamin_c_mg": 5.9
+    },
+    "ph_classification": "Alkaline-forming",
+    "ph_reason": "Root vegetables are excellent for neutralizing acidic waste in the blood."
+  },
+  "chicken": {
+    "food_name": "Chicken",
+    "serving_size": "100g",
+    "calories": 239,
+    "macronutrients": {
+      "protein_g": 27.0,
+      "carbs_g": 0.0,
+      "fat_g": 14.0,
+      "fiber_g": 0.0,
+      "sugar_g": 0.0
+    },
+    "micronutrients": {
+      "iron_mg": 1.3,
+      "potassium_mg": 223.0,
+      "vitamin_c_mg": 0.0
+    },
+    "ph_classification": "Acid-forming",
+    "ph_reason": "Animal proteins contain sulfur-containing amino acids that create sulfuric acid during metabolism."
+  },
+  "corn": {
+    "food_name": "Corn",
+    "serving_size": "100g",
+    "calories": 86,
+    "macronutrients": {
+      "protein_g": 3.2,
+      "carbs_g": 19.0,
+      "fat_g": 1.2,
+      "fiber_g": 2.0,
+      "sugar_g": 6.3
+    },
+    "micronutrients": {
+      "iron_mg": 0.5,
+      "potassium_mg": 270.0,
+      "vitamin_c_mg": 6.8
+    },
+    "ph_classification": "Acid-forming",
+    "ph_reason": "Most grains and starches like corn have an acidifying effect on the body's pH."
+  },
+  "cucumber": {
+    "food_name": "Cucumber",
+    "serving_size": "100g",
+    "calories": 15,
+    "macronutrients": {
+      "protein_g": 0.7,
+      "carbs_g": 3.6,
+      "fat_g": 0.1,
+      "fiber_g": 0.5,
+      "sugar_g": 1.7
+    },
+    "micronutrients": {
+      "iron_mg": 0.3,
+      "potassium_mg": 147.0,
+      "vitamin_c_mg": 2.8
+    },
+    "ph_classification": "Highly Alkaline",
+    "ph_reason": "High water content and alkaline minerals make it one of the best hydrating alkaline foods."
+  },
+  "ginger": {
+    "food_name": "Ginger",
+    "serving_size": "100g",
+    "calories": 80,
+    "macronutrients": {
+      "protein_g": 1.8,
+      "carbs_g": 18.0,
+      "fat_g": 0.8,
+      "fiber_g": 2.0,
+      "sugar_g": 1.7
+    },
+    "micronutrients": {
+      "iron_mg": 0.6,
+      "potassium_mg": 415.0,
+      "vitamin_c_mg": 5.0
+    },
+    "ph_classification": "Alkaline-forming",
+    "ph_reason": "Ginger is highly alkalizing and supports healthy digestion and metabolic pH balance."
+  },
+  "goat": {
+    "food_name": "Goat Meat",
+    "serving_size": "100g",
+    "calories": 143,
+    "macronutrients": {
+      "protein_g": 27.0,
+      "carbs_g": 0.0,
+      "fat_g": 3.0,
+      "fiber_g": 0.0,
+      "sugar_g": 0.0
+    },
+    "micronutrients": {
+      "iron_mg": 3.7,
+      "potassium_mg": 385.0,
+      "vitamin_c_mg": 0.0
+    },
+    "ph_classification": "Acid-forming",
+    "ph_reason": "Like all red meats, goat meat is acid-forming due to its high purine and protein content."
+  },
+  "grapes": {
+    "food_name": "Grapes",
+    "serving_size": "100g",
+    "calories": 69,
+    "macronutrients": {
+      "protein_g": 0.7,
+      "carbs_g": 18.0,
+      "fat_g": 0.2,
+      "fiber_g": 0.9,
+      "sugar_g": 16.0
+    },
+    "micronutrients": {
+      "iron_mg": 0.4,
+      "potassium_mg": 191.0,
+      "vitamin_c_mg": 3.2
+    },
+    "ph_classification": "Alkaline-forming",
+    "ph_reason": "Contains organic acids that are metabolized into alkaline carbonates."
+  },
+  "mango": {
+    "food_name": "Mango",
+    "serving_size": "100g",
+    "calories": 60,
+    "macronutrients": {
+      "protein_g": 0.8,
+      "carbs_g": 15.0,
+      "fat_g": 0.4,
+      "fiber_g": 1.6,
+      "sugar_g": 14.0
+    },
+    "micronutrients": {
+      "iron_mg": 0.2,
+      "potassium_mg": 168.0,
+      "vitamin_c_mg": 36.4
+    },
+    "ph_classification": "Alkaline-forming",
+    "ph_reason": "Rich in alkaline precursors and antioxidants that help maintain pH balance."
+  },
+  "onion": {
+    "food_name": "Onion",
+    "serving_size": "100g",
+    "calories": 40,
+    "macronutrients": {
+      "protein_g": 1.1,
+      "carbs_g": 9.0,
+      "fat_g": 0.1,
+      "fiber_g": 1.7,
+      "sugar_g": 4.2
+    },
+    "micronutrients": {
+      "iron_mg": 0.2,
+      "potassium_mg": 146.0,
+      "vitamin_c_mg": 7.4
+    },
+    "ph_classification": "Alkaline-forming",
+    "ph_reason": "Onions are mineral-rich vegetables that promote alkalinity after digestion."
+  },
+  "orange": {
+    "food_name": "Orange",
+    "serving_size": "100g",
+    "calories": 47,
+    "macronutrients": {
+      "protein_g": 0.9,
+      "carbs_g": 12.0,
+      "fat_g": 0.1,
+      "fiber_g": 2.4,
+      "sugar_g": 9.0
+    },
+    "micronutrients": {
+      "iron_mg": 0.1,
+      "potassium_mg": 181.0,
+      "vitamin_c_mg": 53.2
+    },
+    "ph_classification": "Alkaline-forming",
+    "ph_reason": "Citric acid is acidic outside the body but leaves an alkaline residue after metabolism."
+  },
+  "potato": {
+    "food_name": "Potato",
+    "serving_size": "100g",
+    "calories": 77,
+    "macronutrients": {
+      "protein_g": 2.0,
+      "carbs_g": 17.0,
+      "fat_g": 0.1,
+      "fiber_g": 2.2,
+      "sugar_g": 0.8
+    },
+    "micronutrients": {
+      "iron_mg": 0.8,
+      "potassium_mg": 421.0,
+      "vitamin_c_mg": 19.7
+    },
+    "ph_classification": "Neutral to Alkaline",
+    "ph_reason": "Potatoes are alkaline-forming if eaten with skin, but their starch can be acidifying if processed."
+  },
+  "tomato": {
+    "food_name": "Tomato",
+    "serving_size": "100g",
+    "calories": 18,
+    "macronutrients": {
+      "protein_g": 0.9,
+      "carbs_g": 3.9,
+      "fat_g": 0.2,
+      "fiber_g": 1.2,
+      "sugar_g": 2.6
+    },
+    "micronutrients": {
+      "iron_mg": 0.3,
+      "potassium_mg": 237.0,
+      "vitamin_c_mg": 13.7
+    },
+    "ph_classification": "Alkaline-forming",
+    "ph_reason": "Despite being acidic initially, tomatoes promote an alkaline state post-digestion."
+  },
+  "watermelon": {
+    "food_name": "Watermelon",
+    "serving_size": "100g",
+    "calories": 30,
+    "macronutrients": {
+      "protein_g": 0.6,
+      "carbs_g": 8.0,
+      "fat_g": 0.2,
+      "fiber_g": 0.4,
+      "sugar_g": 6.0
+    },
+    "micronutrients": {
+      "iron_mg": 0.2,
+      "potassium_mg": 112.0,
+      "vitamin_c_mg": 8.1
+    },
+    "ph_classification": "Highly Alkaline",
+    "ph_reason": "Extremely hydrating and mineral-rich, making it highly effective at neutralizing acidity."
+  }
+}
