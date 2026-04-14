@@ -106,7 +106,8 @@ dependencies {
     // TensorFlow Lite - Forced to 2.17.0 to support model opcodes
     implementation("org.tensorflow:tensorflow-lite:2.17.0")
     implementation("org.tensorflow:tensorflow-lite-gpu:2.17.0")
-    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
+    // Upgrade support library to 0.5.0 to get CenterCropOp and ContrastOp
+    implementation("org.tensorflow:tensorflow-lite-support:0.5.0")
     implementation("org.tensorflow:tensorflow-lite-metadata:0.4.4")
 
     testImplementation(libs.junit)
