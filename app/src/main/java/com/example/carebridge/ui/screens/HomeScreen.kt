@@ -147,7 +147,7 @@ fun HomeScreen(navController: NavController) {
                     .fillMaxSize()
                     .padding(innerPadding)
             ) {
-                // Top Header Box (Centered Text + Profile)
+                // Top Header Box (Centered Text)
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -155,14 +155,6 @@ fun HomeScreen(navController: NavController) {
                         .align(Alignment.TopCenter),
                     contentAlignment = Alignment.Center
                 ) {
-                    // Left placeholder/menu icon to match design
-                    Icon(
-                        imageVector = Icons.Default.Menu,
-                        contentDescription = null,
-                        tint = orangeColor,
-                        modifier = Modifier.size(24.dp).align(Alignment.CenterStart)
-                    )
-
                     Text(
                         text = "NutriScan AI",
                         color = Color(0xFFFFF176), // Lighter Yellow (Material Yellow 300)
@@ -170,21 +162,6 @@ fun HomeScreen(navController: NavController) {
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center
                     )
-                    
-                    Box(
-                        modifier = Modifier
-                            .size(40.dp)
-                            .clip(CircleShape)
-                            .background(Color.Gray)
-                            .align(Alignment.CenterEnd)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Person,
-                            contentDescription = "Profile",
-                            modifier = Modifier.align(Alignment.Center),
-                            tint = Color.White
-                        )
-                    }
                 }
 
                 // Centre content block
