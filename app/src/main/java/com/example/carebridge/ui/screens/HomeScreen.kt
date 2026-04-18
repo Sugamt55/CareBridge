@@ -190,7 +190,7 @@ fun HomeScreen(navController: NavController) {
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
-                                text = "TRUSTED BY HEALTH-CONSCIOUS USERS",
+                                text = "SMART ANALYTICS FOR INFORMED NUTRITIONAL CHOICES",
                                 color = Color.White,
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.Bold,

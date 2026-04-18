@@ -1,11 +1,15 @@
 package com.example.carebridge.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -34,14 +38,61 @@ fun NutritionalLibraryScreen(modifier: Modifier = Modifier) {
                 fontWeight = FontWeight.ExtraBold,
                 lineHeight = 38.sp
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(12.dp))
+            
+            // 1. Redesigned Main Subtitle
             Text(
-                text = "Detailed insights into common foods and their metabolic impact.",
-                color = Color.White.copy(alpha = 0.7f),
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Medium
+                text = "Detailed nutritional insights and metabolic impact for all 16 scanned food categories.",
+                color = whiteColor,
+                fontSize = 18.sp, // Slightly increased
+                fontWeight = FontWeight.Bold,
+                lineHeight = 24.sp
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            
+            Spacer(modifier = Modifier.height(12.dp)) // Added bottom margin
+
+            // 2. Styled Info Card
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 12.dp),
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.Black.copy(alpha = 0.5f))
+            ) {
+                Row(modifier = Modifier.height(IntrinsicSize.Min)) {
+                    // Left border accent
+                    Box(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .width(4.dp)
+                            .background(orangeColor)
+                    )
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Icon(
+                            imageVector = Icons.Default.Info,
+                            contentDescription = null,
+                            tint = orangeColor,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "These 16 categories — covering 2 meat types (chicken and goat) and 14 fruits and vegetables — were selected as the classification classes for the NutriScan AI food scanner model. Nutritional data and pH values are sourced from the USDA FoodData Central database.",
+                            color = Color.White,
+                            fontSize = 13.sp,
+                            lineHeight = 19.5.sp // 1.5 line spacing (13 * 1.5 = 19.5)
+                        )
+                    }
+                }
+            }
+
+            // 3. Subtle Horizontal Divider
+            HorizontalDivider(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp, bottom = 8.dp),
+                thickness = 1.dp,
+                color = orangeColor.copy(alpha = 0.2f)
+            )
         }
         items(foodList) { food ->
             FoodCard(food = food, orangeColor = orangeColor)
