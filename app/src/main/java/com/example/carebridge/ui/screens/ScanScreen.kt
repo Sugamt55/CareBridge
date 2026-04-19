@@ -10,6 +10,7 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -26,8 +27,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
@@ -283,6 +289,31 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                             imageCapture = imageCapture,
                             modifier = Modifier.fillMaxSize()
                         )
+                        
+                        // GUIDING OVERLAY: Darken edges and show central square guide
+                        ScannerOverlay(color = orangeColor)
+                        
+                        // TEXT HINT: Below the central frame
+                        Column(
+                            modifier = Modifier.fillMaxSize().padding(bottom = 140.dp),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Spacer(modifier = Modifier.height(240.dp)) // Offset to place text below the central 60% area
+                            Surface(
+                                color = Color.Black.copy(alpha = 0.6f),
+                                shape = RoundedCornerShape(16.dp)
+                            ) {
+                                Text(
+                                    text = "Place food inside the frame.\nKeep hands out of view.",
+                                    color = Color.White,
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    textAlign = TextAlign.Center,
+                                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                                )
+                            }
+                        }
                     } else {
                         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                             Text("Camera permission required", color = whiteColor)
@@ -357,6 +388,43 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                 showSheet = false
                 viewModel.resetState()
             }
+        )
+    }
+}
+
+@Composable
+fun ScannerOverlay(color: Color) {
+    Canvas(modifier = Modifier.fillMaxSize()) {
+        val width = size.width
+        val height = size.height
+        val rectSize = width * 0.6f
+        val left = (width - rectSize) / 2
+        val top = (height - rectSize) / 2
+
+        // 1. Draw a semi-transparent dark overlay over everything
+        drawRect(
+            color = Color.Black.copy(alpha = 0.4f),
+            size = size
+        )
+
+        // 2. "Cut out" the center square using BlendMode.Clear
+        // Note: For this to work as a proper mask, you often need to draw to a separate layer or use a specific implementation.
+        // For a simpler approach that works well in Compose:
+        // We can just draw the border to guide the user.
+        drawRoundRect(
+            color = color,
+            topLeft = Offset(left, top),
+            size = Size(rectSize, rectSize),
+            cornerRadius = CornerRadius(24f, 24f),
+            style = Stroke(width = 3.dp.toPx())
+        )
+        
+        // Add a subtle inner glow or indicator
+        drawRoundRect(
+            color = color.copy(alpha = 0.1f),
+            topLeft = Offset(left, top),
+            size = Size(rectSize, rectSize),
+            cornerRadius = CornerRadius(24f, 24f)
         )
     }
 }

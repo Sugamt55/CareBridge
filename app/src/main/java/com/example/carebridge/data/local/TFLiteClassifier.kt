@@ -34,12 +34,13 @@ class TFLiteClassifier(private val context: Context) {
 
     fun isModelLoaded(): Boolean = model != null && labels.isNotEmpty()
 
-    private fun getCenterCroppedBitmap(bitmap: Bitmap): Bitmap {
-        val width = bitmap.width
-        val height = bitmap.height
-        val size = if (width > height) height else width
-        val x = (width - size) / 2
-        val y = (height - size) / 2
+    private fun centreCrop(bitmap: Bitmap): Bitmap {
+        // Crop inner 60% to aggressively remove hand/background edges
+        val cropFactor = 0.6f
+        val size = (minOf(bitmap.width, bitmap.height) * cropFactor).toInt()
+        val x = (bitmap.width - size) / 2
+        val y = (bitmap.height - size) / 2
+        Log.d(TAG, "Aggressive crop: ${bitmap.width}x${bitmap.height} -> ${size}x${size}")
         return Bitmap.createBitmap(bitmap, x, y, size, size)
     }
 
@@ -62,11 +63,11 @@ class TFLiteClassifier(private val context: Context) {
         val currentModel = model ?: return null
         
         try {
-            // Pre-process using Bitmap operations for steps not available in standard TFLite Support ops
-            val croppedBitmap = getCenterCroppedBitmap(bitmap)
+            // Pre-process using the aggressive centre crop and contrast adjustment
+            val croppedBitmap = centreCrop(bitmap)
             val highContrastBitmap = adjustContrast(croppedBitmap, 1.2f)
 
-            // Final preprocessing using ImageProcessor
+            // Final preprocessing using ImageProcessor (resizing to 224x224 and normalization)
             val imageProcessor = ImageProcessor.Builder()
                 .add(ResizeOp(224, 224, ResizeOp.ResizeMethod.BILINEAR))
                 .add(NormalizeOp(0f, 255f)) 
