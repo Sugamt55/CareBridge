@@ -47,6 +47,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.carebridge.R
 import com.example.carebridge.data.FoodPredictionResponse
+import com.example.carebridge.ui.theme.clinicalBackground
 import com.example.carebridge.ui.viewmodel.MainViewModel
 import com.example.carebridge.ui.viewmodel.ScanUiState
 import java.io.File
@@ -67,12 +68,11 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
     var showSheet by remember { mutableStateOf(false) }
     var scannedFoodData by remember { mutableStateOf<FoodPredictionResponse?>(null) }
 
-    // Style Constants matching HomeScreen
-    val orangeColor = Color(0xFFFF6B00)
-    val navBackgroundColor = Color(0xFF1A1A1A)
+    // Style Constants
+    val orangeColor = MaterialTheme.colorScheme.primary
+    val navBackgroundColor = MaterialTheme.colorScheme.surface
     val unselectedGrey = Color(0xFF888888)
-    val whiteColor = Color(0xFFFFFFFF)
-    val darkOverlay = Color(0x80000000)
+    val whiteColor = MaterialTheme.colorScheme.onSurface
 
     // Permission Handling
     var hasCameraPermission by remember {
@@ -105,172 +105,134 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        // 1. Background: Fullscreen background (Using VideoBackground from HomeScreen.kt)
-        VideoBackground(resourceId = R.raw.background_glow)
-
-        // 2. Dark Overlay (#80000000)
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(darkOverlay)
-        )
-
-        // 3. Subtle Radial Gradient Glow
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.radialGradient(
-                        colors = listOf(
-                            orangeColor.copy(alpha = 0.2f),
-                            Color.Transparent
-                        ),
-                        radius = 1800f
-                    )
-                )
-        )
-
-        Scaffold(
-            containerColor = Color.Transparent,
-            topBar = {
-                TopAppBar(
-                    navigationIcon = {
-                        IconButton(onClick = { 
-                            viewModel.resetState()
-                            navController.navigateUp() 
-                        }) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Back",
-                                tint = whiteColor
-                            )
+    Scaffold(
+        modifier = Modifier.clinicalBackground(),
+        containerColor = Color.Transparent,
+        topBar = {
+            TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { 
+                        viewModel.resetState()
+                        navController.navigateUp() 
+                    }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back",
+                            tint = whiteColor
+                        )
+                    }
+                },
+                title = {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(Icons.Outlined.Bolt, contentDescription = null, tint = orangeColor)
+                        }
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+            )
+        },
+        bottomBar = {
+            NavigationBar(
+                containerColor = navBackgroundColor,
+                tonalElevation = 0.dp,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                    .clip(RoundedCornerShape(32.dp))
+                    .border(1.dp, Color.Black.copy(alpha = 0.05f), RoundedCornerShape(32.dp))
+            ) {
+                NavigationBarItem(
+                    selected = false,
+                    onClick = {
+                        viewModel.resetState()
+                        navController.navigate("home") {
+                            popUpTo("home") { inclusive = true }
+                            launchSingleTop = true
                         }
                     },
-                    title = {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.End,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(Icons.Outlined.Bolt, contentDescription = null, tint = orangeColor)
-                                Spacer(modifier = Modifier.width(16.dp))
-                                Box(
-                                    modifier = Modifier
-                                        .size(32.dp)
-                                        .clip(CircleShape)
-                                        .background(Color.Gray)
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.Person,
-                                        contentDescription = "Profile",
-                                        modifier = Modifier.align(Alignment.Center).size(20.dp),
-                                        tint = whiteColor
-                                    )
-                                }
-                            }
+                    icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
+                    label = { Text("HOME", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    colors = NavigationBarItemDefaults.colors(
+                        unselectedIconColor = unselectedGrey,
+                        unselectedTextColor = unselectedGrey,
+                        indicatorColor = Color.Transparent
+                    )
+                )
+                NavigationBarItem(
+                    selected = true,
+                    onClick = { /* Already here */ },
+                    icon = { Icon(Icons.Default.QrCodeScanner, contentDescription = "Scan") },
+                    label = { Text("SCAN", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = orangeColor,
+                        selectedTextColor = orangeColor,
+                        indicatorColor = Color.Transparent
+                    )
+                )
+                NavigationBarItem(
+                    selected = false,
+                    onClick = {
+                        viewModel.resetState()
+                        navController.navigate("chat") {
+                            popUpTo("home") { saveState = true }
+                            launchSingleTop = true
+                            restoreState = true
                         }
                     },
-                    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+                    icon = { Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = "Chat") },
+                    label = { Text("CHAT", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    colors = NavigationBarItemDefaults.colors(
+                        unselectedIconColor = unselectedGrey,
+                        unselectedTextColor = unselectedGrey,
+                        indicatorColor = Color.Transparent
+                    )
                 )
-            },
-            bottomBar = {
-                // Bottom Navigation Bar: Dark/black (#1A1A1A), stylized like HomeScreen
-                NavigationBar(
-                    containerColor = navBackgroundColor,
-                    tonalElevation = 0.dp,
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp, vertical = 12.dp)
-                        .clip(RoundedCornerShape(32.dp))
-                        .border(1.dp, Color.White.copy(alpha = 0.05f), RoundedCornerShape(32.dp))
-                ) {
-                    NavigationBarItem(
-                        selected = false,
-                        onClick = {
-                            viewModel.resetState()
-                            navController.navigate("home") {
-                                popUpTo("home") { inclusive = true }
-                                launchSingleTop = true
-                            }
-                        },
-                        icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
-                        label = { Text("HOME", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                        colors = NavigationBarItemDefaults.colors(
-                            unselectedIconColor = unselectedGrey,
-                            unselectedTextColor = unselectedGrey,
-                            indicatorColor = Color.Transparent
-                        )
-                    )
-                    NavigationBarItem(
-                        selected = true,
-                        onClick = { /* Already here */ },
-                        icon = { Icon(Icons.Default.QrCodeScanner, contentDescription = "Scan") },
-                        label = { Text("SCAN", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = orangeColor,
-                            selectedTextColor = orangeColor,
-                            indicatorColor = Color.Transparent
-                        )
-                    )
-                    NavigationBarItem(
-                        selected = false,
-                        onClick = {
-                            viewModel.resetState()
-                            navController.navigate("chat") {
-                                popUpTo("home") { saveState = true }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        },
-                        icon = { Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = "Chat") },
-                        label = { Text("CHAT", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                        colors = NavigationBarItemDefaults.colors(
-                            unselectedIconColor = unselectedGrey,
-                            unselectedTextColor = unselectedGrey,
-                            indicatorColor = Color.Transparent
-                        )
-                    )
-                    NavigationBarItem(
-                        selected = false,
-                        onClick = { /* TODO */ },
-                        icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-                        label = { Text("PROFILE", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                        colors = NavigationBarItemDefaults.colors(
-                            unselectedIconColor = unselectedGrey,
-                            unselectedTextColor = unselectedGrey,
-                            indicatorColor = Color.Transparent
-                        )
-                    )
-                }
             }
-        ) { innerPadding ->
+        }
+    ) { innerPadding ->
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding)) {
+            
+            // Subtle Radial Gradient Glow
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.radialGradient(
+                            colors = listOf(
+                                orangeColor.copy(alpha = 0.05f),
+                                Color.Transparent
+                            ),
+                            radius = 1800f
+                        )
+                    )
+            )
+
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding)
                     .padding(horizontal = 24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(modifier = Modifier.height(20.dp))
-                // Title: "AI Report Scanner" - white, bold, large (matching homepage)
                 Text(
                     text = "AI Report Scanner",
-                    color = whiteColor,
-                    fontSize = 42.sp,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.headlineLarge,
                     fontWeight = FontWeight.ExtraBold,
-                    textAlign = TextAlign.Center,
-                    lineHeight = 48.sp
+                    textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                // Subtitle: white
                 Text(
                     text = "Align your food within the frame to start the analysis.",
                     textAlign = TextAlign.Center,
-                    color = whiteColor,
-                    lineHeight = 24.sp,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                    style = MaterialTheme.typography.bodyMedium
                 )
 
                 Spacer(modifier = Modifier.height(32.dp))
@@ -281,7 +243,8 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                         .fillMaxWidth()
                         .aspectRatio(0.8f)
                         .clip(RoundedCornerShape(32.dp))
-                        .background(Color.Black.copy(alpha = 0.3f))
+                        .background(Color.Black.copy(alpha = 0.05f))
+                        .border(1.dp, Color.Black.copy(alpha = 0.05f), RoundedCornerShape(32.dp))
                 ) {
                     if (hasCameraPermission) {
                         CameraPreview(
@@ -290,47 +253,23 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                             modifier = Modifier.fillMaxSize()
                         )
                         
-                        // GUIDING OVERLAY: Darken edges and show central square guide
                         ScannerOverlay(color = orangeColor)
                         
-                        // TEXT HINT: Below the central frame
-                        Column(
-                            modifier = Modifier.fillMaxSize().padding(bottom = 140.dp),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Spacer(modifier = Modifier.height(240.dp)) // Offset to place text below the central 60% area
-                            Surface(
-                                color = Color.Black.copy(alpha = 0.6f),
-                                shape = RoundedCornerShape(16.dp)
-                            ) {
-                                Text(
-                                    text = "Place food inside the frame.\nKeep hands out of view.",
-                                    color = Color.White,
-                                    fontSize = 14.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    textAlign = TextAlign.Center,
-                                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-                                )
-                            }
-                        }
                     } else {
                         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                            Text("Camera permission required", color = whiteColor)
+                            Text("Camera permission required", color = Color.Gray)
                         }
                     }
 
-                    // Corner frame brackets (Orange)
                     ScannerCorners(modifier = Modifier.fillMaxSize(), color = orangeColor)
 
-                    // Camera capture button: white circular button with a subtle dark border
                     Box(
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
-                            .padding(bottom = 60.dp)
+                            .padding(bottom = 20.dp)
                             .size(72.dp)
-                            .border(4.dp, Color.Black.copy(alpha = 0.2f), CircleShape)
-                            .background(whiteColor, CircleShape)
+                            .border(4.dp, Color.Black.copy(alpha = 0.1f), CircleShape)
+                            .background(Color.White, CircleShape)
                             .clip(CircleShape)
                             .clickable(
                                 enabled = uiState !is ScanUiState.Loading && hasCameraPermission,
@@ -346,7 +285,6 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                         Icon(Icons.Default.CameraAlt, contentDescription = "Capture", tint = Color.Black, modifier = Modifier.size(32.dp))
                     }
 
-                    // Loading Indicator
                     if (uiState is ScanUiState.Loading) {
                         Box(
                             modifier = Modifier
@@ -357,15 +295,26 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                 CircularProgressIndicator(color = orangeColor)
                                 Spacer(modifier = Modifier.height(8.dp))
-                                Text("Analyzing Food...", color = whiteColor)
+                                Text("Analyzing Food...", color = Color.White)
                             }
                         }
                     }
                 }
 
+                Spacer(modifier = Modifier.height(24.dp))
+                
+                // HINT TEXT: Now below the scanner UI
+                Text(
+                    text = "Place food inside the frame.\nKeep hands out of view.",
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    lineHeight = 20.sp
+                )
+
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Error Display
                 if (uiState is ScanUiState.Error) {
                     Text(
                         text = (uiState as ScanUiState.Error).message,
@@ -379,7 +328,6 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
         }
     }
 
-    // Result Bottom Sheet
     if (showSheet && scannedFoodData != null) {
         FoodResultBottomSheet(
             foodData = scannedFoodData!!,
@@ -401,16 +349,11 @@ fun ScannerOverlay(color: Color) {
         val left = (width - rectSize) / 2
         val top = (height - rectSize) / 2
 
-        // 1. Draw a semi-transparent dark overlay over everything
         drawRect(
-            color = Color.Black.copy(alpha = 0.4f),
+            color = Color.Black.copy(alpha = 0.2f),
             size = size
         )
 
-        // 2. "Cut out" the center square using BlendMode.Clear
-        // Note: For this to work as a proper mask, you often need to draw to a separate layer or use a specific implementation.
-        // For a simpler approach that works well in Compose:
-        // We can just draw the border to guide the user.
         drawRoundRect(
             color = color,
             topLeft = Offset(left, top),
@@ -419,7 +362,6 @@ fun ScannerOverlay(color: Color) {
             style = Stroke(width = 3.dp.toPx())
         )
         
-        // Add a subtle inner glow or indicator
         drawRoundRect(
             color = color.copy(alpha = 0.1f),
             topLeft = Offset(left, top),

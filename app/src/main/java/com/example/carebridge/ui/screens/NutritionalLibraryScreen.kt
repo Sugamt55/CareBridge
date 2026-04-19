@@ -20,8 +20,9 @@ import com.example.carebridge.data.model.FoodItem
 @Composable
 fun NutritionalLibraryScreen(modifier: Modifier = Modifier) {
     val foodList = getNutritionalData()
-    val orangeColor = Color(0xFFFF6B00)
-    val whiteColor = Color(0xFFFFFFFF)
+    val orangeColor = MaterialTheme.colorScheme.primary
+    val titleColor = MaterialTheme.colorScheme.onSurface
+    val grey = Color(0xFF6B7280) // Professional Slate Grey
 
     LazyColumn(
         modifier = modifier
@@ -33,31 +34,30 @@ fun NutritionalLibraryScreen(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = "Nutritional Encyclopedia",
-                color = whiteColor,
+                color = titleColor,
                 fontSize = 32.sp,
                 fontWeight = FontWeight.ExtraBold,
                 lineHeight = 38.sp
             )
             Spacer(modifier = Modifier.height(12.dp))
             
-            // 1. Redesigned Main Subtitle
             Text(
                 text = "Detailed nutritional insights and metabolic impact for all 16 scanned food categories.",
-                color = whiteColor,
-                fontSize = 18.sp, // Slightly increased
+                color = grey,
+                fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 lineHeight = 24.sp
             )
             
-            Spacer(modifier = Modifier.height(12.dp)) // Added bottom margin
+            Spacer(modifier = Modifier.height(12.dp))
 
-            // 2. Styled Info Card
+            // Styled Info Card
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 12.dp),
                 shape = RoundedCornerShape(12.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.Black.copy(alpha = 0.5f))
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
             ) {
                 Row(modifier = Modifier.height(IntrinsicSize.Min)) {
                     // Left border accent
@@ -77,15 +77,15 @@ fun NutritionalLibraryScreen(modifier: Modifier = Modifier) {
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "These 16 categories — covering 2 meat types (chicken and goat) and 14 fruits and vegetables — were selected as the classification classes for the NutriScan AI food scanner model. Nutritional data and pH values are sourced from the USDA FoodData Central database.",
-                            color = Color.White,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             fontSize = 13.sp,
-                            lineHeight = 19.5.sp // 1.5 line spacing (13 * 1.5 = 19.5)
+                            lineHeight = 19.5.sp
                         )
                     }
                 }
             }
 
-            // 3. Subtle Horizontal Divider
+            // Subtle Horizontal Divider
             HorizontalDivider(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -109,9 +109,9 @@ fun FoodCard(food: FoodItem, orangeColor: Color) {
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.White.copy(alpha = 0.95f)
+            containerColor = Color.White
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
             Row(

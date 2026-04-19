@@ -10,17 +10,8 @@ import com.example.carebridge.ui.screens.*
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = "home" // Temporarily set to home for testing. Change back to "login" later.
+        startDestination = "home"
     ) {
-        composable(route = "login") {
-            LoginScreen(navController = navController)
-        }
-        composable(route = "signup") {
-            SignUpScreen(navController = navController)
-        }
-        composable(route = "reset") {
-            ResetPasswordScreen(navController = navController)
-        }
         composable(route = "home") {
             HomeScreen(navController = navController)
         }

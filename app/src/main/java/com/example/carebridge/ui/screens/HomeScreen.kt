@@ -1,20 +1,13 @@
 package com.example.carebridge.ui.screens
 
-import android.net.Uri
-import androidx.annotation.OptIn
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.History
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.QrCodeScanner
-import androidx.compose.material.icons.outlined.TrendingUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,33 +15,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.media3.common.MediaItem
-import androidx.media3.common.Player
-import androidx.media3.common.util.UnstableApi
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.ui.AspectRatioFrameLayout
-import androidx.media3.ui.PlayerView
 import androidx.navigation.NavController
-import com.example.carebridge.R
+import com.example.carebridge.ui.theme.clinicalBackground
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    val backgroundColor = Color(0xFF0D0800)
     val orangeColor = Color(0xFFFF6B00)
     val greyBorder = Color(0xFF555555)
-    // Using a light grey that is clearly distinct from white but readable
-    val subtitleColor = Color(0xFFCCCCCC) 
-    val navBackgroundColor = Color(0xFF1A1A1A)
+    val subtitleColor = Color(0xFF515f78) // Using Secondary color for subtitle
+    val navBackgroundColor = MaterialTheme.colorScheme.surface
     val unselectedGrey = Color(0xFF888888)
 
     Scaffold(
-        containerColor = backgroundColor,
+        modifier = Modifier.clinicalBackground(),
         bottomBar = {
             NavigationBar(
                 containerColor = navBackgroundColor,
@@ -56,7 +39,7 @@ fun HomeScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 12.dp)
                     .clip(RoundedCornerShape(32.dp))
-                    .border(1.dp, Color.White.copy(alpha = 0.05f), RoundedCornerShape(32.dp))
+                    .border(1.dp, Color.Black.copy(alpha = 0.05f), RoundedCornerShape(32.dp))
             ) {
                 NavigationBarItem(
                     selected = true,
@@ -64,8 +47,8 @@ fun HomeScreen(navController: NavController) {
                     icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
                     label = { Text("HOME", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
                     colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = orangeColor,
-                        selectedTextColor = orangeColor,
+                        selectedIconColor = MaterialTheme.colorScheme.primary,
+                        selectedTextColor = MaterialTheme.colorScheme.primary,
                         unselectedIconColor = unselectedGrey,
                         unselectedTextColor = unselectedGrey,
                         indicatorColor = Color.Transparent
@@ -97,43 +80,22 @@ fun HomeScreen(navController: NavController) {
                         indicatorColor = Color.Transparent
                     )
                 )
-                NavigationBarItem(
-                    selected = false,
-                    onClick = { /* TODO */ },
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-                    label = { Text("PROFILE", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                    colors = NavigationBarItemDefaults.colors(
-                        unselectedIconColor = unselectedGrey,
-                        unselectedTextColor = unselectedGrey,
-                        indicatorColor = Color.Transparent
-                    )
-                )
             }
         }
     ) { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(backgroundColor)
+                .padding(innerPadding)
         ) {
-            // 1. Looping Video Background layer
-            VideoBackground(resourceId = R.raw.background_glow)
-
-            // 2. Dark Overlay to dim the bright video and improve text contrast
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black.copy(alpha = 0.5f))
-            )
-
-            // 3. Subtle Radial Gradient Glow layer
+            // Subtle Radial Gradient Glow layer
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(
                         Brush.radialGradient(
                             colors = listOf(
-                                orangeColor.copy(alpha = 0.2f),
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.05f),
                                 Color.Transparent
                             ),
                             radius = 1800f
@@ -141,11 +103,10 @@ fun HomeScreen(navController: NavController) {
                     )
             )
 
-            // 4. UI Content layer
+            // UI Content layer
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding)
             ) {
                 // Top Header Box (Centered Text)
                 Box(
@@ -157,9 +118,8 @@ fun HomeScreen(navController: NavController) {
                 ) {
                     Text(
                         text = "NutriScan AI",
-                        color = Color(0xFFFFF176), // Lighter Yellow (Material Yellow 300)
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.primary,
                         textAlign = TextAlign.Center
                     )
                 }
@@ -176,7 +136,7 @@ fun HomeScreen(navController: NavController) {
                     Surface(
                         color = Color.Transparent,
                         shape = RoundedCornerShape(50),
-                        border = BorderStroke(1.dp, greyBorder)
+                        border = BorderStroke(1.dp, greyBorder.copy(alpha = 0.2f))
                     ) {
                         Row(
                             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -185,15 +145,14 @@ fun HomeScreen(navController: NavController) {
                             Icon(
                                 imageVector = Icons.Default.Star,
                                 contentDescription = null,
-                                tint = Color(0xFFFFD700),
+                                tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(12.dp)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
                                 text = "SMART ANALYTICS FOR INFORMED NUTRITIONAL CHOICES",
-                                color = Color.White,
-                                fontSize = 10.sp,
-                                fontWeight = FontWeight.Bold,
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                                 letterSpacing = 0.5.sp
                             )
                         }
@@ -205,19 +164,15 @@ fun HomeScreen(navController: NavController) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
                             text = "Scan Your Food.",
-                            color = Color.White,
-                            fontSize = 42.sp,
-                            fontWeight = FontWeight.ExtraBold,
-                            textAlign = TextAlign.Center,
-                            lineHeight = 48.sp
+                            style = MaterialTheme.typography.headlineLarge,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            textAlign = TextAlign.Center
                         )
                         Text(
                             text = "Know What's Inside.",
-                            color = orangeColor,
-                            fontSize = 42.sp,
-                            fontWeight = FontWeight.ExtraBold,
-                            textAlign = TextAlign.Center,
-                            lineHeight = 48.sp
+                            style = MaterialTheme.typography.headlineLarge,
+                            color = MaterialTheme.colorScheme.primary,
+                            textAlign = TextAlign.Center
                         )
                     }
 
@@ -226,11 +181,10 @@ fun HomeScreen(navController: NavController) {
                     // 3. Subtitle
                     Text(
                         text = "Discover nutritional facts and\ningredients instantly.",
+                        style = MaterialTheme.typography.bodyMedium,
                         color = subtitleColor,
-                        fontSize = 16.sp,
                         textAlign = TextAlign.Center,
-                        lineHeight = 24.sp,
-                        fontWeight = FontWeight.Medium
+                        lineHeight = 24.sp
                     )
 
                     Spacer(modifier = Modifier.height(48.dp))
@@ -244,13 +198,13 @@ fun HomeScreen(navController: NavController) {
                             onClick = { navController.navigate("scan") },
                             modifier = Modifier
                                 .weight(1f)
-                                .height(60.dp),
-                            shape = RoundedCornerShape(50),
-                            colors = ButtonDefaults.buttonColors(containerColor = orangeColor)
+                                .height(56.dp),
+                            shape = RoundedCornerShape(12.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                         ) {
                             Text(
                                 text = "Scan Food Now",
-                                color = Color.Black,
+                                color = Color.White,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 15.sp
                             )
@@ -260,10 +214,10 @@ fun HomeScreen(navController: NavController) {
                             onClick = { },
                             modifier = Modifier
                                 .weight(1f)
-                                .height(60.dp),
-                            shape = RoundedCornerShape(50),
-                            border = BorderStroke(1.dp, greyBorder),
-                            colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.White)
+                                .height(56.dp),
+                            shape = RoundedCornerShape(12.dp),
+                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)),
+                            colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.primary)
                         ) {
                             Text(
                                 text = "Learn More",
@@ -276,37 +230,4 @@ fun HomeScreen(navController: NavController) {
             }
         }
     }
-}
-
-@OptIn(UnstableApi::class)
-@Composable
-fun VideoBackground(resourceId: Int) {
-    val context = LocalContext.current
-    val exoPlayer = remember {
-        ExoPlayer.Builder(context).build().apply {
-            val uri = Uri.parse("android.resource://${context.packageName}/$resourceId")
-            setMediaItem(MediaItem.fromUri(uri))
-            repeatMode = Player.REPEAT_MODE_ALL
-            volume = 0f
-            prepare()
-            playWhenReady = true
-        }
-    }
-
-    DisposableEffect(exoPlayer) {
-        onDispose {
-            exoPlayer.release()
-        }
-    }
-
-    AndroidView(
-        factory = { ctx ->
-            PlayerView(ctx).apply {
-                useController = false
-                resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
-                player = exoPlayer
-            }
-        },
-        modifier = Modifier.fillMaxSize()
-    )
 }
