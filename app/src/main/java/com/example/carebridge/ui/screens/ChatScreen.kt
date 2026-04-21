@@ -152,6 +152,10 @@ fun ChatScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(SpacingBetweenComponents))
 
+                WhoIsDrSebiCard()
+
+                Spacer(modifier = Modifier.height(SpacingBetweenComponents))
+
                 MissionCard()
 
                 Spacer(modifier = Modifier.height(SpacingBadgeToHeadline))
@@ -261,6 +265,40 @@ fun BioMineralSlider(
                 fontWeight = FontWeight.Bold,
                 fontSize = 14.sp
             )
+        }
+    }
+}
+
+@Composable
+fun WhoIsDrSebiCard() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(260.dp),
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            item {
+                Text(
+                    text = "Who is Dr Sebi?",
+                    color = PrimaryGreen,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Alfredo Bowman, known as \"Dr. Sebi,\" was a Honduran herbalist who sought natural alternatives after Western medicine failed to treat his own chronic illnesses. He developed \"African Bio-Electric Cell Food Therapy,\" asserting that mucus and substances uncomplimentary to one's genetic structure caused all disease, advocating for an alkaline diet. While he attracted a devoted celebrity following who viewed him as a visionary, the scientific community labeled his claims—which denied germ theory—as dangerous pseudoscience. Ultimately, Dr. Sebi remains a polarizing legacy: to supporters, a champion of natural healing; to critics, a controversial purveyor of false hope.",
+                    color = SlateGrey,
+                    fontSize = 13.sp,
+                    lineHeight = 19.5.sp
+                )
+            }
         }
     }
 }
