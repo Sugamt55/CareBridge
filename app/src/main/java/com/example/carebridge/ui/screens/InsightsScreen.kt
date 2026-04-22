@@ -1,5 +1,7 @@
 package com.example.carebridge.ui.screens
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,9 +24,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLinkStyles
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -271,6 +280,9 @@ fun BioMineralSlider(
 
 @Composable
 fun WhoIsDrSebiCard() {
+    val context = LocalContext.current
+    val youtubeUrl = "https://youtu.be/9ycV9aAWjzM"
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -292,8 +304,29 @@ fun WhoIsDrSebiCard() {
                     fontSize = 18.sp
                 )
                 Spacer(modifier = Modifier.height(8.dp))
+                
+                val annotatedString = buildAnnotatedString {
+                    append("Alfredo Bowman, known as \"Dr. Sebi,\" was a Honduran herbalist who sought natural alternatives after Western medicine failed to treat his own chronic illnesses. He developed \"African Bio-Electric Cell Food Therapy,\" asserting that mucus and substances uncomplimentary to one's genetic structure caused all disease, advocating for an alkaline diet. While he attracted a devoted celebrity following who viewed him as a visionary, the scientific community labeled his claims—which denied germ theory—as dangerous pseudoscience. Ultimately, Dr. Sebi remains a polarizing legacy: to supporters, a champion of natural healing; to critics, a controversial purveyor of false hope.\n\nTo learn more about Dr Sebi, check out the following youtube link which is a documentary video about him:\n")
+                    
+                    withLink(LinkAnnotation.Url(
+                        url = youtubeUrl,
+                        styles = TextLinkStyles(
+                            style = SpanStyle(
+                                color = PrimaryGreen,
+                                textDecoration = TextDecoration.Underline
+                            )
+                        ),
+                        linkInteractionListener = {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl))
+                            context.startActivity(intent)
+                        }
+                    )) {
+                        append(youtubeUrl)
+                    }
+                }
+
                 Text(
-                    text = "Alfredo Bowman, known as \"Dr. Sebi,\" was a Honduran herbalist who sought natural alternatives after Western medicine failed to treat his own chronic illnesses. He developed \"African Bio-Electric Cell Food Therapy,\" asserting that mucus and substances uncomplimentary to one's genetic structure caused all disease, advocating for an alkaline diet. While he attracted a devoted celebrity following who viewed him as a visionary, the scientific community labeled his claims—which denied germ theory—as dangerous pseudoscience. Ultimately, Dr. Sebi remains a polarizing legacy: to supporters, a champion of natural healing; to critics, a controversial purveyor of false hope.",
+                    text = annotatedString,
                     color = SlateGrey,
                     fontSize = 13.sp,
                     lineHeight = 19.5.sp

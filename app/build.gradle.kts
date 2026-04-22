@@ -113,6 +113,9 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-support:0.5.0")
     implementation("org.tensorflow:tensorflow-lite-metadata:0.4.4")
 
+    // Android Browser helper for Custom Tabs
+    implementation("androidx.browser:browser:1.8.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
