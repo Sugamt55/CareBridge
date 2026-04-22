@@ -50,7 +50,7 @@ val Typography = Typography(
     titleLarge = TextStyle(
         fontFamily = CormorantGaramondFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 22.sp,
+        fontSize = 27.sp,
         lineHeight = 28.sp,
         letterSpacing = 0.sp
     ),

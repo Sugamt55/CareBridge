@@ -9,7 +9,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -30,7 +29,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -45,8 +43,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.carebridge.R
 import com.example.carebridge.data.FoodPredictionResponse
+import com.example.carebridge.ui.theme.LightGreen
 import com.example.carebridge.ui.theme.clinicalBackground
 import com.example.carebridge.ui.viewmodel.MainViewModel
 import com.example.carebridge.ui.viewmodel.ScanUiState
@@ -138,7 +136,7 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
         },
         bottomBar = {
             NavigationBar(
-                containerColor = navBackgroundColor,
+                containerColor = LightGreen,
                 tonalElevation = 0.dp,
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 12.dp)
@@ -177,14 +175,14 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                     selected = false,
                     onClick = {
                         viewModel.resetState()
-                        navController.navigate("chat") {
+                        navController.navigate("context") {
                             popUpTo("home") { saveState = true }
                             launchSingleTop = true
                             restoreState = true
                         }
                     },
-                    icon = { Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = "Chat") },
-                    label = { Text("CHAT", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    icon = { Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = "Context") },
+                    label = { Text("CONTEXT", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
                     colors = NavigationBarItemDefaults.colors(
                         unselectedIconColor = unselectedGrey,
                         unselectedTextColor = unselectedGrey,

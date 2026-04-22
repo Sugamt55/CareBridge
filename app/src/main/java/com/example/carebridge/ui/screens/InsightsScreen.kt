@@ -50,7 +50,7 @@ sealed class PhZone {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatScreen(navController: NavController) {
+fun InsightsScreen(navController: NavController) {
     var sliderValue by remember { mutableStateOf(7f) }
 
     val currentZone = when {
@@ -98,8 +98,8 @@ fun ChatScreen(navController: NavController) {
                 NavigationBarItem(
                     selected = true,
                     onClick = { /* Already here */ },
-                    icon = { Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = "Chat") },
-                    label = { Text("CHAT", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    icon = { Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = "Insights") },
+                    label = { Text("INSIGHTS", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
                     colors = NavigationBarItemDefaults.colors(
                         selectedIconColor = PrimaryGreen,
                         selectedTextColor = PrimaryGreen,
@@ -327,7 +327,7 @@ fun MissionCard() {
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "We built this app because we believe everyone deserves to thrive, not just survive. We have seen too many people held back by preventable illnesses, unaware that their daily habits may be slowly draining their vitality. Our mission is to bring clarity to this root cause. Dr. Sebi taught us that disease is the result of ingesting substances uncomplimentary to our genetic structure, which forces the body to produce excessive mucus as a defensive response; this accumulation then clogs our internal pathways and obstructs our natural vitality. By understanding this, we aim to guide you back to your body’s true state of balance—your natural homeostasis.",
+                    text = "We built this app because we believe everyone deserves to thrive, not just survive. We have seen too many people held back by preventable illnesses, unaware that their daily habits may be slowly draining their vitality. Our mission is to bring clarity to this root cause. Dr. Sebi taught us that disease is the result of ingesting substances uncomplimentary to one's genetic structure, which forces the body to produce excessive mucus as a defensive response; this accumulation then clogs our internal pathways and obstructs our natural vitality. By understanding this, we aim to guide you back to your body’s true state of balance—your natural homeostasis.",
                     color = SlateGrey,
                     fontSize = 13.sp,
                     lineHeight = 19.5.sp

@@ -18,8 +18,8 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(route = "scan") {
             ScanScreen(navController = navController)
         }
-        composable(route = "chat") {
-            ChatScreen(navController = navController)
+        composable(route = "insights") {
+            InsightsScreen(navController = navController)
         }
     }
 }

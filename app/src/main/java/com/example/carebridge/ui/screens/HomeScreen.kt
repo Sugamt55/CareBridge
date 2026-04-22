@@ -1,6 +1,7 @@
 package com.example.carebridge.ui.screens
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -15,26 +16,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.carebridge.ui.theme.clinicalBackground
+import com.example.carebridge.R
+import com.example.carebridge.ui.theme.LightGreen
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    val orangeColor = Color(0xFFFF6B00)
     val greyBorder = Color(0xFF555555)
     val subtitleColor = Color(0xFF515f78) // Using Secondary color for subtitle
-    val navBackgroundColor = MaterialTheme.colorScheme.surface
     val unselectedGrey = Color(0xFF888888)
 
     Scaffold(
-        modifier = Modifier.clinicalBackground(),
+        modifier = Modifier.fillMaxSize(),
         bottomBar = {
             NavigationBar(
-                containerColor = navBackgroundColor,
+                containerColor = LightGreen,
                 tonalElevation = 0.dp,
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 12.dp)
@@ -70,10 +73,10 @@ fun HomeScreen(navController: NavController) {
                 NavigationBarItem(
                     selected = false,
                     onClick = {
-                        navController.navigate("chat")
+                        navController.navigate("insights")
                     },
-                    icon = { Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = "Chat") },
-                    label = { Text("CHAT", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    icon = { Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = "Insights") },
+                    label = { Text("INSIGHTS", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
                     colors = NavigationBarItemDefaults.colors(
                         unselectedIconColor = unselectedGrey,
                         unselectedTextColor = unselectedGrey,
@@ -84,41 +87,36 @@ fun HomeScreen(navController: NavController) {
         }
     ) { innerPadding ->
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
+            modifier = Modifier.fillMaxSize()
         ) {
-            // Subtle Radial Gradient Glow layer
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.radialGradient(
-                            colors = listOf(
-                                MaterialTheme.colorScheme.primary.copy(alpha = 0.05f),
-                                Color.Transparent
-                            ),
-                            radius = 1800f
-                        )
-                    )
+            // Background Image (behind everything)
+            Image(
+                painter = painterResource(id = R.drawable.green_bg),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
             )
 
             // UI Content layer
             Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(innerPadding) // Content respects Scaffold padding
             ) {
                 // Top Header Box (Centered Text)
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 16.dp, start = 24.dp, end = 24.dp)
+                        .padding(top = 150.dp, start = 24.dp, end = 24.dp)
                         .align(Alignment.TopCenter),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
                         text = "NutriScan AI",
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontStyle = FontStyle.Italic,
+                            fontWeight = FontWeight.Bold
+                        ),
                         color = MaterialTheme.colorScheme.primary,
                         textAlign = TextAlign.Center
                     )
@@ -180,7 +178,7 @@ fun HomeScreen(navController: NavController) {
 
                     // 3. Subtitle
                     Text(
-                        text = "Discover nutritional facts and\ningredients instantly.",
+                        text = "Discover nutritional facts based from Dr Sebi and\ningredients instantly.",
                         style = MaterialTheme.typography.bodyMedium,
                         color = subtitleColor,
                         textAlign = TextAlign.Center,
@@ -211,7 +209,7 @@ fun HomeScreen(navController: NavController) {
                         }
 
                         OutlinedButton(
-                            onClick = { },
+                            onClick = { navController.navigate("insights")},
                             modifier = Modifier
                                 .weight(1f)
                                 .height(56.dp),

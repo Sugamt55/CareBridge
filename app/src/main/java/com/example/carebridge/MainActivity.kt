@@ -3,6 +3,7 @@ package com.example.carebridge
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -14,10 +15,7 @@ import com.example.carebridge.ui.theme.CareBridgeTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // This line removes the default "Title Bar" if you want a full-screen medical look
-        // window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-
+        enableEdgeToEdge()
         setContent {
             // 1. Apply your app's custom medical theme
             CareBridgeTheme {
