@@ -135,22 +135,6 @@ fun FoodResultBottomSheet(
                     ResultSuggestionChip(label = "Vit C: ${detailedData.micronutrients.vitaminCMg}mg")
                 }
             }
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-            // Action Button
-            Button(
-                onClick = { /* TODO: Save logic */ },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                shape = RoundedCornerShape(16.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF0056B3)
-                )
-            ) {
-                Text("Save to Daily Log", fontWeight = FontWeight.Bold, fontSize = 16.sp)
-            }
         }
     }
 }
