@@ -7,7 +7,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
-    private const val BASE_URL = "http://10.0.2.2:8000/" 
+    // Switched to 127.0.0.1 because we are using 'adb reverse'
+    // This maps the emulator's local port 8000 directly to your Mac's port 8000
+    private const val BASE_URL = "http://127.0.0.1:8000" 
 
     private val logging = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
@@ -15,14 +17,14 @@ object RetrofitInstance {
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(logging)
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
+        .connectTimeout(5, TimeUnit.SECONDS) // Short timeout so you don't wait 15s for failures
+        .readTimeout(5, TimeUnit.SECONDS)
+        .writeTimeout(5, TimeUnit.SECONDS)
         .build()
 
     val api: FoodApiService by lazy {
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_URL + "/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
