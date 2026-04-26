@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -55,7 +56,13 @@ import java.util.concurrent.Executor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewModel()) {
+fun ScanScreen(
+    navController: NavController, 
+    viewModel: MainViewModel = viewModel(),
+    // Added for testing: Allows bypassing actual CameraX init in integration tests
+    isTestMode: Boolean = false,
+    onTestCapture: () -> Unit = {}
+) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val uiState by viewModel.uiState.collectAsState()
@@ -68,14 +75,13 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
 
     // Style Constants
     val orangeColor = MaterialTheme.colorScheme.primary
-    val navBackgroundColor = MaterialTheme.colorScheme.surface
-    val unselectedGrey = Color(0xFF888888)
     val whiteColor = MaterialTheme.colorScheme.onSurface
+    val unselectedGrey = Color(0xFF888888)
 
     // Permission Handling
     var hasCameraPermission by remember {
         mutableStateOf(
-            ContextCompat.checkSelfPermission(
+            isTestMode || ContextCompat.checkSelfPermission(
                 context,
                 Manifest.permission.CAMERA
             ) == PackageManager.PERMISSION_GRANTED
@@ -90,7 +96,7 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
     )
 
     LaunchedEffect(key1 = true) {
-        if (!hasCameraPermission) {
+        if (!hasCameraPermission && !isTestMode) {
             launcher.launch(Manifest.permission.CAMERA)
         }
     }
@@ -126,9 +132,7 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                         horizontalArrangement = Arrangement.End,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Outlined.Bolt, contentDescription = null, tint = orangeColor)
-                        }
+                        Icon(Icons.Outlined.Bolt, contentDescription = null, tint = orangeColor)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
@@ -196,16 +200,12 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
             .fillMaxSize()
             .padding(innerPadding)) {
             
-            // Subtle Radial Gradient Glow
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(
                         Brush.radialGradient(
-                            colors = listOf(
-                                orangeColor.copy(alpha = 0.05f),
-                                Color.Transparent
-                            ),
+                            colors = listOf(orangeColor.copy(alpha = 0.05f), Color.Transparent),
                             radius = 1800f
                         )
                     )
@@ -220,7 +220,7 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
                     text = "AI Report Scanner",
-                    color = MaterialTheme.colorScheme.onSurface,
+                    color = whiteColor,
                     style = MaterialTheme.typography.headlineLarge,
                     fontWeight = FontWeight.ExtraBold,
                     textAlign = TextAlign.Center
@@ -229,13 +229,12 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                 Text(
                     text = "Align your food within the frame to start the analysis.",
                     textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                    color = whiteColor.copy(alpha = 0.7f),
                     style = MaterialTheme.typography.bodyMedium
                 )
 
                 Spacer(modifier = Modifier.height(32.dp))
 
-                // Scanner Frame
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -245,14 +244,17 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                         .border(1.dp, Color.Black.copy(alpha = 0.05f), RoundedCornerShape(32.dp))
                 ) {
                     if (hasCameraPermission) {
-                        CameraPreview(
-                            lifecycleOwner = lifecycleOwner,
-                            imageCapture = imageCapture,
-                            modifier = Modifier.fillMaxSize()
-                        )
-                        
+                        if (!isTestMode) {
+                            CameraPreview(
+                                lifecycleOwner = lifecycleOwner,
+                                imageCapture = imageCapture,
+                                modifier = Modifier.fillMaxSize()
+                            )
+                        } else {
+                            // Placeholder for tests
+                            Box(modifier = Modifier.fillMaxSize().background(Color.DarkGray).testTag("CameraPlaceholder"))
+                        }
                         ScannerOverlay(color = orangeColor)
-                        
                     } else {
                         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                             Text("Camera permission required", color = Color.Gray)
@@ -272,9 +274,12 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
                             .clickable(
                                 enabled = uiState !is ScanUiState.Loading && hasCameraPermission,
                                 onClick = {
-                                    takePicture(context, imageCapture, executor) { file ->
-                                        Log.d("ScanScreen", "Triggering analysis for: ${file.name}")
-                                        viewModel.analyzeFood(file)
+                                    if (!isTestMode) {
+                                        takePicture(context, imageCapture, executor) { file ->
+                                            viewModel.analyzeFood(file)
+                                        }
+                                    } else {
+                                        onTestCapture()
                                     }
                                 }
                             ),
@@ -301,19 +306,17 @@ fun ScanScreen(navController: NavController, viewModel: MainViewModel = viewMode
 
                 Spacer(modifier = Modifier.height(24.dp))
                 
-                // HINT TEXT: Now below the scanner UI
                 Text(
                     text = "Place food inside the frame.\nKeep hands out of view.",
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                    color = whiteColor.copy(alpha = 0.6f),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
                     lineHeight = 20.sp
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
-
                 if (uiState is ScanUiState.Error) {
+                    Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text = (uiState as ScanUiState.Error).message,
                         color = Color.Red,
@@ -347,10 +350,7 @@ fun ScannerOverlay(color: Color) {
         val left = (width - rectSize) / 2
         val top = (height - rectSize) / 2
 
-        drawRect(
-            color = Color.Black.copy(alpha = 0.2f),
-            size = size
-        )
+        drawRect(color = Color.Black.copy(alpha = 0.2f), size = size)
 
         drawRoundRect(
             color = color,
@@ -391,11 +391,7 @@ fun CameraPreview(
 
             try {
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    lifecycleOwner,
-                    cameraSelector,
-                    useCaseGroup
-                )
+                cameraProvider.bindToLifecycle(lifecycleOwner, cameraSelector, useCaseGroup)
                 preview.setSurfaceProvider(previewView.surfaceProvider)
             } catch (e: Exception) {
                 Log.e("CameraPreview", "Binding failed", e)
@@ -403,10 +399,7 @@ fun CameraPreview(
         }, ContextCompat.getMainExecutor(context))
     }
 
-    AndroidView(
-        factory = { previewView },
-        modifier = modifier
-    )
+    AndroidView(factory = { previewView }, modifier = modifier)
 }
 
 private fun takePicture(
@@ -415,25 +408,16 @@ private fun takePicture(
     executor: Executor,
     onImageCaptured: (File) -> Unit
 ) {
-    val outputDirectory = File(context.cacheDir, "images").apply {
-        if (!exists()) mkdirs()
-    }
-    
-    val photoFile = File(
-        outputDirectory,
-        SimpleDateFormat("yyyyMMdd-HHmmss", Locale.US).format(Date()) + ".jpg"
-    )
-
+    val outputDirectory = File(context.cacheDir, "images").apply { if (!exists()) mkdirs() }
+    val photoFile = File(outputDirectory, SimpleDateFormat("yyyyMMdd-HHmmss", Locale.US).format(Date()) + ".jpg")
     val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
     imageCapture.takePicture(
-        outputOptions,
-        executor,
+        outputOptions, executor,
         object : ImageCapture.OnImageSavedCallback {
             override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                 onImageCaptured(photoFile)
             }
-
             override fun onError(exception: ImageCaptureException) {
                 Log.e("ScanScreen", "Capture failed", exception)
             }
@@ -446,35 +430,19 @@ fun ScannerCorners(modifier: Modifier, color: Color) {
     Box(modifier = modifier.padding(24.dp)) {
         val cornerSize = 40.dp
         val strokeWidth = 4.dp
-
-        // Top Left
-        Box(modifier = Modifier
-            .size(cornerSize)
-            .align(Alignment.TopStart)) {
+        Box(modifier = Modifier.size(cornerSize).align(Alignment.TopStart)) {
             Box(modifier = Modifier.fillMaxHeight().width(strokeWidth).background(color))
             Box(modifier = Modifier.fillMaxWidth().height(strokeWidth).background(color))
         }
-
-        // Top Right
-        Box(modifier = Modifier
-            .size(cornerSize)
-            .align(Alignment.TopEnd)) {
+        Box(modifier = Modifier.size(cornerSize).align(Alignment.TopEnd)) {
             Box(modifier = Modifier.fillMaxHeight().width(strokeWidth).align(Alignment.TopEnd).background(color))
             Box(modifier = Modifier.fillMaxWidth().height(strokeWidth).background(color))
         }
-
-        // Bottom Left
-        Box(modifier = Modifier
-            .size(cornerSize)
-            .align(Alignment.BottomStart)) {
+        Box(modifier = Modifier.size(cornerSize).align(Alignment.BottomStart)) {
             Box(modifier = Modifier.fillMaxHeight().width(strokeWidth).background(color))
             Box(modifier = Modifier.fillMaxWidth().height(strokeWidth).align(Alignment.BottomStart).background(color))
         }
-
-        // Bottom Right
-        Box(modifier = Modifier
-            .size(cornerSize)
-            .align(Alignment.BottomEnd)) {
+        Box(modifier = Modifier.size(cornerSize).align(Alignment.BottomEnd)) {
             Box(modifier = Modifier.fillMaxHeight().width(strokeWidth).align(Alignment.TopEnd).background(color))
             Box(modifier = Modifier.fillMaxWidth().height(strokeWidth).background(color))
         }

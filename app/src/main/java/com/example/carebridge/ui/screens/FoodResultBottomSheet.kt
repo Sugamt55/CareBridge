@@ -2,10 +2,10 @@ package com.example.carebridge.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.*
@@ -38,6 +38,7 @@ fun FoodResultBottomSheet(
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp)
                 .padding(bottom = 32.dp)
+                .verticalScroll(rememberScrollState()) // Improved scroll support
         ) {
             // Header
             Row(
@@ -106,20 +107,25 @@ fun FoodResultBottomSheet(
                 )
             }
 
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.height(if (detailedData != null) 210.dp else 140.dp)
-            ) {
-                items(nutritionItems.size) { index ->
-                    val item = nutritionItems[index]
-                    NutritionCard(label = item.first, value = item.second)
+            // Structured Grid Layout
+            nutritionItems.chunked(2).forEach { rowItems ->
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.padding(bottom = 12.dp)
+                ) {
+                    rowItems.forEach { item ->
+                        Box(modifier = Modifier.weight(1f)) {
+                            NutritionCard(label = item.first, value = item.second)
+                        }
+                    }
+                    if (rowItems.size == 1) {
+                        Spacer(modifier = Modifier.weight(1f))
+                    }
                 }
             }
 
             if (detailedData != null) {
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(12.dp))
                 Text(
                     "Micronutrients",
                     style = MaterialTheme.typography.labelLarge,
@@ -158,7 +164,6 @@ fun PhScaleBar(
                     shape = RoundedCornerShape(6.dp)
                 )
         ) {
-            // Marker
             val bias = ((phLevel.coerceIn(0.0, 14.0) / 14.0) * 2 - 1).toFloat()
             Box(
                 modifier = Modifier
@@ -178,7 +183,6 @@ fun PhScaleBar(
         
         Spacer(modifier = Modifier.height(8.dp))
         
-        // Added the pH level text here
         Text(
             text = "pH Level: %.1f".format(phLevel),
             fontSize = 14.sp,
