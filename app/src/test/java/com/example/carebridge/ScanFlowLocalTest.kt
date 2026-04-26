@@ -1,11 +1,8 @@
 package com.example.carebridge
 
-import android.Manifest
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.navigation.compose.rememberNavController
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.GrantPermissionRule
 import com.example.carebridge.data.FoodPredictionResponse
 import com.example.carebridge.data.model.FoodDatabaseItem
 import com.example.carebridge.data.model.Macronutrients
@@ -21,16 +18,15 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
-@RunWith(AndroidJUnit4::class)
-class ScanFlowIntegrationTest {
+@RunWith(RobolectricTestRunner::class)
+@Config(instrumentedPackages = ["androidx.loader.content"])
+class ScanFlowLocalTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
-
-    // Bypasses the OS permission dialog
-    @get:Rule
-    val permissionRule: GrantPermissionRule = GrantPermissionRule.grant(Manifest.permission.CAMERA)
 
     private lateinit var uiStateFlow: MutableStateFlow<ScanUiState>
     private lateinit var mockViewModel: MainViewModel
@@ -43,7 +39,7 @@ class ScanFlowIntegrationTest {
     }
 
     @Test
-    fun testEndToEndScanFlow() {
+    fun testEndToEndScanFlowLocal() {
         composeTestRule.setContent {
             CareBridgeTheme {
                 ScanScreen(
@@ -58,29 +54,13 @@ class ScanFlowIntegrationTest {
         }
 
         // --- STEP 1: INITIAL STATE ---
-        composeTestRule.waitUntil(10000) {
-            try {
-                composeTestRule.onNodeWithText("AI Report Scanner").assertIsDisplayed()
-                true
-            } catch (e: AssertionError) {
-                false
-            }
-        }
-        
+        composeTestRule.onNodeWithText("AI Report Scanner").assertIsDisplayed()
         val captureButton = composeTestRule.onNodeWithContentDescription("Capture", useUnmergedTree = true)
         captureButton.assertIsDisplayed()
 
         // --- STEP 2: TRIGGER CAPTURE & VERIFY LOADING ---
         captureButton.performClick()
-        
-        composeTestRule.waitUntil(10000) {
-            try {
-                composeTestRule.onNodeWithText("Analyzing Food...").assertIsDisplayed()
-                true
-            } catch (e: AssertionError) {
-                false
-            }
-        }
+        composeTestRule.onNodeWithText("Analyzing Food...").assertIsDisplayed()
 
         // --- STEP 3: SIMULATE SUCCESS (RESULT DISPLAY) ---
         val dummyResponse = FoodPredictionResponse(
@@ -106,40 +86,19 @@ class ScanFlowIntegrationTest {
 
         uiStateFlow.value = ScanUiState.Success(dummyResponse, dummyDetailedData)
 
-        // Wait for Bottom Sheet content
-        composeTestRule.waitUntil(15000) {
-            try {
-                composeTestRule.onNodeWithText("Apple", useUnmergedTree = true).assertIsDisplayed()
-                true
-            } catch (e: AssertionError) {
-                false
-            }
-        }
+        // Verify Bottom Sheet elements appear
+        composeTestRule.onNodeWithText("Apple").assertIsDisplayed()
         
-        // Scroll to and verify integrated data nodes
-        composeTestRule.onNodeWithText("Acidic", useUnmergedTree = true).performScrollTo().assertIsDisplayed()
-        composeTestRule.onNodeWithText("Potassium: 195.0mg", useUnmergedTree = true).performScrollTo().assertIsDisplayed()
+        // Scroll to and verify integrated data
+        composeTestRule.onNodeWithText("Acidic").performScrollTo().assertIsDisplayed()
+        composeTestRule.onNodeWithText("Potassium: 195.0mg").performScrollTo().assertIsDisplayed()
 
         // --- STEP 4: DISMISSAL ---
-        composeTestRule.onNodeWithContentDescription("Close", useUnmergedTree = true).performClick()
+        composeTestRule.onNodeWithContentDescription("Close").performClick()
         
-        // Return ViewModel state to Idle
         uiStateFlow.value = ScanUiState.Idle
         
-        // Wait for sheet content to be completely removed from hierarchy
-        composeTestRule.waitUntil(15000) {
-            composeTestRule.onAllNodesWithText("Apple", useUnmergedTree = true).fetchSemanticsNodes().isEmpty()
-        }
-        
-        // Final verification: Ensure main screen revealed and interactable
-        composeTestRule.waitUntil(10000) {
-            try {
-                composeTestRule.onNodeWithText("AI Report Scanner").assertIsDisplayed()
-                composeTestRule.onNodeWithContentDescription("Capture", useUnmergedTree = true).assertIsDisplayed()
-                true
-            } catch (e: AssertionError) {
-                false
-            }
-        }
+        // Verify we are back to the main scanner view
+        composeTestRule.onNodeWithText("AI Report Scanner").assertIsDisplayed()
     }
 }

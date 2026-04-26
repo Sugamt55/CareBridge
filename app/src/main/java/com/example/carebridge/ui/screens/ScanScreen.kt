@@ -59,7 +59,6 @@ import java.util.concurrent.Executor
 fun ScanScreen(
     navController: NavController, 
     viewModel: MainViewModel = viewModel(),
-    // Added for testing: Allows bypassing actual CameraX init in integration tests
     isTestMode: Boolean = false,
     onTestCapture: () -> Unit = {}
 ) {
@@ -67,7 +66,7 @@ fun ScanScreen(
     val lifecycleOwner = LocalLifecycleOwner.current
     val uiState by viewModel.uiState.collectAsState()
     
-    val imageCapture = remember { ImageCapture.Builder().build() }
+    val imageCapture = remember { if (!isTestMode) ImageCapture.Builder().build() else null }
     val executor = remember { ContextCompat.getMainExecutor(context) }
 
     var showSheet by remember { mutableStateOf(false) }
@@ -225,6 +224,7 @@ fun ScanScreen(
                     fontWeight = FontWeight.ExtraBold,
                     textAlign = TextAlign.Center
                 )
+
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "Align your food within the frame to start the analysis.",
@@ -244,7 +244,7 @@ fun ScanScreen(
                         .border(1.dp, Color.Black.copy(alpha = 0.05f), RoundedCornerShape(32.dp))
                 ) {
                     if (hasCameraPermission) {
-                        if (!isTestMode) {
+                        if (!isTestMode && imageCapture != null) {
                             CameraPreview(
                                 lifecycleOwner = lifecycleOwner,
                                 imageCapture = imageCapture,
@@ -274,7 +274,7 @@ fun ScanScreen(
                             .clickable(
                                 enabled = uiState !is ScanUiState.Loading && hasCameraPermission,
                                 onClick = {
-                                    if (!isTestMode) {
+                                    if (!isTestMode && imageCapture != null) {
                                         takePicture(context, imageCapture, executor) { file ->
                                             viewModel.analyzeFood(file)
                                         }

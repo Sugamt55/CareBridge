@@ -51,7 +51,6 @@ android {
             excludes += "META-INF/LICENSE.md"
             excludes += "META-INF/LICENSE-notice.md"
         }
-        // Removed useLegacyPackaging = true to avoid installation issues on API 36
     }
     
     testOptions {
@@ -127,6 +126,9 @@ dependencies {
     testImplementation("org.robolectric:robolectric:4.11.1")
     testImplementation("androidx.test:core:1.5.0")
     testImplementation("io.mockk:mockk:1.13.12")
+    // Added for Robolectric Compose Testing
+    testImplementation("androidx.compose.ui:ui-test-junit4")
+    testImplementation(platform(libs.androidx.compose.bom))
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
