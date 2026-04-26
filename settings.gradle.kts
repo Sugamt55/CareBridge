@@ -22,5 +22,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CareBridge"
+rootProject.name = "NutriScan AI"
 include(":app")
