@@ -9,7 +9,7 @@
     <uses-feature android:name="android.hardware.camera" android:required="false" />
 
     <application
-        android:name=".CareBridgeApp"
+        android:name=".NutriScanApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CareBridge"
+        android:theme="@style/Theme.NutriScanAI"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:dataExtractionRules,android:fullBackupContent,android:theme,android:label,android:icon,android:roundIcon">
 
@@ -25,7 +25,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.CareBridge">
+            android:theme="@style/Theme.NutriScanAI">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

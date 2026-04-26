@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.carebridge"
+    namespace = "com.example.nutriscanai"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.carebridge"
+        applicationId = "com.example.nutriscanai"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
