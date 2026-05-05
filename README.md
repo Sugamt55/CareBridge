@@ -1,2 +1,2 @@
 # NutriScan AI
-A telemedicine application to improve healthcare access
+A Mobile App-Based Dietary Analysis and Health Assessment through Machine Learning.
