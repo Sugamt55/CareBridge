@@ -39,6 +39,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun isModelLoaded(): Boolean = classifier.isModelLoaded()
 
+    fun setErrorMessage(message: String) {
+        _uiState.value = ScanUiState.Error(message)
+    }
+
     fun analyzeFood(imageFile: File) {
         _uiState.value = ScanUiState.Loading
         Log.d("MainViewModel", "analyzeFood started for: ${imageFile.name}")
@@ -104,8 +108,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 _uiState.value = ScanUiState.Success(response, detailedDataFromResponse)
 
             } catch (e: java.net.ConnectException) {
-                Log.e("MainViewModel", "CONNECTION FAILED: ${e.message}. Did you run 'adb reverse tcp:8000 tcp:8000'?")
-                _uiState.value = ScanUiState.Error("Could not reach server. Ensure main.py is running.")
+                Log.e("MainViewModel", "CONNECTION FAILED: ${e.message}")
+                _uiState.value = ScanUiState.Error("Could not reach server. Verify IP and Wi-Fi.")
             } catch (e: java.net.SocketTimeoutException) {
                 Log.e("MainViewModel", "TIMEOUT: ${e.message}")
                 _uiState.value = ScanUiState.Error("Server timed out. Check connection.")

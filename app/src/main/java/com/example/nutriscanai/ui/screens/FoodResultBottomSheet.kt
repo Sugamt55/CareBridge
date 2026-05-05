@@ -30,7 +30,8 @@ fun FoodResultBottomSheet(
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        containerColor = Color.White,
+        containerColor = Color.White, // Force white background
+        contentColor = Color.Black,   // Force black text for contrast
         shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
     ) {
         Column(
@@ -38,7 +39,7 @@ fun FoodResultBottomSheet(
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp)
                 .padding(bottom = 32.dp)
-                .verticalScroll(rememberScrollState()) // Improved scroll support
+                .verticalScroll(rememberScrollState())
         ) {
             // Header
             Row(
@@ -50,7 +51,8 @@ fun FoodResultBottomSheet(
                     Text(
                         text = detailedData?.foodName ?: foodData.foodName,
                         style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black // Explicitly Black
                     )
                     Text(
                         text = detailedData?.servingSize ?: foodData.servingSize,
@@ -59,7 +61,7 @@ fun FoodResultBottomSheet(
                     )
                 }
                 IconButton(onClick = onDismiss) {
-                    Icon(Icons.Default.Close, contentDescription = "Close")
+                    Icon(Icons.Default.Close, contentDescription = "Close", tint = Color.Black)
                 }
             }
 
@@ -69,7 +71,7 @@ fun FoodResultBottomSheet(
             Text(
                 "Alkalinity (pH Scale)",
                 style = MaterialTheme.typography.labelLarge,
-                color = Color.Gray
+                color = Color.DarkGray
             )
             Spacer(modifier = Modifier.height(8.dp))
             PhScaleBar(
@@ -85,7 +87,7 @@ fun FoodResultBottomSheet(
             Text(
                 "Nutritional Information (per ${detailedData?.servingSize ?: foodData.servingSize})",
                 style = MaterialTheme.typography.labelLarge,
-                color = Color.Gray
+                color = Color.DarkGray
             )
             Spacer(modifier = Modifier.height(16.dp))
             
@@ -129,7 +131,7 @@ fun FoodResultBottomSheet(
                 Text(
                     "Micronutrients",
                     style = MaterialTheme.typography.labelLarge,
-                    color = Color.Gray
+                    color = Color.DarkGray
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
@@ -213,7 +215,7 @@ fun PhScaleBar(
             Text(
                 text = it,
                 style = MaterialTheme.typography.bodySmall,
-                color = Color.DarkGray,
+                color = Color.Black, // Ensure visible on white background
                 lineHeight = 16.sp
             )
         }
@@ -223,9 +225,10 @@ fun PhScaleBar(
 @Composable
 fun NutritionCard(label: String, value: String) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = Color.Transparent),
+        colors = CardDefaults.cardColors(containerColor = Color.White), // White card
         border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE5E7EB)),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(12.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
             modifier = Modifier
@@ -234,7 +237,7 @@ fun NutritionCard(label: String, value: String) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(label, fontSize = 10.sp, color = Color.Gray, fontWeight = FontWeight.Bold)
-            Text(value, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+            Text(value, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color.Black)
         }
     }
 }

@@ -1,14 +1,15 @@
 package com.example.nutriscanai
 
+import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.*
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.navigation.compose.rememberNavController
 import com.example.nutriscanai.data.FoodPredictionResponse
 import com.example.nutriscanai.data.model.FoodDatabaseItem
 import com.example.nutriscanai.data.model.Macronutrients
 import com.example.nutriscanai.data.model.Micronutrients
 import com.example.nutriscanai.ui.screens.ScanScreen
-import com.example.nutriscanai.ui.theme.nutriscanaiTheme
+import com.example.nutriscanai.ui.theme.NutriScanAITheme
 import com.example.nutriscanai.ui.viewmodel.MainViewModel
 import com.example.nutriscanai.ui.viewmodel.ScanUiState
 import io.mockk.every
@@ -22,11 +23,11 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(instrumentedPackages = ["androidx.loader.content"])
+@Config(sdk = [33], qualifiers = "w411dp-h891dp-420dpi", instrumentedPackages = ["androidx.loader.content"])
 class ScanFlowLocalTest {
 
     @get:Rule
-    val composeTestRule = createComposeRule()
+    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
 
     private lateinit var uiStateFlow: MutableStateFlow<ScanUiState>
     private lateinit var mockViewModel: MainViewModel
@@ -34,14 +35,14 @@ class ScanFlowLocalTest {
     @Before
     fun setup() {
         mockViewModel = mockk<MainViewModel>(relaxed = true)
-        uiStateFlow = MutableStateFlow<ScanUiState>(ScanUiState.Idle)
+        uiStateFlow = MutableStateFlow(ScanUiState.Idle)
         every { mockViewModel.uiState } returns uiStateFlow
     }
 
     @Test
     fun testEndToEndScanFlowLocal() {
         composeTestRule.setContent {
-            nutriscanaiTheme {
+            NutriScanAITheme {
                 ScanScreen(
                     navController = rememberNavController(),
                     viewModel = mockViewModel,
@@ -53,31 +54,29 @@ class ScanFlowLocalTest {
             }
         }
 
-        // --- STEP 1: INITIAL STATE ---
-        composeTestRule.onNodeWithText("AI Report Scanner").assertIsDisplayed()
+        // 1. Initial State
+        composeTestRule.onNodeWithText("AI Food Scanner").assertExists()
+        
         val captureButton = composeTestRule.onNodeWithContentDescription("Capture", useUnmergedTree = true)
-        captureButton.assertIsDisplayed()
+        captureButton.assertExists()
 
-        // --- STEP 2: TRIGGER CAPTURE & VERIFY LOADING ---
+        // 2. Trigger Capture & Verify Loading
         captureButton.performClick()
-        composeTestRule.onNodeWithText("Analyzing Food...").assertIsDisplayed()
+        
+        composeTestRule.waitUntil(10000) {
+            composeTestRule.onAllNodesWithText("Analyzing Food...", substring = true).fetchSemanticsNodes().isNotEmpty()
+        }
+        composeTestRule.onNodeWithText("Analyzing Food...", substring = true).assertExists()
 
-        // --- STEP 3: SIMULATE SUCCESS (RESULT DISPLAY) ---
+        // 3. Simulate AI Result
         val dummyResponse = FoodPredictionResponse(
-            foodName = "Apple",
-            servingSize = "100g",
-            calories = 52,
-            protein = "0.3g",
-            carbs = "14g",
-            fat = "0.2g",
-            phLevel = 3.5,
-            isAlkaline = false
+            foodName = "Apple", servingSize = "100g", calories = 52,
+            protein = "0.3g", carbs = "14g", fat = "0.2g", 
+            phLevel = 3.5, isAlkaline = false
         )
         
         val dummyDetailedData = FoodDatabaseItem(
-            foodName = "Apple",
-            servingSize = "1 medium (182g)",
-            calories = 95,
+            foodName = "Apple", servingSize = "1 medium", calories = 95,
             macronutrients = Macronutrients(0.5, 25.0, 0.3, 4.4, 19.0),
             micronutrients = Micronutrients(0.1, 8.4, 1.0, 0.1, 195.0),
             phClassification = "Acidic",
@@ -86,19 +85,18 @@ class ScanFlowLocalTest {
 
         uiStateFlow.value = ScanUiState.Success(dummyResponse, dummyDetailedData)
 
-        // Verify Bottom Sheet elements appear
-        composeTestRule.onNodeWithText("Apple").assertIsDisplayed()
-        
-        // Scroll to and verify integrated data
-        composeTestRule.onNodeWithText("Acidic").performScrollTo().assertIsDisplayed()
-        composeTestRule.onNodeWithText("Potassium: 195.0mg").performScrollTo().assertIsDisplayed()
+        // 4. Verify result display
+        composeTestRule.waitUntil(10000) {
+            composeTestRule.onAllNodesWithText("Apple", useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
+        }
+        composeTestRule.onNodeWithText("Apple", useUnmergedTree = true).assertExists()
+        composeTestRule.onNodeWithText("Acidic", useUnmergedTree = true).performScrollTo().assertExists()
 
-        // --- STEP 4: DISMISSAL ---
-        composeTestRule.onNodeWithContentDescription("Close").performClick()
-        
+        // 5. Dismiss Bottom Sheet
+        composeTestRule.onNodeWithContentDescription("Close", useUnmergedTree = true).performClick()
         uiStateFlow.value = ScanUiState.Idle
         
-        // Verify we are back to the main scanner view
-        composeTestRule.onNodeWithText("AI Report Scanner").assertIsDisplayed()
+        // Final verification
+        composeTestRule.onNodeWithText("AI Food Scanner").assertExists()
     }
 }

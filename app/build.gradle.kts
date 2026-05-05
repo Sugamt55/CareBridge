@@ -64,10 +64,10 @@ android {
 
 configurations.all {
     resolutionStrategy {
-        // Force 2.17.0 to prevent version mismatch with the model
         force("org.tensorflow:tensorflow-lite:2.17.0")
         force("org.tensorflow:tensorflow-lite-gpu:2.17.0")
-        force("org.tensorflow:tensorflow-lite-api:2.17.0")
+        force("org.tensorflow:tensorflow-lite-support:0.5.0")
+        force("org.tensorflow:tensorflow-lite-metadata:0.4.4")
     }
 }
 
@@ -81,9 +81,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     
-    // Google Fonts
     implementation("androidx.compose.ui:ui-text-google-fonts:1.7.5")
-    
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("androidx.compose.runtime:runtime-livedata:1.7.5")
@@ -112,30 +110,32 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("io.coil-kt:coil-compose:2.7.0")
 
-    // TensorFlow Lite - Forced to 2.17.0 to support model opcodes
     implementation("org.tensorflow:tensorflow-lite:2.17.0")
     implementation("org.tensorflow:tensorflow-lite-gpu:2.17.0")
-    // Upgrade support library to 0.5.0 to get CenterCropOp and ContrastOp
     implementation("org.tensorflow:tensorflow-lite-support:0.5.0")
     implementation("org.tensorflow:tensorflow-lite-metadata:0.4.4")
 
-    // Android Browser helper for Custom Tabs
     implementation("androidx.browser:browser:1.8.0")
 
+    // Unit Testing
     testImplementation(libs.junit)
     testImplementation("org.robolectric:robolectric:4.11.1")
     testImplementation("androidx.test:core:1.5.0")
     testImplementation("io.mockk:mockk:1.13.12")
-    // Added for Robolectric Compose Testing
-    testImplementation("androidx.compose.ui:ui-test-junit4")
+    
+    // Compose Unit Testing support
     testImplementation(platform(libs.androidx.compose.bom))
+    testImplementation(libs.androidx.compose.ui.test.junit4)
+    testImplementation(libs.androidx.activity.compose)
 
+    // Instrumented Testing
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation("androidx.test:rules:1.6.1")
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation("io.mockk:mockk-android:1.13.12")
+
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 }

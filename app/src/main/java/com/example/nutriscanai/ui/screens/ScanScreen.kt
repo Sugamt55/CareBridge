@@ -280,7 +280,9 @@ fun ScanScreen(
                                 enabled = uiState !is ScanUiState.Loading && hasCameraPermission,
                                 onClick = {
                                     if (!isTestMode && imageCapture != null) {
-                                        takePicture(context, imageCapture, executor) { file ->
+                                        takePicture(context, imageCapture, executor, onCaptureError = { error ->
+                                            viewModel.setErrorMessage(error)
+                                        }) { file ->
                                             viewModel.analyzeFood(file)
                                         }
                                     } else {
@@ -413,6 +415,7 @@ private fun takePicture(
     context: Context,
     imageCapture: ImageCapture,
     executor: Executor,
+    onCaptureError: (String) -> Unit,
     onImageCaptured: (File) -> Unit
 ) {
     val outputDirectory = File(context.cacheDir, "images").apply { if (!exists()) mkdirs() }
@@ -427,6 +430,7 @@ private fun takePicture(
             }
             override fun onError(exception: ImageCaptureException) {
                 Log.e("ScanScreen", "Capture failed", exception)
+                onCaptureError(exception.message ?: "Unknown capture error")
             }
         }
     )

@@ -8,7 +8,7 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.example.carebridge" />
+                  <option name="appId" value="com.example.nutriscanai" />
                   <option name="mobileSdkAppId" value="1:899302353696:android:f962cffed3300393260545" />
                   <option name="projectId" value="device-streaming-0619d401" />
                   <option name="projectNumber" value="899302353696" />
